@@ -1,0 +1,25 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Datos Generales</ui:define>
+	<ui:define name="title2">Modificar Accion</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idAccion" value="#{accionMBean.idAccion}" />
+			<f:event listener="#{accionMBean.inicializar()}" type="preRenderView" />
+		</f:metadata>
+		<p:panel header="Modificar Accion" style="margin-bottom:20px">
+			<h:outputText for="idMAccion" value="Accion: " />
+			<p:inputText id="idMAccion" value="#{accionMBean.nuevaAccion.acciAccion}"
+				required="true" />
+			<p:commandButton value="Modificar Accion" title="Modificar Accion"
+				action="#{accionMBean.guardarAccion()}" update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/sistema/datosgenericos/listadoacciones.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

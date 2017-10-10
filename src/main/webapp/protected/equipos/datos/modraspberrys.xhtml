@@ -1,0 +1,38 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Modificar Raspberry</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idRaspberryParam"
+				value="#{raspberryMBean.idRaspberryParam}" />
+			<f:event listener="#{raspberryMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="adminequipoagregarequipo" header="Agregar Equipo"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:outputText for="mask" value="Fecha Ingreso: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{raspberryMBean.nuevoRaspberry.raspFechaIngreso}"
+					disabled="true" />
+				<h:outputText for="idMRaspNombre" value="Nombre Raspberry: " />
+				<p:inputText id="idMRaspNombre" value="#{raspberryMBean.nuevoRaspberry.raspNombre}"
+					required="true" />
+				<h:outputText for="idMRIP" value="Raspbery IP: " />
+				<p:inputText id="idMRIP" value="#{raspberryMBean.nuevoRaspberry.raspIp}"
+					required="true" />
+				<h:outputText for="idMRaspActivo" value="Raspberry Activo: " />
+				<p:inputSwitch id="idMRaspActivo" value="#{raspberryMBean.nuevoRaspberry.raspActivo}"
+					required="true" />
+			</h:panelGrid>
+			<p:commandButton value="Modificar Raspberry"
+				title="Modificar Raspberry"
+				actionListener="#{raspberryMBean.guardarRaspberry()}" update="growl" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

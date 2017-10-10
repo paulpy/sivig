@@ -1,0 +1,41 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Monitorizacion</ui:define>
+	<ui:define name="title2">Raspberrys</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{viewEquiposRaspMBean.listRaspberrys()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:dataGrid var="raspberrys"
+			value="#{viewEquiposRaspMBean.raspberrys}" columns="3" layout="grid"
+			rows="12" paginator="true" id="raspberrys"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="6,12,16">
+
+			<f:facet name="header">
+            Monitoreo Raspberry
+       	 	</f:facet>
+			<p:panel header="#{raspberrys.raspNombre}" style="text-align:center">
+				<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+					columnClasses="label,value" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+					<h:outputText value="Activo: " />
+					<h:outputText value="#{raspberrys.raspActivo}" />
+
+					<h:outputText value="Estado: " />
+					<h:outputText value="#{raspberrys.raspEstado}" />
+
+					<h:outputText value="Fecha Ingreso: " />
+					<h:outputText value="#{raspberrys.raspFechaIngreso}" />
+
+				</p:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+	</ui:define>
+</ui:composition>

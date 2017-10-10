@@ -1,0 +1,62 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Empresariales</ui:define>
+	<ui:define name="title2">Agregar Funcionario</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idFuncionarioParam"
+				value="#{funcionarioMBean.idFuncionarioParam}" />
+			<f:event listener="#{funcionarioMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel header="Datos Persona y Funcionario"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="Nombre: " />
+				<p:inputText id="persNombre"
+					value="#{funcionarioMBean.nuevoFuncPersona.persNombre}" />
+				<h:outputText value="Apellido: " />
+				<p:inputText id="persApellido"
+					value="#{funcionarioMBean.nuevoFuncPersona.persApellido}" />
+				<h:outputText value="Numero de Cedula: " />
+				<p:inputText id="persCedula"
+					value="#{funcionarioMBean.nuevoFuncPersona.persCi}" />
+				<h:outputText value="Fecha de Nacimiento: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{funcionarioMBean.nuevoFuncPersona.persFechaNacimiento}" />
+				<h:outputText value="Sexo: " />
+				<p:selectOneMenu id="persSexo" style="width:125px"
+					value="#{funcionarioMBean.nuevoFuncPersona.persSexo}">
+					<f:selectItem itemLabel="Femenino" itemValue="0" />
+					<f:selectItem itemLabel="Masculino" itemValue="1" />
+				</p:selectOneMenu>
+				<h:outputText value="Area: " />
+				<p:selectOneMenu id="area" style="width:125px"
+					value="#{funcionarioMBean.nuevoFuncionario.funcArea}">
+					<f:selectItem itemLabel="Comercial" itemValue="comercial" />
+					<f:selectItem itemLabel="Tecnica" itemValue="tecnica" />
+					<f:selectItem itemLabel="Programacion" itemValue="programacion" />
+					<f:selectItem itemLabel="Cliente" itemValue="cliente" />
+				</p:selectOneMenu>
+				<h:outputText value="Cargo: " />
+				<p:selectOneMenu id="cargo" style="width:125px"
+					value="#{funcionarioMBean.nuevoFuncionario.funcCargo}">
+					<f:selectItem itemLabel="Encargado" itemValue="encargado" />
+					<f:selectItem itemLabel="Auxiliar" itemValue="auxiliar" />
+					<f:selectItem itemLabel="Tecnico" itemValue="tecnico" />
+				</p:selectOneMenu>
+				<h:outputText value="Funcionario Activo: " />
+				<p:inputSwitch
+					value="#{funcionarioMBean.nuevoFuncionario.funcEstado}"
+					required="true" />
+			</h:panelGrid>
+			<p:commandButton value="Modificar Funcionario"
+				title="Modificar Funcionario"
+				action="#{funcionarioMBean.guardarFuncionario()}" update="true" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,61 @@
+<ui:composition template="/protected/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Usuarios</ui:define>
+	<ui:define name="titulo2">Modificar Usuario</ui:define>
+	<ui:define name="cuerpo">
+		<h:form>
+		<p:growl id="message" showDetail="true" />
+			<p:panel id="agregarusauriodesdeperosna"
+				header="Agregar Usuario desde: " toggleable="false"
+				toggleSpeed="500" closeSpeed="500" widgetVar="panel"
+				style="margin-bottom:20px">
+					<h:panelGrid columns="3" cellpadding="2" title="Funcionario">
+						<p:panel header="Funcionario"
+							style="margin-bottom:20px">
+								<h:outputText value="Area:"/>
+								<p:selectOneMenu id="area" style="width:125px" value="#{nuevoUsuaFuncionario.funcArea}">
+									<f:selectItem itemLabel="Comercial" itemValue="comercial" />
+									<f:selectItem itemLabel="Tecnica" itemValue="tecnica" />
+									<f:selectItem itemLabel="Programacion" itemValue="programacion" />
+									<f:selectItem itemLabel="Cliente" itemValue="cliente" />
+								</p:selectOneMenu>
+								<h:outputText value="Cargo:"/>
+								<p:selectOneMenu id="cargo" style="width:125px" value="#{nuevoUsuaFuncionario.funcCargo}">
+									<f:selectItem itemLabel="Encargado" itemValue="encargado" />
+									<f:selectItem itemLabel="Auxiliar" itemValue="auxiliar" />
+									<f:selectItem itemLabel="Tecnico" itemValue="tecnico" />
+								</p:selectOneMenu>
+								<h:outputText value="Funcionario Activo: " />
+								<p:inputSwitch value="#{nuevoUsuaFuncionario.funcEstado}" required="true" />
+							</h:panelGrid>
+						</p:panel>
+						<p:panel header="Datos Usuario" style="margin-bottom:20px">
+							<h:panelGrid columns="2" cellpadding="5">
+								<h:outputText value="Usuario: " />
+								<p:inputText id="usuarioUsuario" value="#{nuevoUsuario.usuaUsuario}" disabled="true"/>
+								<h:outputText for="pw1" value="Contraseña: " />
+								<p:password id="pw1" match="pw2" value="#{nuevoUsuario.usuaPass}" feedback="true" required="true"/>
+								<h:outputText for="pw2" value="Confirmar Contraseña: " />
+								<p:password id="pw2" value="#{nuevoUsuario.usuaPass}" feedback="true" required="true"/>
+								<h:outputText value="Usuario Activo: " />
+								<p:inputSwitch value="#{nuevoUsuario.usuaActivo}" />
+								<h:outputText value="Usuario Tipo: " />
+								<p:selectOneMenu id="tipousuario" value="#{nuevoUsuario.usuaTipo}" style="width:125px" >
+									<f:selectItem itemLabel="Administrador" itemValue="admin" />
+									<f:selectItem itemLabel="Centinela" itemValue="centinela" />
+									<f:selectItem itemLabel="Operador" itemValue="operador" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</p:panel>
+					</h:panelGrid>
+					<p:commandButton value="Agregar Usuario" title="Agregar Usuario" 
+					actionListener="#{usuarioController.registrarUsuario()}" 
+					update="message"/>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

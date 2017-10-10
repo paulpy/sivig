@@ -1,0 +1,53 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Empresariales</ui:define>
+	<ui:define name="title2">Estado Funcionario</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{funcionarioMBean.listarFuncionario()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistadofuncionario"
+			header="Listado Estados Funcionarios" style="text-align:center">
+			<p:dataTable id="listadoestadosequipo"
+				value="#{funcionarioMBean.funcionarioList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Funcionarios" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Nombre Funcionario">
+					<h:outputText value="#{item.persona.persNombre}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Area Funcionario">
+					<h:outputText value="#{item.funcArea}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Cargo Funcionario">
+					<h:outputText value="#{item.funcCargo}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Funcionario">
+					<h:outputText value="#{item.funcEstado}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevocontrato" value="Agregar"
+							outcome="/protected/empresarial/funcionarios/agregarfuncionario.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/empresarial/funcionarios/modfuncionario.xhtml">
+						<f:param name="idFuncionarioParam"
+							value="#{item.funcIdFuncionario}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

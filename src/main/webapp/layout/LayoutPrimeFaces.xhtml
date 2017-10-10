@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+	<div class="ui-g">
+		<div class="ui-g-12 ui-md-2">
+			<ui:include src="topMenu.xhtml" />
+			<ui:include src="menu.xhtml" />
+			<ui:include src="logequipos.xhtml" />
+		</div>
+		<div class="ui-g-12 ui-md-10 ui-g-nopad">
+			<div class="ui-g-12 ui-g-nopad">
+				<h:form>
+					<p:growl id="growl" showDetail="true" life="3000" sticky="true"/>
+					<ui:insert name="body" />
+					<ui:insert name="prompts" />
+				</h:form>
+			</div>
+		</div>
+		<div>
+			<p:outputLabel>Paul Jourdan - Todos los derechos reservados. 2017 - Paraguay</p:outputLabel>
+		</div>
+	</div>
+</h:body>
+</html>

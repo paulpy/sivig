@@ -1,0 +1,55 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Empresarial</ui:define>
+	<ui:define name="title2">Contratos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{contratoMBean.listarContratos()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistcontratos" header="Contratos"
+			style="text-align:center; width:80%; min-width:20%">
+			<p:dataTable id="listadocontratos"
+				value="#{contratoMBean.contratoList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Contratos" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Identificador del Contrato">
+					<h:outputText value="#{item.contIdentificadorContrato}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Fecha Inicio">
+					<h:outputText value="#{item.contFechaInicio}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Fecha Finalizacion">
+					<h:outputText value="#{item.contFechaFinalizacion}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center" headerText="Entidad">
+					<h:outputText value="#{item.entidad.entiEntidad}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Contrato">
+					<h:outputText value="#{item.contActivo}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevocontrato" value="Agregar"
+							outcome="/protected/empresarial/clientes/agregarcontrato.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/empresarial/clientes/modcontrato.xhtml">
+						<f:param name="idContratoParam" value="#{item.contIdContrato}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

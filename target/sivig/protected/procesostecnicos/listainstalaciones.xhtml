@@ -1,0 +1,52 @@
+<ui:composition template="/protected/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Tecnicos</ui:define>
+	<ui:define name="title2">Listado Instalaciones</ui:define>
+	<ui:define name="body">
+	<f:metadata>
+			<f:event listener="#{instalacionMBean.listarInstalaciones()}"
+				type="preRenderView" />
+		</f:metadata>
+			<p:panel id="panellistadoinstalaciones"
+				header="Listado Instalaciones" style="text-align:center; width:80%; min-width:20%">
+				<p:dataTable id="listadoinstalaciones" value="#{instalacionMBean.instalaccionList}"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true" emptyMessage="No se encontraron Contratos" paginator="true" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" rows="30">
+					<p:column style="width: 9%; text-align: center"
+						headerText="Funcionario Instalador">
+						<h:outputText value="#{item.funcionario.persona.persNombre}" />
+					</p:column>
+					<p:column style="width: 9%; text-align: center"
+						headerText="Entidad">
+						<h:outputText value="#{item.dependencia.entidad.entiEntidad}" />
+					</p:column>
+					<p:column style="width: 9%; text-align: center"
+						headerText="Dependencia">
+						<h:outputText value="#{item.dependencia.depeNombreDependencia}" />
+					</p:column>
+					<p:column style="width: 9%; text-align: center"
+						headerText="Fecha Instalacion">
+						<h:outputText value="#{item.instFechaInstalacion}" />
+					</p:column>
+					<p:column style="width: 9%; text-align: center"
+						headerText="Observaciones">
+						<h:outputText value="#{item.instObservacion}" />
+					</p:column>
+					<p:column style="width: 7%; text-align: center">
+						<f:facet name="header">
+							<p:button id="nuevainstalacion" value="Agregar" 
+								outcome="/protected/procesostecnicos/instalaciones.xhtml"   >
+							</p:button>		 
+						</f:facet>
+						<p:button  title="Editar"  icon="ui-icon-pencil" >
+						</p:button>	
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+	</ui:define>
+</ui:composition>

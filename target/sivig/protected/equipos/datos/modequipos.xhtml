@@ -1,0 +1,43 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Modificar Equipos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idEquipoParam"
+				value="#{equipoMBean.idEquipoParam}" />
+			<f:event listener="#{equipoMBean.inicializar()}" type="preRenderView" />
+		</f:metadata>
+		<p:panel id="adminequipoagregarequipo" header="Agregar Equipo"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:outputText for="idMEquipoSerie" value="Serie Equipo: " />
+				<p:inputText id="idMEquipoSerie" value="#{equipoMBean.nuevoEquipo.equiSerieEquipo}"
+					required="true" disabled="true" />
+				<h:outputText for="mask" value="Fecha Ingreso: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{equipoMBean.nuevoEquipo.equiFechaIngreso}" required="true"
+					disabled="true" />
+				<h:outputText for="idMEquipoActivo" value="Equipo Activo: " />
+				<p:inputSwitch id="idMEquipoActivo" value="#{equipoMBean.nuevoEquipo.equiActivo}"
+					required="true" />
+				<h:outputText for="idMEquipoRasp" value="Raspberry Asignado: " />
+				<p:selectOneMenu id="idMEquipoRasp" style="width:125px"
+					value="#{equipoMBean.nuevoEquipo.raspberry}"
+					converter="#{raspberryConverter}" required="true">
+					<f:selectItems value="#{equipoMBean.raspberrisList}" var="data"
+						itemValue="#{data}" itemLabel="#{data.raspNombre}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<p:commandButton value="Modificar Equipo" title="Modificar Equipo"
+				action="#{equipoMBean.guardarEquipo()}" update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/equipos/datos/estadoequipos.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

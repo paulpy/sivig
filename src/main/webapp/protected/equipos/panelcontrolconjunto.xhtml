@@ -1,0 +1,86 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Panel de Control</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idEquipoParam"
+				value="#{interaccionMBean.idEquipoParam}" />
+			<f:event listener="#{interaccionMBean.inicializarPanelControl()}" type="preRenderView" />
+		</f:metadata>
+		<h:panelGrid columns="2" cellpadding="10">
+			<p:panel id="prasp" header="Acciones Raspberry" style="margin-bottom:20px">
+		        <h:panelGrid columns="2" cellpadding="10">
+					<p:commandButton value="Reiniciar" action="#{interaccionMBean.reiniciarR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Apagar" action="#{interaccionMBean.apagarR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Sincronizar Horario" action="#{interaccionMBean.sincHoraR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Sincronizar Estados" action="#{interaccionMBean.sincEstadosR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Sincronizar Acciones" action="#{interaccionMBean.sincAccionesR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Sincronizar Causas" action="#{interaccionMBean.sincCausasR(request.getUserPrincipal().getName())}"/>
+		        </h:panelGrid>
+		    </p:panel>
+		    <p:panel id="pequi" header="Acciones Equipo" style="margin-bottom:20px">
+		        <h:panelGrid columns="3" cellpadding="10">
+		            <p:commandButton value="Reiniciar" action="#{interaccionMBean.reinicioE(request.getUserPrincipal().getName())}"/>
+		            <p:commandButton value="Inicio" action="#{interaccionMBean.encendidoE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Apagar" action="#{interaccionMBean.apagadoE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Sincronizar Horario" action="#{interaccionMBean.sincHoraE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Crear Backup" action="#{interaccionMBean.crearBackupE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Inicio Sistema" action="#{interaccionMBean.inicioSE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Reinicio Sistema" action="#{interaccionMBean.reinicioSE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton value="Bajada de Sistema" action="#{interaccionMBean.paradaSE(request.getUserPrincipal().getName())}"/>
+					<p:commandButton for="comandoaenviar" value="Sincronizar Acciones" action="#{interaccionMBean.enviarComandoE(request.getUserPrincipal().getName())}"/>
+					<p:inputText id="comandoaenviar" value="#{interaccionMBean.nuevaInteraccion.inteComando}"/>
+		        </h:panelGrid>
+		    </p:panel>
+		</h:panelGrid>
+		<h:panelGrid columns="3" cellpadding="10">
+			<p:carousel value="#{interaccionMBean.nuevoEquipo}" headerText="Custom" var="item" itemStyle="height:200px;text-align:center" numVisible="1" easing="easeOutBounce" style="width:250px" cricular="true">
+		        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+		            <h:outputText value="Equipo:" />
+		            <h:outputText value="#{item.equiIdenificador}" />
+		            <h:outputText value="Estado:" />
+		            <h:outputText value="#{item.equiEstado}" />
+		            <h:outputText value="Fecha Ingreso:" />
+		            <h:outputText value="#{item.equiFechaIngreso}" />
+		            <h:outputText value="Serie:" />
+		            <h:outputText value="#{item.equiSerieEquipo}" />
+		            <h:outputText value="Raspberry:" />
+		            <h:outputText value="#{item.raspberry.raspNombre}" />
+		            <h:outputText value="Estado:" />
+		            <h:outputText value="#{item.raspberry.raspEstado}" />
+		            <h:outputText value="Fecha Ingreso:" />
+		            <h:outputText value="#{item.raspberry.raspFechaIngreso}" />
+		            <h:outputText value="Activo:" />
+		            <h:outputText value="#{item.raspberry.raspActivo}" />
+		        </h:panelGrid>
+    		</p:carousel>
+    		<p:dataTable var="item2" value="#{interaccionMBean.historicoEquipoList}" rows="5">
+			    <p:column headerText="Fecha y Hora">
+			        <h:outputText value="#{item2.eqesMomentoEstado}" />
+			    </p:column>
+			    <p:column headerText="Causa">
+			        <h:outputText value="#{item2.causaCambiosEstado.ccesCausaEstado}" />
+			    </p:column>
+			    <p:column headerText="Estado">
+			        <h:outputText value="#{item2.estadosEquipo.eseqEstadoEquipo}" />
+			    </p:column>
+			</p:dataTable>
+			<p:dataTable var="item3" value="#{interaccionMBean.historicoRaspberryList}" rows="5">
+			    <p:column headerText="Fecha y Hora">
+			        <h:outputText value="#{item3.raesMomentoCambio}" />
+			    </p:column>
+			    <p:column headerText="Causa">
+			        <h:outputText value="#{item3.causaCambiosEstado.ccesCausaEstado}" />
+			    </p:column>
+			    <p:column headerText="Equipo">
+			        <h:outputText value="#{item3.estadosEquipo.eseqEstadoEquipo}" />
+			    </p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>

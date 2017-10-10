@@ -1,0 +1,43 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Empresarial</ui:define>
+	<ui:define name="title2">Estado Entidad</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{entidadMbean.listarEntidades()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistentidad" header="Entidades"
+			style="text-align:center; width:80%; min-width:20%">
+			<p:dataTable id="listadoentidades"
+				value="#{entidadMbean.entidadList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Entidades" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center" headerText="Entidad">
+					<h:outputText value="#{item.entiEntidad}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Entidad">
+					<h:outputText value="#{item.entiEstado}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevocontrato" value="Agregar"
+							outcome="/protected/empresarial/clientes/agregarentidad.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/empresarial/clientes/modentidad.xhtml">
+						<f:param name="idEntidad" value="#{item.entiIdEntidad}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

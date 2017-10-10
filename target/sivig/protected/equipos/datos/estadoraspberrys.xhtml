@@ -1,0 +1,52 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Estado Raspberry</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{raspberryMBean.listarRaspberrys()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelestadosraspberrys" header="Raspberrys"
+			style="text-align:center; width:80%; min-width:20%">
+			<p:dataTable id="listadoraspberrys"
+				value="#{raspberryMBean.raspberryList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Contratos" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Nombre en Sistema">
+					<h:outputText value="#{item.raspNombre}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Fecha Ingreso">
+					<h:outputText value="#{item.raspFechaIngreso}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="IP Raspberry">
+					<h:outputText value="#{item.raspIp}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Raspberry">
+					<h:outputText value="#{item.raspActivo}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevorasp" value="Agregar"
+							outcome="/protected/equipos/datos/agregarraspberry.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/equipos/datos/modraspberrys.xhtml">
+						<f:param name="idRaspberryParam" value="#{item.raspIdRaspberry}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

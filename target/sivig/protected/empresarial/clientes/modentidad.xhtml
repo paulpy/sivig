@@ -1,0 +1,32 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Empresariales</ui:define>
+	<ui:define name="title2">Entidad</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idEntidad" value="#{entidadMbean.idEntidadParam}" />
+			<f:event listener="#{entidadMbean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelprocesosempresarialesclientesentidad"
+			header="Entidad">
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:outputText for="idEntiNombre" value="Entidad: " />
+				<p:inputText id="idEntiNombre"
+					value="#{entidadMbean.nuevaEntidad.entiEntidad}" disabled="true" />
+				<h:outputText value="Estado Entidad: " />
+				<p:inputSwitch value="#{entidadMbean.nuevaEntidad.entiEstado}" />
+			</h:panelGrid>
+			<p:commandButton value="Modificar Entidad"
+				title="Modificar Estado Entidad"
+				action="#{entidadMbean.guardarEntidad()}" update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/empresarial/clientes/estadoentidad.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

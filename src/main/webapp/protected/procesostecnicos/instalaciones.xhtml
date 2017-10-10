@@ -1,0 +1,55 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Equipos</ui:define>
+	<ui:define name="title2">Mantenimientos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{instalacionMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelinstalacion" header="Nueva Instalacion">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputText for="mask" value="Fecha Isntalacion" />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{instalacionMBean.nuevaInstalacion.instFechaInstalacion}"
+					required="true" />
+				<h:outputText for="idNInstFunc" value="Funcionario Encargado" />
+				<p:selectOneMenu id="idNInstFunc" style="width:125px"
+					value="#{instalacionMBean.nuevaInstalacion.funcionario}"
+					converter="#{funcionarioConverter}" required="true">
+					<f:selectItems value="#{instalacionMBean.funcionariosList}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.persona.persNombre}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNInstDepe" value="Dependencia" />
+				<p:selectOneMenu id="idNInstDepe" style="width:125px"
+					value="#{instalacionMBean.nuevaInstalacion.dependencia}"
+					converter="#{dependenciaConverter}" required="true">
+					<f:selectItems value="#{instalacionMBean.dependenciaList}"
+						var="dependencia" itemValue="#{dependencia}"
+						itemLabel="#{dependencia.depeNombreDependencia}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNInstEqui" value="Equipo" />
+				<p:selectOneMenu id="idNInstEqui" style="width:125px"
+					value="#{instalacionMBean.nuevaInstalacion.equipo}"
+					converter="#{equipoConverter}" rendered="true">
+					<f:selectItems value="#{instalacionMBean.equiposList}" var="equipo"
+						itemValue="#{equipo}" itemLabel="#{equipo.equiSerieEquipo}" />
+				</p:selectOneMenu>
+				<h:outputText value="Observacion: " />
+				<p:inputTextarea rows="6" cols="33"
+					value="#{instalacionMBean.nuevaInstalacion.instObservacion}" />
+			</h:panelGrid>
+			<p:commandButton value="Guardar Instalacion" update="growl"
+				title="Guardar Instalacion"
+				action="#{instalacionMBean.registrarInstalacion()}" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/procesostecnicos/listainstalaciones.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

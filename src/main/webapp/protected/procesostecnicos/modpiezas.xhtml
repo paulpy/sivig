@@ -1,0 +1,33 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Equipos</ui:define>
+	<ui:define name="title2">Piezas</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idPiezaParam" value="#{piezasMBean.idPiezaParam}" />
+			<f:event listener="#{piezasMBean.inicializar()}" type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelpiezas" header="Pieza">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputText for="idMPiezaID" value="Identificador de pieza: " />
+				<p:inputText id="idMPiezaID"
+					value="#{piezasMBean.nuevaPieza.piezPieza}" required="true" />
+				<h:outputText for="idMPiezaCant" value="Cantidad: " />
+				<p:inputText id="idMPiezaCantidMPiezaCant"
+					value="#{piezasMBean.nuevaPieza.piezCantidad}" required="true" />
+				<h:outputText for="idMPiezaDetalle" value="Detalles de la pieza: " />
+				<p:inputTextarea id="idMPiezaDetalle" rows="6" cols="33"
+					value="#{piezasMBean.nuevaPieza.piezDetalle}" required="true" />
+			</h:panelGrid>
+			<p:commandButton value="Modidicar Piezas" title="Modidicar Pieza"
+				actionListener="#{piezasMBean.guardarPieza()}" update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/procesostecnicos/listapiezas.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

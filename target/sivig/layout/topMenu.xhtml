@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pu="http://primefaces.org/ultima"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<div class="topbar clearfix">
+	<h:form id="menuForm" enctype="multipart/form-data">
+			<h:panelGroup>
+				<h:panelGrid columns="2" style="text-align:center;">
+					<p:outputLabel value="#{request.getUserPrincipal().getName()} "/>
+					<p:commandButton value="Cerrar Sesion" icon="ui-icon-power"
+						action="#{login.logout()}" title="Cerrar Session"/>
+				</h:panelGrid>
+			</h:panelGroup>
+	</h:form>
+	</div>
+</ui:composition>

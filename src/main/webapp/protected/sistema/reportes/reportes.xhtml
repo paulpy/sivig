@@ -1,0 +1,32 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Sistema</ui:define>
+	<ui:define name="title2">Reportes</ui:define>
+	<ui:define name="body">
+		<h:form id="mainForm">
+			<p:selectOneButton>
+				<f:selectItem itemLabel="Instalaciones" itemValue="instalacion" />
+				<f:selectItem itemLabel="Mantenimiento" itemValue="mantenimiento" />
+				<f:selectItem itemLabel="Contrato" itemValue="contrato" />
+				<f:selectItem itemLabel="Cambio de pieza" itemValue="cambiopieza" />
+			</p:selectOneButton>
+			<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+				columnClasses="label,value" layout="grid"
+				styleClass="ui-panelgrid-blank">
+				<p:outputLabel for="fechainicio" value="Fecha Inicio Rango: " />
+				<p:calendar id="fechainicio" effect="fold" />
+				<p:outputLabel for="fechafinal" value="Fecha Final Rango:" />
+				<p:calendar id="fechafinal" effect="fold" />
+				<p:outputLabel for="console" value="Funcionario: " />
+				<p:selectOneMenu id="console" style="width:125px">
+					<f:selectItem itemLabel="Funcionario" itemValue="funcionario" />
+				</p:selectOneMenu>
+				<p:commandButton value="Submit" icon="ui-icon-check" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,82 @@
+<ui:composition template="/protected/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Usuarios</ui:define>
+	<ui:define name="title2">Agregar Usuario</ui:define>
+	<ui:define name="body">
+		<p:panel id="agregarusauriodesdeperosna"
+			header="Agregar Usuario desde: " toggleable="false" toggleSpeed="500"
+			closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+			<p:panel header="Datos Persona y Funcionario"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText for="idNUNombre" value="Nombre: " />
+					<p:inputText id="idNUNombre"
+						value="#{nuevoUsuaPersona.persNombre}" required="true" />
+					<h:outputText for="idNUApellido" value="Apellido: " />
+					<p:inputText id="idNUApellido"
+						value="#{nuevoUsuaPersona.persApellido}" required="true" />
+					<h:outputText for="idNUCI" value="Numero de Cedula: " />
+					<p:inputText id="idNUCI" value="#{nuevoUsuaPersona.persCi}"
+						required="true" />
+					<h:outputText for="mask" value="Fecha de Nacimiento: " />
+					<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+						value="#{nuevoUsuaPersona.persFechaNacimiento}" required="true"/>
+					<h:outputText value="Sexo: " />
+					<p:selectOneMenu id="sexo" style="width:125px"
+						value="#{nuevoUsuaPersona.persSexo}">
+						<f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					</p:selectOneMenu>
+					<h:outputText value="Area:" />
+					<p:selectOneMenu id="area" style="width:125px"
+						value="#{nuevoUsuaFuncionario.funcArea}">
+						<f:selectItem itemLabel="Comercial" itemValue="comercial" />
+						<f:selectItem itemLabel="Tecnica" itemValue="tecnica" />
+						<f:selectItem itemLabel="Programacion" itemValue="programacion" />
+						<f:selectItem itemLabel="Cliente" itemValue="cliente" />
+					</p:selectOneMenu>
+					<h:outputText value="Cargo:" />
+					<p:selectOneMenu id="cargo" style="width:125px"
+						value="#{nuevoUsuaFuncionario.funcCargo}">
+						<f:selectItem itemLabel="Encargado" itemValue="encargado" />
+						<f:selectItem itemLabel="Auxiliar" itemValue="auxiliar" />
+						<f:selectItem itemLabel="Tecnico" itemValue="tecnico" />
+					</p:selectOneMenu>
+					<h:outputText value="Funcionario Activo: " />
+					<p:inputSwitch value="#{nuevoUsuaFuncionario.funcEstado}"
+						required="true" />
+				</h:panelGrid>
+			</p:panel>
+			<p:panel header="Datos Usuario" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="Usuario: " />
+					<p:inputText id="usuarioUsuario"
+						value="#{nuevoUsuario.usuaUsuario}" />
+					<h:outputText for="pw1" value="Contraseña: " />
+					<p:password id="pw1" match="pw2" value="#{nuevoUsuario.usuaPass}"
+						feedback="true" required="true" />
+					<h:outputText for="pw2" value="Confirmar Contraseña: " />
+					<p:password id="pw2" value="#{nuevoUsuario.usuaPass}"
+						feedback="true" required="true" />
+					<h:outputText value="Usuario Activo: " />
+					<p:inputSwitch value="#{nuevoUsuario.usuaActivo}" />
+					<h:outputText value="Usuario Tipo: " />
+					<p:selectOneMenu id="tipousuario" value="#{nuevoUsuario.usuaTipo}"
+						style="width:125px">
+						<f:selectItem itemLabel="Administrador" itemValue="admin" />
+						<f:selectItem itemLabel="Centinela" itemValue="centinela" />
+						<f:selectItem itemLabel="Operador" itemValue="operador" />
+						<f:selectItem itemLabel="Auditor" itemValue="auditor" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</p:panel>
+			<p:commandButton value="Agregar Usuario" title="Agregar Usuario"
+				actionListener="#{usuarioController.registrarUsuario()}"
+				update="growl" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

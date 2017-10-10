@@ -1,0 +1,71 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Empresarial</ui:define>
+	<ui:define name="title2">Dependencia</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{dependenciaMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelprocesosempresarialesclientesentidad"
+			header="Dependencia">
+			<h:panelGrid columns="2" cellpadding="10" title="Dependencia">
+				<h:outputText for="idDepeNombre" value="Nombre dependencia: " />
+				<p:inputText id="idDepeNombre"
+					value="#{dependenciaMBean.nuevaDependencia.depeNombreDependencia}" required="true"/>
+				<h:outputText for="idNDepeEntidad" value="Entidad: " />
+				<p:selectOneMenu id="idNDepeEntidad" style="width:125px"
+					value="#{dependenciaMBean.nuevaDependencia.entidad}"
+					converter="#{entidadConverter}" required="true">
+					<f:selectItems value="#{dependenciaMBean.entidadesList}"
+						var="entidad" itemValue="#{entidad}"
+						itemLabel="#{entidad.entiEntidad}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNDepeEstado" value="Estado Dependencia: " />
+				<p:inputSwitch id="idNDepeEstado"
+					value="#{dependenciaMBean.nuevaDependencia.depeEstado}" required="true"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="10" title="Direccion">
+				<h:outputText for="idNDepeCalle1" value="Calle 1: " />
+				<p:selectOneMenu id="idNDepeCalle1" style="width:125px"
+					value="#{dependenciaMBean.nuevaDireccion.calle1}"
+					converter="#{calleConverter}" required="true">
+					<f:selectItems value="#{dependenciaMBean.calleList}" var="calle1"
+						itemValue="#{calle1}" itemLabel="#{calle1.callCalle}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNDepeCalle2" value="Calle 2: " />
+				<p:selectOneMenu id="idNDepeCalle2" style="width:125px"
+					value="#{dependenciaMBean.nuevaDireccion.calle2}"
+					converter="#{calleConverter}" required="true">
+							<f:selectItems value="#{dependenciaMBean.calleList}" var="calle2"
+						itemValue="#{calle2}" itemLabel="#{calle2.callCalle}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNDepeCalle3" value="Calle 3: " />
+				<p:selectOneMenu id="idNDepeCalle3" style="width:125px"
+					value="#{dependenciaMBean.nuevaDireccion.calle3}"
+					converter="#{calleConverter}" required="true">
+					<f:selectItems value="#{dependenciaMBean.calleList}"
+						var="calle3" itemValue="#{calle3}" itemLabel="#{calle3.callCalle}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNDepeCiudad" value="Ciudad: " />
+				<p:selectOneMenu id="idNDepeCiudad" style="width:125px"
+					value="#{dependenciaMBean.nuevaDireccion.ciudad}"
+					converter="#{ciudadConverter}" required="true">
+					<f:selectItems value="#{dependenciaMBean.ciudadList}" var="ciudad"
+						itemValue="#{ciudad}" itemLabel="#{ciudad.ciudCiudad}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNDepeNroEdi" value="Nro. Edificacion: " />
+				<p:inputText id="idNDepeNroEdi" value="#{dependenciaMBean.nuevaDireccion.direNro}" required="true"/>
+			</h:panelGrid>
+			<p:commandButton value="Agregar Entidad" title="Agregar Entidad"
+				update="growl" action="#{dependenciaMBean.guardarDependencia()}" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/empresarial/clientes/estadodependencias.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

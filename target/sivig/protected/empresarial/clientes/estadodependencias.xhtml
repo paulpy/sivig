@@ -1,0 +1,48 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Empresariales</ui:define>
+	<ui:define name="title2">Estado Funcionario</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{dependenciaMBean.listarDependencias()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistadodependencia" header="Dependencias"
+			style="text-align:center">
+			<p:dataTable id="listadodependencias"
+				value="#{dependenciaMBean.dependenciasList}"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Funcionarios" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Nombre Dependencia">
+					<h:outputText value="#{item.depeNombreDependencia}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Entidad correspondiente">
+					<h:outputText value="#{item.entidad.entiEntidad}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Dependencia">
+					<h:outputText value="#{item.depeEstado}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevadependencia" value="Agregar"
+							outcome="/protected/empresarial/clientes/agregardependencia.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/empresarial/clientes/moddependencia.xhtml">
+						<f:param name="idDependencia" value="#{item.depeIdDependencia}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

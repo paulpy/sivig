@@ -1,0 +1,56 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Equipos</ui:define>
+	<ui:define name="title2">Mantenimientos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{mantenimientoMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelmantenimiento" header="Nuevo Mantenimiento">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputText for="mask" value="Fecha Mantenimiento: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy  HH:mm:ss" mask="true"
+					value="#{mantenimientoMBean.nuevoMantenimiento.mantFechaHora}"
+					required="true" />
+				<h:outputText for="idNMantContrato" value="Contrato: " />
+				<p:selectOneMenu id="idNMantContrato" style="width:125px"
+					value="#{mantenimientoMBean.nuevoMantenimiento.contrato}"
+					converter="#{contratoConverter}" required="true">
+					<f:selectItems value="#{mantenimientoMBean.contratoList}"
+						var="contrato" itemValue="#{contrato}"
+						itemLabel="#{contrato.contIdentificadorContrato}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNMantDepe" value="Dependencia: " />
+				<p:selectOneMenu id="idNMantDepe" style="width:125px"
+					value="#{mantenimientoMBean.nuevoMantenimiento.dependencia}"
+					converter="#{dependenciaConverter}" required="true">
+					<f:selectItems value="#{mantenimientoMBean.dependenciaList}"
+						var="dependencia" itemValue="#{dependencia}"
+						itemLabel="#{dependencia.depeNombreDependencia}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNMantFunc" value="Funcionario: " />
+				<p:selectOneMenu id="idNMantFunc" style="width:125px"
+					value="#{mantenimientoMBean.nuevoMantenimiento.funcionario}"
+					converter="#{funcionarioConverter}" required="true">
+					<f:selectItems value="#{mantenimientoMBean.funcionarioList}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.persona.persNombre}" />
+				</p:selectOneMenu>
+				<h:outputText value="Observacion: " />
+				<p:inputTextarea rows="6" cols="33"
+					value="#{mantenimientoMBean.nuevoMantenimiento.mantObservacion}" />
+			</h:panelGrid>
+			<p:commandButton value="Guardar Mantenimiento" update="growl"
+				title="Guardar Mantenimineto"
+				action="#{mantenimientoMBean.registrarMantenimiento()}" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/main.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Equipos</ui:define>
+	<ui:define name="title2">Cambios de Piezas</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{cambioPiezaMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelcambiopieza" header="Cambio de Pieza">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputText for="mask" value="Fecha de Cambio " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{cambioPiezaMBean.nuevoCambioPieza.capiFechaCambio}" required="true" />
+				<h:outputText for="idNCPFunc" value="Funcionario: " />
+				<p:selectOneMenu id="idNCPFunc" style="width:125px"
+					value="#{cambioPiezaMBean.nuevoCambioPieza.funcionario}"
+					converter="#{funcionarioConverter}" required="true">
+					<f:selectItems value="#{cambioPiezaMBean.funcionarioList}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.persona.persNombre}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNCPEqui" value="Equipo: " />
+				<p:selectOneMenu id="idNCPEqui" style="width:125px"
+					value="#{cambioPiezaMBean.nuevoCambioPieza.equipo}"
+					converter="#{equipoConverter}" required="true">
+					<f:selectItems value="#{cambioPiezaMBean.equipoList}" var="equipo"
+						itemValue="#{equipo}" itemLabel="#{equipo.equiSerieEquipo}" />
+				</p:selectOneMenu>
+				<h:outputText for="idNCPPieza" value="Pieza Cambiada: " />
+				<p:selectOneMenu id="idNCPPieza" style="width:125px"
+					value="#{cambioPiezaMBean.nuevoCambioPieza.pieza}"
+					converter="#{piezaConverter}" required="true">
+					<f:selectItems value="#{cambioPiezaMBean.piezaList}" var="pieza"
+						itemValue="#{pieza}" itemLabel="#{pieza.piezPieza}" />
+				</p:selectOneMenu>
+				<h:outputText value="Observacion: " />
+				<p:inputTextarea rows="6" cols="33"
+					value="#{cambioPiezaMBean.nuevoCambioPieza.capiObservacion}" />
+			</h:panelGrid>
+			<p:commandButton value="Guardar Cambio de Pieza"
+				title="Guardar Cambio"
+				actionListener="#{cambioPiezaMBean.registrarCambioPieza()}"
+				update="growl" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

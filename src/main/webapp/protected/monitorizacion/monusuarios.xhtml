@@ -1,0 +1,40 @@
+<ui:composition template="/protected/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Monitorizacion</ui:define>
+	<ui:define name="titulo2">Usuarios</ui:define>
+	<ui:define name="cuerpo">
+		<h:form id="mainForm">
+			<p:panel id="panelmonitorizacionusuarios"
+				header="Monitorizacion Usuarios" style="text-align:center">
+				<p:dataTable id="monitorizacionsiviras"
+					emptyMessage="No se encontro ningun usuario a monitorear"
+					paginator="true" paginatorPosition="bottom" rows="30">
+					<p:column style="width: 180px; text-align: center"
+						headerText="Usuario">
+						<h:outputText value="1" />
+					</p:column>
+					<p:column style="width: 180px; text-align: center"
+						headerText="Ultima Conexion">
+						<h:outputText value="1" />
+					</p:column>
+					<p:column style="width: 180px; text-align: center"
+						headerText="Cargo">
+						<h:outputText value="Asuncion" />
+					</p:column>
+					<p:column style="width: 180px; text-align: center"
+						headerText="Estado">
+						<h:outputText value="1" />
+					</p:column>
+					<p:column style="width: 180px; text-align: center"
+						headerText="trabajos">
+						<h:outputText value="Corriendo" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

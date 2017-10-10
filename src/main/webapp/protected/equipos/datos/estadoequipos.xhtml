@@ -1,0 +1,51 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Estado Equipos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{equipoMBean.listarEquipos()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistadoequipos" header="Listado Equipos"
+			style="text-align:center; width:80%; min-width:20%">
+			<p:dataTable id="listadoequipos" value="#{equipoMBean.equipoList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Funcionarios" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Serie Equipo">
+					<h:outputText value="#{item.equiSerieEquipo}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Fecha Ingreso">
+					<h:outputText value="#{item.equiFechaIngreso}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Raspberry Asignado">
+					<h:outputText value="#{item.raspberry.raspNombre}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Equipo">
+					<h:outputText value="#{item.equiActivo}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevocontrato" value="Agregar"
+							outcome="/protected/equipos/datos/agregarequipo.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/equipos/datos/modequipos.xhtml">
+						<f:param name="idEquipoParam" value="#{item.equiIdEquipo}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

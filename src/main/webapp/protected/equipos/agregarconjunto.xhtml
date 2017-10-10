@@ -1,0 +1,42 @@
+<ui:composition template="/protected/main.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Equipos</ui:define>
+	<ui:define name="title2">Agregar Conjunto</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{conjuntoMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="adminequipoagregarconjunto" header="Agregar Conjunto"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:outputText for="idNEquipoSerie" value="Serie Equipo: " />
+				<p:inputText id="idNEquipoSerie" value="#{conjuntoMBean.nuevoEquipo.equiSerieEquipo}" required="true" />
+				<h:outputText for="mask" value="Fecha Ingreso Equipo: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{conjuntoMBean.nuevoEquipo.equiFechaIngreso}" required="true" />
+				<h:outputText for="idNEquipoActivo" value="Equipo Activo: " />
+				<p:inputSwitch id="idNEquipoActivo" value="#{conjuntoMBean.nuevoEquipo.equiActivo}" required="true" />
+				<h:outputText for="mask2" value="Fecha Ingreso Raspberry: " />
+				<p:calendar id="mask2" pattern="dd-MM-yyyy" mask="true"
+					value="#{conjuntoMBean.nuevoRaspberry.raspFechaIngreso}" />
+				<h:outputText for="idNEquipoRasp" value="Nombre Raspberry: " />
+				<p:inputText if="idNEquipoRasp" value="#{conjuntoMBean.nuevoRaspberry.raspNombre}" required="true" />
+				<h:outputText for="idNEquipoRIP" value="Raspbery IP: " />
+				<p:inputText id="idNEquipoRIP" value="#{conjuntoMBean.nuevoRaspberry.raspIp}" required="true" />
+				<h:outputText for="idNequipoRaspActivo" value="Raspberry Activo: " />
+				<p:inputSwitch id="idNequipoRaspActivo" value="#{conjuntoMBean.nuevoRaspberry.raspActivo}" required="true" />
+			</h:panelGrid>
+			<p:commandButton value="Agregar Conjunto" title="Agregar Raspberry"
+				action="#{conjuntoMBean.registrarConjunto()}"
+				update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/main.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

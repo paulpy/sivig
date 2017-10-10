@@ -1,0 +1,44 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Tecnicos</ui:define>
+	<ui:define name="title2">Piezas</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:event listener="#{piezasMBean.inicializar()}" type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panellistadopiezas"
+			header="Listado Estados Piezas" style="text-align:center">
+			<p:dataTable id="listadopiezas" value="#{piezasMBean.piezaList}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Contratos" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center" headerText="Pieza">
+					<h:outputText value="#{item.piezPieza}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center" headerText="Detalle">
+					<h:outputText value="#{item.piezDetalle}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Cantidad Actual">
+					<h:outputText value="#{item.piezCantidad}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevapieza" value="Agregar"
+							outcome="/protected/procesostecnicos/piezas.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil"
+						outcome="/protected/procesostecnicos/modpiezas.xhtml">
+						<f:param name="idPiezaParam" value="#{item.piezIdPieza}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,30 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Monitorizacion</ui:define>
+	<ui:define name="title2">Equipos</ui:define>
+	<ui:define name="body">
+		<p:carousel headerText="Responsive" var="car"
+			itemStyle="text-align:center" responsive="true">
+			<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+				columnClasses="label,value" layout="grid"
+				styleClass="ui-panelgrid-blank">
+
+				<h:outputText value="Id:" />
+				<h:outputText value="1" />
+
+				<h:outputText value="Year" />
+				<h:outputText value="2017" />
+
+				<h:outputText value="Color:" />
+				<h:outputText value="ROJO" />
+
+				<h:outputText value="Price" />
+				<h:outputText value="MUCHO" />
+			</p:panelGrid>
+		</p:carousel>
+	</ui:define>
+</ui:composition>

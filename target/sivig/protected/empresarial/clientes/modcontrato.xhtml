@@ -1,0 +1,59 @@
+<ui:composition template="/layout/LayoutPrimeFaces.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Procesos Empresariales</ui:define>
+	<ui:define name="title2">Contratos</ui:define>
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="idContratoParam"
+				value="#{contratoMBean.idContratoParam}" />
+			<f:event listener="#{contratoMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelcontratos" header="Modificar Contrato">
+			<h:panelGrid columns="2" cellpadding="2">
+				<h:outputText value="Funcionario Encargado " />
+				<p:selectOneMenu id="encargado" style="width:125px"
+					value="#{contratoMBean.nuevoContrato.funcionario}"
+					converter="#{funcionarioConverter}" disabled="true">
+					<f:selectItems value="#{contratoMBean.funcionarioList}"
+						var="funcionario" itemValue="#{funcionario}"
+						itemLabel="#{funcionario.persona.persNombre}" />
+				</p:selectOneMenu>
+				<h:outputText value="Entidad Contratadora: " />
+				<p:selectOneMenu id="contratadora" style="width:125px"
+					value="#{contratoMBean.nuevoContrato.entidad}"
+					converter="#{entidadConverter}" disabled="true">
+					<f:selectItems value="#{contratoMBean.entidadList}" var="entidad"
+						itemValue="#{entidad}" itemLabel="#{entidad.entiEntidad}" />
+				</p:selectOneMenu>
+				<h:outputText value="Fecha Inicio Contrato: " />
+				<p:calendar id="mask1" pattern="dd-MM-yyyy" mask="true"
+					value="#{contratoMBean.nuevoContrato.contFechaInicio}"
+					disabled="true" />
+				<h:outputText value="Fecha Final Contrato: " />
+				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
+					value="#{contratoMBean.nuevoContrato.contFechaFinalizacion}"
+					disabled="true" />
+				<h:outputText value="Observacion: " />
+				<p:inputTextarea rows="6" cols="33"
+					value="#{contratoMBean.nuevoContrato.contObservacion}" />
+				<h:outputText value="Identificador de Contrato: " />
+				<p:inputText
+					value="#{contratoMBean.nuevoContrato.contIdentificadorContrato}"
+					disabled="true" />
+				<h:outputText value="Contrato Estado: " />
+				<p:inputSwitch value="#{contratoMBean.nuevoContrato.contActivo}" />
+			</h:panelGrid>
+			<p:commandButton value="Modificar Contrato"
+				title="Modificar Contrato"
+				action="#{contratoMBean.guardarContrato()}" update="growl" />
+			<p:button value="Volver" id="botonVolver"
+				outcome="/protected/empresarial/clientes/estadocontratos.xhtml"
+				icon="ui-icon-arrowreturnthick-1-w" />
+		</p:panel>
+	</ui:define>
+</ui:composition>

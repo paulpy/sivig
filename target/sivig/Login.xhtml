@@ -1,0 +1,41 @@
+<ui:composition template="/WEB-INF/templates/LayoutLogin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="titulo">Print Server</ui:define>
+	<ui:define name="cuerpo">
+		<h:form id="mainForm">
+			<h:form id="loginForm">
+				<p:growl id="growlLogin" life="3000" />
+				<table>
+					<tr>
+						<td style="width: 300px">
+							<img src="/images_outside/logo.gif" width="250px" />
+						</td>
+						<td>
+							<h1 style="text-align: center">BIENVENIDO</h1>
+							<h2 style="text-align: center">HOLA MUNDO</h2> <p:focus /> <h:panelGrid columns="2"
+								styleClass="grid-login">
+								<p:outputLabel for="j_username">USUARIO</p:outputLabel>
+								<p:inputText id="j_username" autofocus="autofocus" value="#{login.userName}" placeholder="Usuario"
+									required="required" type="text" name="j_username" />
+
+								<p:outputLabel for="j_password">CONTRASEÑA</p:outputLabel>
+								<p:inputText id="j_password" value="#{login.password}" placeholder="Contraseña" 
+									required="required" type="password" name="j_password" />
+
+								<p:outputLabel></p:outputLabel>
+								<div align="right">
+									<p:commandButton value="Ingreso" action="#{login.login}"
+										update="growlLogin" />
+								</div>
+							</h:panelGrid>
+						</td>
+					</tr>
+				</table>
+			</h:form>
+		</h:form>
+	</ui:define>
+</ui:composition>
