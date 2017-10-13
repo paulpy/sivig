@@ -4,10 +4,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
+<h:head>
+	<h:outputStylesheet library="css" name="menu.css"/>
+</h:head>
 <h:body>
 	<div class="ui-g">
-		<div class="ui-g-12 ui-md-2">
+		<div id="divmenu" class="ui-g-12 ui-md-2">
 			<ui:include src="topMenu.xhtml" />
 			<ui:include src="menu.xhtml" />
 			<ui:include src="logequipos.xhtml" />

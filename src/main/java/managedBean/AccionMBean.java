@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
+import org.primefaces.context.RequestContext;
 
 import model.Accion;
 import service.AccionService;
@@ -50,8 +51,8 @@ public class AccionMBean implements Serializable{
 				accionService.actualizaAccion(nuevaAccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
-				context.addMessage(null, m);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadoacciones.xhtml");
+				context.addMessage(null, m);
 			} else {
 				accionService.registrarAccion(nuevaAccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");

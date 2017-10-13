@@ -10,7 +10,7 @@
 		<f:metadata>
 			<f:event listener="#{accionMBean.inicializar()}" type="preRenderView" />
 		</f:metadata>
-		<p:panel header="Agregar Nueva Accion" style="margin-bottom:20px">
+		<p:panel id="panelagreraraccion" header="Agregar Nueva Accion" style="margin-bottom:20px">
 			<h:outputText for="idNAccion" value="Accion: " />
 			<p:inputText id="idNAccion" value="#{accionMBean.nuevaAccion.acciAccion}"
 				required="true" />
