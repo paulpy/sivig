@@ -95,4 +95,13 @@ public class HistoricoRaspberryEstadoService {
 		listarHistoricoR = query.getResultList();
 		return listarHistoricoR;
 	}
+	
+	public List<String> listHistoricoRaspCambioEstado(Integer idrasp){
+		// TODO Auto-generated method stub
+		List<String> listarHistoricoR = null;
+		TypedQuery<String> query = em.createQuery("SELECT ee.eseqEstadoEquipo FROM HistoricoRaspberryEstado AS hre, EstadoEquipo AS ee WHERE hre.raspberry.raspIdRaspberry = :raspberry AND hre.estadoEquipo.eseqIdEstadoEquipo = ee.eseqIdEstadoEquipo ORDER BY hre.raesIdRaspberryEstado DESC", String.class);
+		listarHistoricoR = query.setParameter("raspberry", idrasp).getResultList();
+		return listarHistoricoR;
+	}
+	
 }

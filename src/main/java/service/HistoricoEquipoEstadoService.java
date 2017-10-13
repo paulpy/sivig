@@ -106,4 +106,11 @@ public class HistoricoEquipoEstadoService {
 		listarHistEquipo = query.getResultList();
 		return listarHistEquipo;
 	}
+	
+	public List<String> listHistoricoEquipoCambioEstado(Integer idequipo){
+		List<String> listarHistEquipo = null;
+		TypedQuery<String> query = em.createQuery("SELECT ee.eseqEstadoEquipo FROM HistoricoEquipoEstado AS hee, EstadoEquipo AS ee WHERE hee.equipo.equiIdEquipo = :equipo AND hee.estadoEquipo.eseqIdEstadoEquipo = ee.eseqIdEstadoEquipo ORDER BY hee.eqesMomentoEstado DESC", String.class);
+		listarHistEquipo = query.setParameter("equipo", idequipo).getResultList();
+		return listarHistEquipo;
+	}
 }
