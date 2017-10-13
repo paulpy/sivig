@@ -7,6 +7,7 @@
 	<ui:define name="title">Equipos</ui:define>
 	<ui:define name="title2">Panel de Control</ui:define>
 	<ui:define name="body">
+		<p:poll interval="5" listener="#{interaccionMBean.verificarEquipo()}"/>
 		<f:metadata>
 			<f:viewParam name="idEquipoParam"
 				value="#{interaccionMBean.idEquipoParam}" />
@@ -59,7 +60,7 @@
 		            <h:outputText value="#{item.raspberry.raspActivo}" />
 		        </h:panelGrid>
     		</p:carousel>
-    		<p:dataTable var="item2" value="#{interaccionMBean.historicoEquipoList}" rows="5">
+    		<p:dataTable id="historicoEquiposTabla" var="item2" value="#{interaccionMBean.historicoEquipoList}" rows="5">
 			    <p:column headerText="Fecha y Hora">
 			        <h:outputText value="#{item2.eqesMomentoEstado}" />
 			    </p:column>
@@ -70,7 +71,7 @@
 			        <h:outputText value="#{item2.estadosEquipo.eseqEstadoEquipo}" />
 			    </p:column>
 			</p:dataTable>
-			<p:dataTable var="item3" value="#{interaccionMBean.historicoRaspberryList}" rows="5">
+			<p:dataTable id="historicoRaspberryTabla" var="item3" value="#{interaccionMBean.historicoRaspberryList}" rows="5">
 			    <p:column headerText="Fecha y Hora">
 			        <h:outputText value="#{item3.raesMomentoCambio}" />
 			    </p:column>

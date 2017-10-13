@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
+import org.primefaces.context.RequestContext;
 
 import model.Accion;
 import model.Equipo;
@@ -369,6 +370,12 @@ public class InteraccionMBean implements Serializable{
 			e.printStackTrace();
 		}
 		limpiar();
+	}
+	
+	public void verificarEquipo(){
+		listarHistoricos(nuevoEquipo);
+		RequestContext.getCurrentInstance().update("mainForm:historicoEquiposTabla");
+		RequestContext.getCurrentInstance().update("mainForm:historicoRaspberryTabla");
 	}
 	
 	public void limpiar(){
