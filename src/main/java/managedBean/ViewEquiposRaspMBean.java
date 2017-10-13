@@ -53,14 +53,22 @@ public class ViewEquiposRaspMBean implements Serializable{
 		if(equipos.size() > 0){
 			for(Equipo equipo : equipos){
 				List<String> listadoEstadoHE = historicoEquipoEstadoService.listHistoricoEquipoCambioEstado(equipo.getEquiIdEquipo());
-				String estadoEquipo = listadoEstadoHE.get(0).toString();
-				equipo.setEquiEstado(estadoEquipo);
-				equipoService.updateEquipo(equipo);
+				if(listadoEstadoHE.size() == 0){
+					System.out.println("Es un estado null");
+				} else {
+					String estadoEquipo = listadoEstadoHE.get(0).toString();
+					equipo.setEquiEstado(estadoEquipo);
+					equipoService.updateEquipo(equipo);
+				}
 				List<String> listadoEstadoHR = historicoRaspberryEstadoService.listHistoricoRaspCambioEstado(equipo.getRaspberry().getRaspIdRaspberry());
-				String estadoRaspberry = listadoEstadoHR.get(0).toString();
-				Raspberry raspactual = equipo.getRaspberry();
-				raspactual.setRaspEstado(estadoRaspberry);
-				raspberryService.actualizarRaspberry(raspactual);
+				if(listadoEstadoHR.size() == 0){
+					System.out.println("Es un estado null");
+				} else {
+					String estadoRaspberry = listadoEstadoHR.get(0).toString();
+					Raspberry raspactual = equipo.getRaspberry();
+					raspactual.setRaspEstado(estadoRaspberry);
+					raspberryService.actualizarRaspberry(raspactual);
+				}
 			}
 			RequestContext.getCurrentInstance().update("mainForm:gritEquiposMontGral");
 		}
