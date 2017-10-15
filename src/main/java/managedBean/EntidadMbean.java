@@ -81,6 +81,16 @@ public class EntidadMbean implements Serializable{
 	public void limpiar(){
 		nuevaEntidad = new Entidad();
 	}
+	
+	public String estadoEntidadView(boolean estadoEnti){
+		String estadoEntidadActual = null;
+		if(estadoEnti){
+			estadoEntidadActual = "Activo";
+		} else {
+			estadoEntidadActual = "Inactivo";
+		}
+		return estadoEntidadActual;
+	}
 
 	public Entidad getNuevaEntidad() {
 		return nuevaEntidad;
@@ -105,5 +115,5 @@ public class EntidadMbean implements Serializable{
 	public void setEntidadList(List<Entidad> entidadList) {
 		this.entidadList = entidadList;
 	}
-
+	
 }

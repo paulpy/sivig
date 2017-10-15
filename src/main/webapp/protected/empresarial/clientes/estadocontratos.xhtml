@@ -36,7 +36,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Contrato">
-					<h:outputText value="#{item.contActivo}" />
+					<h:outputText value="#{contratoMBean.estadoContratoView(item.contActivo)}" />
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">

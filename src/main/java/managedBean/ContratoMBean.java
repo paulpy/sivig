@@ -96,6 +96,16 @@ public class ContratoMBean implements Serializable {
 		entidadList = entidadService.listEntidad();
 		funcionarioList = funcionarioService.listFuncionario();
 	}
+	
+	public String estadoContratoView(boolean estadoContratoOriginal){
+		String estadoCont = null;
+		if(estadoContratoOriginal){
+			estadoCont = "Vigente";
+		} else {
+			estadoCont = "Inactivo";
+		}
+		return estadoCont;
+	}
 
 	public String getIdContratoParam() {
 		return idContratoParam;

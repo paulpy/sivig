@@ -87,6 +87,16 @@ public class FuncionarioMBean implements Serializable{
 	public void listarFuncionario(){
 		funcionarioList = funcionarioService.listFuncionario();
 	}
+	
+	public String estadoFuncionarioView(boolean estadoFuncionarioActual){
+		String estadoFunc = null;
+		if(estadoFuncionarioActual){
+			estadoFunc = "Activo";
+		} else {
+			estadoFunc = "Inactivo";
+		}
+		return estadoFunc;
+	}
 
 	public Funcionario getNuevoFuncionario() {
 		return nuevoFuncionario;

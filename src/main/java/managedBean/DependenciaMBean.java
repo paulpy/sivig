@@ -53,7 +53,7 @@ public class DependenciaMBean implements Serializable{
 	private List<Calle> calleList;
 	private List<Ciudad> ciudadList;
 	private List<Dependencia> dependenciasList;
-	
+
 	public void inicializar() throws Exception {
 		if(!FacesContext.getCurrentInstance().isPostback()){
 			if(idDependencia != null){
@@ -104,6 +104,16 @@ public class DependenciaMBean implements Serializable{
 	public void limpiar(){
 		nuevaDependencia = new Dependencia();
 		nuevaDireccion = new Direccion();
+	}
+	
+	public String estadoDependenciaView(boolean estadoDependencia){
+		String estadoDep = null;
+		if(estadoDependencia){
+			estadoDep = "Activo";
+		} else {
+			estadoDep = "Inactivo";
+		}
+		return estadoDep;
 	}
 	
 	public void listarDependencias(){
@@ -165,5 +175,5 @@ public class DependenciaMBean implements Serializable{
 	public void setNuevaDireccion(Direccion nuevaDireccion) {
 		this.nuevaDireccion = nuevaDireccion;
 	}
-	
+
 }

@@ -33,7 +33,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Funcionario">
-					<h:outputText value="#{item.funcEstado}" />
+					<h:outputText value="#{funcionarioMBean.estadoFuncionarioView(item.funcEstado)}" />
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">
