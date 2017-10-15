@@ -33,7 +33,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Raspberry">
-					<h:outputText value="#{item.raspActivo}" />
+					<h:outputText value="#{raspberryMBean.estadoRaspberryView(item.raspActivo)}" style="color:#{raspberryMBean.colorEstadoEquipoView(item.raspActivo)}"/>
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">

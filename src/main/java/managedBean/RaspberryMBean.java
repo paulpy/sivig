@@ -70,6 +70,26 @@ public class RaspberryMBean implements Serializable{
 		}
 	}
 	
+	public String estadoRaspberryView(boolean estadoRaspberryActual){
+		String estadoRaspberry = null;
+		if(estadoRaspberryActual){
+			estadoRaspberry = "Habilitado";
+		} else {
+			estadoRaspberry = "Inhabilitado";
+		}
+		return estadoRaspberry;
+	}
+	
+	public String colorEstadoEquipoView(boolean estadoRaspberryActual){
+		String estadoRaspberry = null;
+		if(estadoRaspberryActual){
+			estadoRaspberry = "Green";
+		} else {
+			estadoRaspberry = "Red";
+		}
+		return estadoRaspberry;
+	}
+	
 	public void listarRaspberrys(){
 		raspberryList = raspberryService.listRaspberry();
 	}

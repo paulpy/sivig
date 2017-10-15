@@ -16,6 +16,9 @@
 				<h:outputText for="idNEquipoSerie" value="Serie Equipo: " />
 				<p:inputText id="idNEquipoSerie" value="#{equipoMBean.nuevoEquipo.equiSerieEquipo}"
 					required="true" />
+				<h:outputText for="idNEquipoIdentificador" value="Identificador Equipo: " />
+				<p:inputText id="idNEquipoIdentificador" value="#{equipoMBean.nuevoEquipo.equiIdenificador}"
+					required="true" />
 				<h:outputText for="mask" value="Fecha Ingreso: " />
 				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
 					value="#{equipoMBean.nuevoEquipo.equiFechaIngreso}" required="true" />

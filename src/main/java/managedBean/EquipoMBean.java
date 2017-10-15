@@ -83,6 +83,26 @@ public class EquipoMBean implements Serializable{
 		listarRaspoberrys();
 	}
 	
+	public String estadoEquipoView(boolean estadoEquipoActual){
+		String estadoEquipo = null;
+		if(estadoEquipoActual){
+			estadoEquipo = "Habilitado";
+		} else {
+			estadoEquipo = "Inhabilitado";
+		}
+		return estadoEquipo;
+	}
+	
+	public String colorEstadoEquipoView(boolean estadoEquipoActual){
+		String estadoEquipo = null;
+		if(estadoEquipoActual){
+			estadoEquipo = "Green";
+		} else {
+			estadoEquipo = "Red";
+		}
+		return estadoEquipo;
+	}
+	
 	public void listarEquipos(){
 		equipoList = equipoService.listEquipo();
 	}

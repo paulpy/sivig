@@ -32,7 +32,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Equipo">
-					<h:outputText value="#{item.equiActivo}" />
+					<h:outputText value="#{equipoMBean.estadoEquipoView(item.equiActivo)}" style="color:#{equipoMBean.colorEstadoEquipoView(item.equiActivo)}"/>
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">
