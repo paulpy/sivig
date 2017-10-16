@@ -16,12 +16,12 @@
 		<h:panelGrid columns="2" cellpadding="10">
 			<p:panel id="prasp" header="Acciones Raspberry" style="margin-bottom:20px">
 		        <h:panelGrid columns="2" cellpadding="10">
-					<p:commandButton value="Reiniciar" action="#{interaccionMBean.reiniciarR(request.getUserPrincipal().getName())}"/>
-					<p:commandButton value="Apagar" action="#{interaccionMBean.apagarR(request.getUserPrincipal().getName())}"/>
-					<p:commandButton value="Sincronizar Horario" action="#{interaccionMBean.sincHoraR(request.getUserPrincipal().getName())}"/>
-					<p:commandButton value="Sincronizar Estados" action="#{interaccionMBean.sincEstadosR(request.getUserPrincipal().getName())}"/>
-					<p:commandButton value="Sincronizar Acciones" action="#{interaccionMBean.sincAccionesR(request.getUserPrincipal().getName())}"/>
-					<p:commandButton value="Sincronizar Causas" action="#{interaccionMBean.sincCausasR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Reiniciar" action="#{interaccionMBean.reiniciarR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Apagar" action="#{interaccionMBean.apagarR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Sincronizar Horario" action="#{interaccionMBean.sincHoraR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Sincronizar Estados" action="#{interaccionMBean.sincEstadosR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Sincronizar Acciones" action="#{interaccionMBean.sincAccionesR(request.getUserPrincipal().getName())}"/>
+					<p:commandButton styleClass="commandbutton" value="Sincronizar Causas" action="#{interaccionMBean.sincCausasR(request.getUserPrincipal().getName())}"/>
 		        </h:panelGrid>
 		    </p:panel>
 		    <p:panel id="pequi" header="Acciones Equipo" style="margin-bottom:20px">

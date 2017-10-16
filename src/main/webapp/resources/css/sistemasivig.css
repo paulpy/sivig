@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+
+#divmenu {
+	background-color: #154360;
+}
+
+#cuerpoPag {
+	background-color: #1F618D;
+}
+
+#mainForm .commandbutton {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	text-shadow: 0px 0px 0px #3498db;
+	border-radius: 0px;
+	color: #ffffff;
+	border: none;
+	font-size: 14px;
+	background: #3498db;
+	padding: 2% 4% 2% 4%;
+	font-weight: normal;
+	text-decoration: none;
+	font-style: normal;
+	text-align: center;
+	font-family: @Arial Unicode MS
+}
+
+#menuForm .commandButton {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	text-shadow: 0px 0px 0px #3498db;
+	border-radius: 0px;
+	color: #ffffff;
+	border: none;
+	font-size: 14px;
+	background: #3498db;
+	padding: 2% 4% 2% 4%;
+	font-weight: normal;
+	text-decoration: none;
+	font-style: normal;
+	text-align: center;
+	font-family: @Arial Unicode MS
+}
