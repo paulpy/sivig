@@ -40,7 +40,7 @@
 		            <h:outputText value="#{item.raspberry.raspFechaIngreso}" />
 		            <h:outputText value="Activo:" />
 		            <h:outputText value="#{viewEquiposRaspMBean.estadoRaspberryView(item.raspberry.raspActivo)}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipoView(item.raspberry.raspActivo)}"/>
-		            <p:button value="Panel de Control"
+		            <p:button styleClass="commandbutton1" value="Panel de Control"
 		            	outcome="/protected/equipos/panelcontrolconjunto.xhtml">
 						<f:param name="idEquipoParam" value="#{item.equiIdEquipo}" />
 					</p:button>

@@ -11,7 +11,7 @@
 			<h:panelGroup>
 				<h:panelGrid columns="2" style="text-align:center;">
 					<p:outputLabel value="#{request.getUserPrincipal().getName()} "/>
-					<p:commandButton value="Cerrar Sesion" icon="ui-icon-power"
+					<p:commandButton styleClass="commandButton" value="Cerrar Sesion" icon="ui-icon-power"
 						action="#{login.logout()}" title="Cerrar Session"/>
 				</h:panelGrid>
 			</h:panelGroup>

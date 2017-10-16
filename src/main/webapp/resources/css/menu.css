@@ -1,13 +1,31 @@
 @CHARSET "ISO-8859-1";
 
-#divmenu{
-	background-color: #5499C7;
+#divmenu {
+	background-color: white;
 }
 
-#cuerpoPag{
+#cuerpoPag {
 	background-color: #1F618D;
 }
 
-#datosEquipos{
-	background-color: #5499C7;
+#mainForm .commandbutton1 {
+	background-color: #3498db; /* Green */
+	border: none;
+	color: white;
+	padding: 2% 4% 2% 4%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#menuForm .commandButton {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0px;
+	color: #ffffff;
+	font-size: 14px;
+	background: #3498db;
+	padding: 2% 4% 2% 4%;
+	text-decoration: none;
 }
