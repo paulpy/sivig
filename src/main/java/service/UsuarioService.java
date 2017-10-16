@@ -25,6 +25,12 @@ public class UsuarioService {
 		usuarioEventSrc.fire(usuario);
 	}
 	
+	public void actualizarUsuario(Usuario usuario){
+		logger.info("Registrado "+ usuario.getUsuaUsuario());
+		em.merge(usuario);
+		usuarioEventSrc.fire(usuario);
+	}
+	
 	public Usuario getUsuario(String username){
 		Usuario usuario = null;
 		try {

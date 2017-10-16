@@ -87,8 +87,26 @@
 	overflow: hidden;
 }
 
-#menupanelForm .ui-accordion-content {
-	padding: 0px;
-	margin: 0px;
+#menupanelForm .ui-accordion-header {
 	overflow: hidden;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	text-shadow: 0px 0px 0px #3498db;
+	border-radius: 0px;
+	color: black;
+	border: none;
+	font-size: 14px;
+	background: white;
+	padding: 2% 4% 2% 4%;
+	font-weight: normal;
+	text-decoration: none;
+	font-style: normal;
+	text-align: center;
+	font-family: @ Arial Unicode MS;
+	width: 100%;
+}
+
+#menupanelForm .ui-accordion-header:hover{
+	background-color: #008CBA;
+    color: white;
 }

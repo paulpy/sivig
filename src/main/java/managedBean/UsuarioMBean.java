@@ -12,48 +12,48 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
-import model.Accion;
-import service.AccionService;
+import model.Usuario;
+import service.UsuarioService;
 
 @ViewScoped
 @ManagedBean
-public class AccionMBean implements Serializable{
+public class UsuarioMBean implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Accion nuevaAccion;
+	private Usuario nuevoUsuario;
 	@Inject
 	private FacesContext context;
 	@Inject
-	private AccionService accionService;
+	private UsuarioService usuarioService;
 	@RequestParam
-	private String idAccion;
+	private String idUsuario;
 	private ExternalContext externalContext;
-	private List<Accion> accionList;
-	public void inicializar() {
+	private List<Usuario> usuarioList;
+	public void inicializar(){
 		if(!FacesContext.getCurrentInstance().isPostback()){
-			if(idAccion != null){
+			if(idUsuario != null){
 				limpiar();
-				Integer id = Integer.parseInt(idAccion);
-				nuevaAccion = accionService.getAccion(id);
-			} else {
-				limpiar();
-				listarAccion();
+				Integer id = Integer.parseInt(idUsuario);
+				nuevoUsuario = usuarioService.getUsuario(id);
 			}
+		} else {
+			limpiar();
+			listarUsuarios();
 		}
 	}
-	public void guardarAccion(){
+	public void guardarUsuario(){
 		try {
-			if(idAccion != null){
-				accionService.actualizaAccion(nuevaAccion);
+			if(idUsuario != null){
+				usuarioService.actualizarUsuario(nuevoUsuario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadoacciones.xhtml");
 				context.addMessage(null, m);
 			} else {
-				accionService.registrarAccion(nuevaAccion);
+				usuarioService.registrarUsuario(nuevoUsuario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
 				inicializar();
@@ -65,28 +65,29 @@ public class AccionMBean implements Serializable{
 			context.addMessage(null, m);
 		}
 	}
-	public void listarAccion(){
-		accionList = accionService.listAccion();
+	public void listarUsuarios(){
+		usuarioList = usuarioService.listUsuario();
 	}
 	public void limpiar(){
-		nuevaAccion = new Accion();
+		nuevoUsuario = new Usuario();
 	}
-	public Accion getNuevaAccion() {
-		return nuevaAccion;
+	public Usuario getNuevoUsuario() {
+		return nuevoUsuario;
 	}
-	public void setNuevaAccion(Accion nuevaAccion) {
-		this.nuevaAccion = nuevaAccion;
+	public void setNuevoUsuario(Usuario nuevoUsuario) {
+		this.nuevoUsuario = nuevoUsuario;
 	}
-	public String getIdAccion() {
-		return idAccion;
+	public String getIdUsuario() {
+		return idUsuario;
 	}
-	public void setIdAccion(String idAccion) {
-		this.idAccion = idAccion;
+	public void setIdUsuario(String idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	public List<Accion> getAccionList() {
-		return accionList;
+	public List<Usuario> getUsuarioList() {
+		return usuarioList;
 	}
-	public void setAccionList(List<Accion> accionList) {
-		this.accionList = accionList;
+	public void setUsuarioList(List<Usuario> usuarioList) {
+		this.usuarioList = usuarioList;
 	}
+	
 }
