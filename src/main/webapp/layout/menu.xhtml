@@ -4,66 +4,115 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<h:form>
+	<h:form id="menupanelForm">
 		<div class="layout-menu #{guestPreferences.menuClass}">
-    	<div class="nano">
-    	<div class="nano-content menu-scroll-content">
-    	<p:tieredMenu style="width:200px" id="menuBar">
-    		<p:menuitem  outcome="/protected/main.xhtml" value="Inicio" propagation="none" />
-			<p:submenu label="Empresarial">
-				<p:submenu label="Cliente">
-					<p:menuitem outcome="/protected/empresarial/clientes/estadocontratos.xhtml" value="Contratos"/>
-					<p:menuitem outcome="/protected/empresarial/clientes/estadoentidad.xhtml" value="Entidades"/>
-					<p:menuitem outcome="/protected/empresarial/clientes/estadodependencias.xhtml" value="Dependencias"/>
-				</p:submenu>
-				<p:submenu label="Funcionarios">
-					<p:menuitem outcome="/protected/empresarial/funcionarios/estadofuncionario.xhtml" value="Funcionarios"/>
-				</p:submenu>
-			</p:submenu>
-			<p:submenu label="Equipos">
-				<p:menuitem outcome="/protected/equipos/agregarconjunto.xhtml" value="Agregar Conjunto"/>
-				<p:submenu label="Datos">
-					<p:menuitem outcome="/protected/equipos/datos/estadoequipos.xhtml" value="Estado Equipos"/>
-					<p:menuitem outcome="/protected/equipos/datos/estadoraspberrys.xhtml" value="Estado Raspberry"/>
-					<p:menuitem outcome="/protected/equipos/datos/reporteraspequi.xhtml" value="Reportes"/>
-				</p:submenu>
-				<p:submenu label="Monitoreo">
-					<p:menuitem outcome="/protected/equipos/monitorizacion/monitequiposgral" value="Monitor Conjunto"/>
-					<p:menuitem outcome="/protected/equipos/monitorizacion/monitequipos.xhtml" value="Monitor Equipos"/>
-					<p:menuitem outcome="/protected/equipos/monitorizacion/monitraspberrys.xhtml" value="Monitor Raspberrys"/>
-				</p:submenu>
-			</p:submenu>
-			<p:submenu label="Monitorizacion">
-				<p:menuitem outcome="/protected/monitorizacion/monsiviras.xhtml" value="Sivig"/>
-				<p:menuitem outcome="/protected/monitorizacion/monusuarios.xhtml" value="Usuarios"/>
-			</p:submenu>
-			<p:submenu label="Procesos Tecnicos">
-				<p:menuitem outcome="/protected/procesostecnicos/cambiodepieza.xhtml" value="Cambios de Piezas"/>
-				<p:menuitem outcome="/protected/procesostecnicos/listainstalaciones.xhtml" value="Instalaciones"/>
-				<p:menuitem outcome="/protected/procesostecnicos/listapiezas.xhtml" value="Lista Piezas"/>
-				<p:menuitem outcome="/protected/procesostecnicos/mantenimientos.xhtml" value="Mantenimientos"/>
-			</p:submenu>
-			<p:submenu label="Sistema">
-				<p:submenu label="Auditoria">
-					<p:menuitem outcome="/protected/sistema/auditoria/generarauditoria.xhtml" value="Auditoria"/>
-				</p:submenu>
-				<p:submenu label="Datos Genericos">
-					<p:menuitem outcome="/protected/sistema/datosgenericos/listadoacciones.xhtml" value="Acciones"/>
-					<p:menuitem outcome="/protected/sistema/datosgenericos/listadocalle.xhtml" value="Calles"/>
-					<p:menuitem outcome="/protected/sistema/datosgenericos/listadocausaestado.xhtml" value="Causa Estados"/>
-					<p:menuitem outcome="/protected/sistema/datosgenericos/listadociudad.xhtml" value="Ciudades"/>
-					<p:menuitem outcome="/protected/sistema/datosgenericos/listadoestadoequipo.xhtml" value="Estado Equipos"/>
-				</p:submenu>
-				<p:submenu label="Reportes">
-					<p:menuitem outcome="/protected/sistema/reportes/reportes.xhtml" value="Reportes del sistema"/>
-				</p:submenu>
-				<p:submenu label="Usuarios">
-					<p:menuitem outcome="/protected/sistema/usuarios/estadousuarios.xhtml" value="Agregar Usuarios"/>
-				</p:submenu>
-			</p:submenu>
-    	</p:tieredMenu>		
-    </div>
-    </div>
-    </div>
-    </h:form>
+			<div class="nano">
+				<div class="nano-content menu-scroll-content">
+
+					<p:button styleClass="button" outcome="/protected/main.xhtml"
+						value="Inicio" />
+					<p:accordionPanel styleClass="ui-accordion-content"
+						activeIndex="null">
+						<p:tab title="Empresarial">
+							<p:accordionPanel activeIndex="null"
+								styleClass="ui-accordion-content">
+								<p:tab title="Cliente">
+									<p:button styleClass="button"
+										outcome="/protected/empresarial/clientes/estadocontratos.xhtml"
+										value="Contratos" />
+									<p:button styleClass="button"
+										outcome="/protected/empresarial/clientes/estadoentidad.xhtml"
+										value="Entidades" />
+									<p:button styleClass="button"
+										outcome="/protected/empresarial/clientes/estadodependencias.xhtml"
+										value="Dependencias" />
+								</p:tab>
+								<p:tab title="Funcionario">
+									<p:button styleClass="button"
+										outcome="/protected/empresarial/funcionarios/estadofuncionario.xhtml"
+										value="Funcionarios" />
+								</p:tab>
+							</p:accordionPanel>
+						</p:tab>
+						<p:tab title="Equipos">
+							<p:button styleClass="button"
+								outcome="/protected/equipos/agregarconjunto.xhtml"
+								value="Agregar Conjunto" />
+							<p:accordionPanel styleClass="ui-accordion-content"
+								activeIndex="null">
+								<p:tab title="Datos">
+									<p:button styleClass="button"
+										outcome="/protected/equipos/datos/estadoequipos.xhtml"
+										value="Estado Equipos" />
+									<p:button styleClass="button"
+										outcome="/protected/equipos/datos/estadoraspberrys.xhtml"
+										value="Estado Raspberry" />
+								</p:tab>
+								<p:tab title="Monitoreo">
+									<p:button styleClass="button"
+										outcome="/protected/equipos/monitorizacion/monitequiposgral"
+										value="Monitor Conjunto" />
+									<p:button styleClass="button"
+										outcome="/protected/equipos/monitorizacion/monitequipos.xhtml"
+										value="Monitor Equipos" />
+									<p:button styleClass="button"
+										outcome="/protected/equipos/monitorizacion/monitraspberrys.xhtml"
+										value="Monitor Raspberrys" />
+								</p:tab>
+							</p:accordionPanel>
+						</p:tab>
+						<p:tab title="Procesos Tecnicos">
+							<p:button styleClass="button"
+								outcome="/protected/procesostecnicos/cambiodepieza.xhtml"
+								value="Cambios de Piezas" />
+							<p:button styleClass="button"
+								outcome="/protected/procesostecnicos/listainstalaciones.xhtml"
+								value="Instalaciones" />
+							<p:button styleClass="button"
+								outcome="/protected/procesostecnicos/listapiezas.xhtml"
+								value="Lista Piezas" />
+							<p:button styleClass="button"
+								outcome="/protected/procesostecnicos/mantenimientos.xhtml"
+								value="Mantenimientos" />
+						</p:tab>
+						<p:tab title="Sistema">
+							<p:button styleClass="button"
+								outcome="/protected/sistema/auditoria/generarauditoria.xhtml"
+								value="Auditoria" />
+							<p:button styleClass="button"
+								outcome="/protected/sistema/usuarios/estadousuarios.xhtml"
+								value="Agregar Usuarios" />
+							<p:accordionPanel styleClass="ui-accordion-content"
+								activeIndex="null">
+								<p:tab title="Datos Genericos">
+									<p:button styleClass="button"
+										outcome="/protected/procesostecnicos/cambiodepieza.xhtml"
+										value="Cambios de Piezas" />
+									<p:button styleClass="button"
+										outcome="/protected/procesostecnicos/listainstalaciones.xhtml"
+										value="Instalaciones" />
+									<p:button styleClass="button"
+										outcome="/protected/procesostecnicos/listapiezas.xhtml"
+										value="Lista Piezas" />
+									<p:button styleClass="button"
+										outcome="/protected/procesostecnicos/mantenimientos.xhtml"
+										value="Mantenimientos" />
+									<p:button styleClass="button"
+										outcome="/protected/procesostecnicos/mantenimientos.xhtml"
+										value="Mantenimientos" />
+								</p:tab>
+								<p:tab title="Reportes">
+									<p:button styleClass="button" value="Cambios de Piezas" />
+									<p:button styleClass="button" value="Instalaciones" />
+									<p:button styleClass="button" value="Lista Piezas" />
+									<p:button styleClass="button" value="Mantenimientos" />
+									<p:button styleClass="button" value="Mantenimientos" />
+								</p:tab>
+							</p:accordionPanel>
+						</p:tab>
+					</p:accordionPanel>
+				</div>
+			</div>
+		</div>
+	</h:form>
 </ui:composition>
