@@ -8,7 +8,7 @@
 		<div class="layout-menu #{guestPreferences.menuClass}">
     	<div class="nano">
     	<div class="nano-content menu-scroll-content">
-    	<p:tieredMenu style="width:200px" id="menuBar">
+    	<p:accordionPanel style="width:200px" id="menuBar">
     		<p:menuitem outcome="/protected/main.xhtml" value="Inicio" propagation="none" />
 			<p:submenu label="Empresarial">
 				<p:submenu label="Cliente">
@@ -60,7 +60,7 @@
 					<p:menuitem outcome="/protected/sistema/usuarios/estadousuarios.xhtml" value="Agregar Usuarios"/>
 				</p:submenu>
 			</p:submenu>
-    	</p:tieredMenu>
+    	</p:accordionPanel>
     </div>
     </div>
     </div>
