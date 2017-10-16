@@ -21,13 +21,13 @@
        	 	</f:facet>
 			<p:panel header="Datos"
 				style="text-align:center">
-				<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+				<p:panelGrid id="datosEquipos" columns="2" style="width:100%;margin:10px 0px"
 					columnClasses="label,value" layout="grid"
 					styleClass="ui-panelgrid-blank">
 					<h:outputText value="Equipo:" />
 		            <h:outputText value="#{item.equiIdenificador}" />
 		            <h:outputText value="Estado:" />
-		            <h:outputText value="#{item.equiEstado}" />
+		            <h:outputText value="#{item.equiEstado}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipos(item.equiEstado)}"/>
 		            <h:outputText value="Fecha Ingreso:" />
 		            <h:outputText value="#{item.equiFechaIngreso}" />
 		            <h:outputText value="Serie:" />
@@ -35,11 +35,11 @@
 		            <h:outputText value="Raspberry:" />
 		            <h:outputText value="#{item.raspberry.raspNombre}" />
 		            <h:outputText value="Estado:" />
-		            <h:outputText value="#{item.raspberry.raspEstado}" />
+		            <h:outputText value="#{item.raspberry.raspEstado}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipos(item.raspberry.raspEstado)}"/>
 		            <h:outputText value="Fecha Ingreso:" />
 		            <h:outputText value="#{item.raspberry.raspFechaIngreso}" />
 		            <h:outputText value="Activo:" />
-		            <h:outputText value="#{item.raspberry.raspActivo}" />
+		            <h:outputText value="#{viewEquiposRaspMBean.estadoRaspberryView(item.raspberry.raspActivo)}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipoView(item.raspberry.raspActivo)}"/>
 		            <p:button value="Panel de Control"
 		            	outcome="/protected/equipos/panelcontrolconjunto.xhtml">
 						<f:param name="idEquipoParam" value="#{item.equiIdEquipo}" />

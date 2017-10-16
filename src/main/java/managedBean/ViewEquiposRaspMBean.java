@@ -10,8 +10,6 @@ import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
 
 import model.Equipo;
-import model.HistoricoEquipoEstado;
-import model.HistoricoRaspberryEstado;
 import model.Raspberry;
 import service.EquipoService;
 import service.HistoricoEquipoEstadoService;
@@ -73,6 +71,43 @@ public class ViewEquiposRaspMBean implements Serializable{
 			RequestContext.getCurrentInstance().update("mainForm:gritEquiposMontGral");
 		}
 		
+	}
+	
+	public String estadoRaspberryView(boolean estadoRaspberryActual){
+		String estadoRaspberry = null;
+		if(estadoRaspberryActual){
+			estadoRaspberry = "Habilitado";
+		} else {
+			estadoRaspberry = "Inhabilitado";
+		}
+		return estadoRaspberry;
+	}
+	
+	public String colorEstadoEquipoView(boolean estadoRaspberryActual){
+		String estadoRaspberry = null;
+		if(estadoRaspberryActual){
+			estadoRaspberry = "Green";
+		} else {
+			estadoRaspberry = "Red";
+		}
+		return estadoRaspberry;
+	}
+	
+	public String colorEstadoEquipos(String estado){
+		String colorAsignado = null;
+		if((estado.equals("Corriendo"))||(estado.equals("Encendido"))){
+			colorAsignado = "Green";
+		} else {
+			if((estado.equals("Reiniciando"))||(estado.equals("Sistema Operativo Iniciando"))){
+				colorAsignado = "Orange";
+			} else {
+				if (estado.equals("Apagado")){
+					colorAsignado = "Red";
+				}
+			}
+		}
+		
+		return colorAsignado;
 	}
 
 	public List<Equipo> getEquipos() {
