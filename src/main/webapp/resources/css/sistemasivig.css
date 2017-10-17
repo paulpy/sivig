@@ -155,7 +155,7 @@ html, body {
 	border: 1%;
 }
 
-#mainForm .ui-panel-titlebar, .ui-paginator{
+#mainForm .ui-panel-titlebar, .ui-paginator, .ui-datagrid-header {
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	text-shadow: 0px 0px 0px #3498db;
@@ -191,6 +191,11 @@ html, body {
 #mainForm .ui-button:hover{
 	background-color: white;
     color: black;
+}
+
+#mainForm .ui-panelgrid-blank{
+	font-size: 78%;
+	text-align: right;
 }
 
 
