@@ -13,7 +13,7 @@
 		</f:metadata>
 		<p:panel id="panellistcontratos" header="Contratos"
 			style="text-align:center; width:80%; min-width:20%">
-			<p:dataTable id="listadocontratos"
+			<p:dataTable styleClass="dataTable" id="listadocontratos"
 				value="#{contratoMBean.contratoList}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 				var="item" style="margin-botton: 1%" lazy="true"

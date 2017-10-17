@@ -9,11 +9,15 @@
 	<div class="topbar clearfix">
 	<h:form id="menuForm" enctype="multipart/form-data">
 			<h:panelGroup>
-				<h:panelGrid columns="1" style="text-align:center;">
+				<h:panelGrid styleClass="panelGrid" columns="1">
+					<br/>
 					<p:outputLabel styleClass="outputLabel" value="Bienvenido Usuario: "/>
 					<p:outputLabel styleClass="outputLabel" value="#{request.getUserPrincipal().getName()} "/>
+					<br/>
 					<p:commandButton styleClass="commandButton" value="Cerrar Sesion" icon="ui-icon-power"
 						action="#{login.logout()}" title="Cerrar Session"/>
+					<br/>
+					<br/>
 				</h:panelGrid>
 			</h:panelGroup>
 	</h:form>
