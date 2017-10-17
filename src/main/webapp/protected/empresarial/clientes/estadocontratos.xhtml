@@ -18,7 +18,7 @@
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 				var="item" style="margin-botton: 1%" lazy="true"
 				emptyMessage="No se encontraron Contratos" paginator="true"
-				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="10">
 				<p:column style="width: 9%; text-align: center"
 					headerText="Identificador del Contrato">
 					<h:outputText value="#{item.contIdentificadorContrato}" />
@@ -36,7 +36,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Contrato">
-					<h:outputText value="#{contratoMBean.estadoContratoView(item.contActivo)}" />
+					<h:outputText value="#{contratoMBean.estadoContratoView(item.contActivo)}" style="color:#{contratoMBean.colorEstadoContratoView(item.contActivo)}" />
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">

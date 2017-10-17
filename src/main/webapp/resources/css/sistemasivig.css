@@ -2,11 +2,11 @@
 
 html, body {
 	widows: inherit;
-	height: 100%;
+	height: 98%;
 }
 
 .ui-g{
-	height: 96%;
+	height: 100%;
 	width: 100%;
 }
 
@@ -20,6 +20,7 @@ html, body {
 	background-color: #ffffff;
 	height: 90%;
 	width: 82%;
+	overflow-y: scroll
 }
 
 #menuForm .panelGrid{
@@ -191,3 +192,5 @@ html, body {
 	background-color: white;
     color: black;
 }
+
+

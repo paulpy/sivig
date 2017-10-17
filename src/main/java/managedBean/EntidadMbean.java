@@ -92,6 +92,16 @@ public class EntidadMbean implements Serializable{
 		return estadoEntidadActual;
 	}
 
+	public String colorestadoEntidadView(boolean estadoEnti){
+		String estadoEntidadActual = null;
+		if(estadoEnti){
+			estadoEntidadActual = "#006600";
+		} else {
+			estadoEntidadActual = "#cc9900";
+		}
+		return estadoEntidadActual;
+	}
+	
 	public Entidad getNuevaEntidad() {
 		return nuevaEntidad;
 	}

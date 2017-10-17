@@ -65,6 +65,27 @@ public class UsuarioMBean implements Serializable{
 			context.addMessage(null, m);
 		}
 	}
+	
+	public String estadoUsuario(boolean estadoUsu){
+		String usuarioEstadoEnv = null;
+		if(estadoUsu){
+			usuarioEstadoEnv = "Activo";
+		} else {
+			usuarioEstadoEnv = "Inactivo";
+		}
+		return usuarioEstadoEnv;
+	}
+	
+	public String colorEstadoUsuario(boolean estadoUsu){
+		String colorestado = null;
+		if(estadoUsu){
+			colorestado = "green";
+		} else {
+			colorestado = "red";
+		}
+		return colorestado;
+	}
+	
 	public void listarUsuarios(){
 		usuarioList = usuarioService.listUsuario();
 	}

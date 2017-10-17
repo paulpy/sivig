@@ -106,6 +106,16 @@ public class ContratoMBean implements Serializable {
 		}
 		return estadoCont;
 	}
+	
+	public String colorEstadoContratoView(boolean estadoContratoOriginal){
+		String estadoCont = null;
+		if(estadoContratoOriginal){
+			estadoCont = "#006600";
+		} else {
+			estadoCont = "#cc9900";
+		}
+		return estadoCont;
+	}
 
 	public String getIdContratoParam() {
 		return idContratoParam;

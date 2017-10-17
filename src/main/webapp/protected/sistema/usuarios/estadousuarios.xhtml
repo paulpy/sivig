@@ -32,7 +32,7 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Usuario">
-					<h:outputText value="#{item.usuaActivo}" />
+					<h:outputText value="#{usuarioMBean.estadoUsuario(item.usuaActivo)}" style="color:#{usuarioMBean.colorEstadoUsuario(item.usuaActivo)}" />
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">
