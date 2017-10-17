@@ -378,6 +378,23 @@ public class InteraccionMBean implements Serializable{
 		RequestContext.getCurrentInstance().update("mainForm:historicoRaspberryTabla");
 	}
 	
+	public String colorEstadoEquipos(String estado){
+		String colorAsignado = null;
+		if((estado.equals("Corriendo"))||(estado.equals("Encendido"))){
+			colorAsignado = "Green";
+		} else {
+			if((estado.equals("Reiniciando"))||(estado.equals("Sistema Operativo Iniciando"))){
+				colorAsignado = "Orange";
+			} else {
+				if (estado.equals("Apagado")){
+					colorAsignado = "Red";
+				}
+			}
+		}
+		
+		return colorAsignado;
+	}
+	
 	public void limpiar(){
 		nuevaInteraccion = new Interaccion();
 	}
