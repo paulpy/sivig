@@ -39,7 +39,7 @@ public class Login implements Serializable {
         originalURL = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_REQUEST_URI);
 
         if (originalURL == null) {
-            originalURL = externalContext.getRequestContextPath() + "/protected/main.xhtml";
+            originalURL = externalContext.getRequestContextPath() + "protected/main.xhtml";
         } else {
             String originalQuery = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_QUERY_STRING);
 
@@ -74,6 +74,7 @@ public class Login implements Serializable {
 	        	        System.out.println("USERNAME: " +userName + " -> " + password);
 		                request.login(userName, password);
 		                externalContext.redirect(originalURL);
+		                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acceso Concedido", userName));
 		            } catch (ServletException e) {
 		            	e.printStackTrace();
 		            	FacesContext.getCurrentInstance().addMessage("",
@@ -88,6 +89,11 @@ public class Login implements Serializable {
 	        }
         }
     }
+	
+	public void mensajedeinicio(){
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Ingreso Exitoso", userName));
+	}
 	
 	public String logout() {
 		        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

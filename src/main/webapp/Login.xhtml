@@ -8,7 +8,7 @@
 	<ui:define name="cuerpo">
 		<h:form id="mainForm">
 			<h:form id="loginForm">
-				<p:growl id="growlLogin" life="3000" />
+				<p:growl id="growlLogin" life="15000" showDetail="false" sticky="false"/>
 				<table>
 					<tr>
 						<td style="width: 300px">
@@ -18,13 +18,13 @@
 							<h1 style="text-align: center">BIENVENIDO</h1>
 							<h2 style="text-align: center">SIVIG</h2> <p:focus /> <h:panelGrid columns="2"
 								styleClass="grid-login">
-								<p:outputLabel for="j_username">USUARIO</p:outputLabel>
-								<p:inputText id="j_username" autofocus="autofocus" value="#{login.userName}" placeholder="Usuario"
-									required="required" type="text" name="j_username" />
+								<p:outputLabel for="usuario">USUARIO</p:outputLabel>
+								<p:inputText id="usuario" autofocus="autofocus" value="#{login.userName}" placeholder="Usuario"
+									required="true" type="text" name="usuario" />
 
-								<p:outputLabel for="j_password">CONTRASEÑA</p:outputLabel>
-								<p:inputText id="j_password" value="#{login.password}" placeholder="Contraseña" 
-									required="required" type="password" name="j_password" />
+								<p:outputLabel for="clave">CONTRASEÑA</p:outputLabel>
+								<p:inputText id="clave" value="#{login.password}" placeholder="Contraseña" 
+									required="true" type="password" name="password" />
 
 								<p:outputLabel></p:outputLabel>
 								<div align="right">
