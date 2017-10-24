@@ -58,6 +58,7 @@ public class InteraccionMBean implements Serializable{
 	
 	private List<HistoricoEquipoEstado> historicoEquipoList;
 	private List<HistoricoRaspberryEstado> historicoRaspberryList;
+	private List<Interaccion> interaccionList;
 	
 	public void inicializarPanelControl(){
 		nuevoEquipo = new Equipo();
@@ -70,6 +71,7 @@ public class InteraccionMBean implements Serializable{
 	public void listarHistoricos(Equipo nuevoEquipo){
 		historicoEquipoList = historicoEquipoEstadoService.listHistoricoE(nuevoEquipo.getEquiIdEquipo());
 		historicoRaspberryList = historicoRaspberryEstadoService.listHistoricoR(nuevoEquipo.getRaspberry().getRaspIdRaspberry());
+		interaccionList = interaccionService.listInteraccionesLog(nuevoEquipo.getRaspberry());
 	}
 	
 	public void apagarR(String usuariodata){
@@ -395,6 +397,26 @@ public class InteraccionMBean implements Serializable{
 		return colorAsignado;
 	}
 	
+	public String colorInteraccion(boolean activo){
+		String colorInteraccion = null;
+		if(activo){
+			colorInteraccion = "Orange";
+		} else {
+			colorInteraccion = "Blue";
+		}
+		return colorInteraccion;
+	}
+	
+	public String estadoInteraccion(boolean activo){
+		String estadoInteraccion = null;
+		if(activo){
+			estadoInteraccion = "En Espera";
+		} else {
+			estadoInteraccion = "Cumplido";
+		}
+		return estadoInteraccion;
+	}
+	
 	public void limpiar(){
 		nuevaInteraccion = new Interaccion();
 	}
@@ -453,6 +475,14 @@ public class InteraccionMBean implements Serializable{
 
 	public void setUsuarioParam(String usuarioParam) {
 		this.usuarioParam = usuarioParam;
+	}
+
+	public List<Interaccion> getInteraccionList() {
+		return interaccionList;
+	}
+
+	public void setInteraccionList(List<Interaccion> interaccionList) {
+		this.interaccionList = interaccionList;
 	}
 	
 	

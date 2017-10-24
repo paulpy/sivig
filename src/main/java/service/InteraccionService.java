@@ -51,6 +51,19 @@ public class InteraccionService {
 		return listInteraccion;
 	}
 	
+	public List<Interaccion> listInteraccionesLog(Raspberry raspberry){
+		List<Interaccion> listainteraccion = null;
+		TypedQuery<Interaccion> query = em.createQuery("FROM Interaccion AS inte WHERE inte.raspberry.raspIdRaspberry = :raspberry ORDER BY inte.inteIdInteraccion DESC", Interaccion.class);
+		try {
+			listainteraccion = query.setParameter("raspberry", raspberry.getRaspIdRaspberry()).getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+			System.out.println("error ");
+		}
+		return listainteraccion;
+	}
+	
 	public List<EnvioInteraccion> listInteracciones(Raspberry rasp){
 		List<Interaccion> interaccionesConjunto = null;
 		EnvioInteraccion envioparalist = new EnvioInteraccion();
