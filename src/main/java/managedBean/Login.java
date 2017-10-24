@@ -20,86 +20,87 @@ import service.UsuarioService;
 @ManagedBean
 @ViewScoped
 public class Login implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
 	private String originalURL;
 	private ExternalContext externalContext;
-	
+
 	@Inject
 	private UsuarioService usuarioService;
-	
-	public Login(){
+
+	public Login() {
 	}
-	
+
 	@PostConstruct
-    public void init() {
-        externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        originalURL = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_REQUEST_URI);
+	public void init() {
+		externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		originalURL = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_REQUEST_URI);
 
-        if (originalURL == null) {
-            originalURL = externalContext.getRequestContextPath() + "protected/main.xhtml";
-        } else {
-            String originalQuery = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_QUERY_STRING);
+		if (originalURL == null) {
+			originalURL = externalContext.getRequestContextPath() + "/protected/main.xhtml";
+		} else {
+			String originalQuery = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_QUERY_STRING);
 
-            if (originalQuery != null) {
-                originalURL += "?" + originalQuery;
-            }
-        }
-    }
+			if (originalQuery != null) {
+				originalURL += "?" + originalQuery;
+			}
+		}
+	}
+
 	public void login() throws IOException {
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        
-        System.out.println("Login: " +userName + " -> " + password);
-
-        Usuario user = usuarioService.getUsuario(userName);
-        System.out.println("Login2 ");
-        if ((user.getUsuaActivo() == null)){
-        	FacesContext.getCurrentInstance().addMessage("",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							"Usuario Activo es Nulo. No sé permitirá login de usuario", null));
-        } else {
-	        if (!user.getUsuaActivo()){
-	        	FacesContext.getCurrentInstance().addMessage("",
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+		if ((userName.equals(null)) || userName.equals("")) {
+			FacesContext.getCurrentInstance().addMessage("",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falta Completar Campo Usuario", null));
+		} else {
+			if ((password.equals(null)) || password.equals("")) {
+				FacesContext.getCurrentInstance().addMessage("",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falta Completar Campo Contraseña", null));
+			} else {
+				FacesContext.getCurrentInstance().addMessage("",
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Campos completados", null));
+				System.out.println("Login: " + userName);
+				Usuario user = usuarioService.getUsuario(userName);
+				if (user == null) {
+					FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Usuario no existe en la base de datos", null));
+				} else {
+					if (!user.getUsuaActivo()) {
+						FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Usuario inactivo. No sé permitirá login de usuario", null));
-	        } else {
-        	
-		        if((user != null)){
-		        	try {
-		        	     if (request.getUserPrincipal() != null) {
-		        	    	 request.logout();
-		        	     }
-	        	        System.out.println("USERNAME: " +userName + " -> " + password);
-		                request.login(userName, password);
-		                externalContext.redirect(originalURL);
-		                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Acceso Concedido", userName));
-		            } catch (ServletException e) {
-		            	e.printStackTrace();
-		            	FacesContext.getCurrentInstance().addMessage("",
-		    					new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-		    							"Nombre de usuario o contraseña incorrecta.", null));
-		            }
-		        } else {
-		        	FacesContext.getCurrentInstance().addMessage("",
-							new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-									"Nombre de usuario inexistente.", null));
-		        }
-	        }
-        }
-    }
-	
-	public void mensajedeinicio(){
+					} else {
+						try {
+							if (request.getUserPrincipal() != null) {
+								request.logout();
+							}
+							System.out.println("USERNAME: " + userName + " -> " + password);
+							request.login(userName, password);
+							externalContext.redirect(originalURL);
+							FacesContext.getCurrentInstance().addMessage(null,
+									new FacesMessage("Acceso Concedido", userName));
+						} catch (ServletException e) {
+							e.printStackTrace();
+							FacesContext.getCurrentInstance().addMessage("", new FacesMessage(
+									FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrecta.", null));
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void mensajedeinicio() {
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Ingreso Exitoso", userName));
+		context.addMessage(null, new FacesMessage("Ingreso Exitoso", userName));
 	}
-	
+
 	public String logout() {
-		        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		        return "/index.xhtml?faces-redirect=true";
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/index.xhtml?faces-redirect=true";
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
@@ -116,5 +117,5 @@ public class Login implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

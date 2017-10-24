@@ -33,15 +33,16 @@ public class UsuarioService {
 	
 	public Usuario getUsuario(String username){
 		Usuario usuario = null;
+		TypedQuery<Usuario> query = em.createQuery("FROM Usuario WHERE usuaUsuario='"+username+"'", Usuario.class);
 		try {
-			TypedQuery<Usuario> query = em.createQuery("FROM Usuario WHERE usuaUsuario='"+username+"'", Usuario.class);
-			usuario = query.getSingleResult();		
-			return usuario;
+			usuario = query.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
-			return null;
+			System.out.println(e.toString());
+			System.out.println("Usuario no encontrado retorna null");
+			usuario = null;
 		}
+		return usuario;
 	}
 	
 	public List<Usuario> listUsuario(){
