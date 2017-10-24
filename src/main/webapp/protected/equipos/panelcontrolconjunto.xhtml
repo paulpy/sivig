@@ -60,7 +60,7 @@
 						action="#{interaccionMBean.reinicioSE(request.getUserPrincipal().getName())}" />
 					<p:commandButton value="Bajada de Sistema"
 						action="#{interaccionMBean.paradaSE(request.getUserPrincipal().getName())}" />
-					<p:commandButton for="comandoaenviar" value="Sincronizar Acciones"
+					<p:commandButton for="comandoaenviar" value="Enviar Comando"
 						action="#{interaccionMBean.enviarComandoE(request.getUserPrincipal().getName())}" />
 					<p:inputText id="comandoaenviar"
 						value="#{interaccionMBean.nuevaInteraccion.inteComando}" />
