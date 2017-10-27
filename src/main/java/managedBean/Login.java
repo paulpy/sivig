@@ -75,6 +75,7 @@ public class Login implements Serializable {
 							if (request.getUserPrincipal() != null) {
 								request.logout();
 							}
+							
 							System.out.println("USERNAME: " + userName + " -> " + password);
 							request.login(userName, password);
 							externalContext.redirect(originalURL);
