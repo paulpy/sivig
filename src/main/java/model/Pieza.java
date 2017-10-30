@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,6 +30,10 @@ public class Pieza implements Serializable {
 
 	@Column(name="piez_pieza")
 	private String piezPieza;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="piez_ultima_actualizacion")
+	private Date piezUltimaActualizacion;
 
 	//bi-directional many-to-one association to CambiosPieza
 	@OneToMany(mappedBy="pieza")
