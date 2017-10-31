@@ -36,6 +36,12 @@ public class FuncionarioService {
 		funcionario = em.find(Funcionario.class, id);
 		return funcionario;
 	}
+	public List<Funcionario> listFuncionarioTec(){
+		List<Funcionario> funcioanrios = null;
+		TypedQuery<Funcionario> query = em.createQuery("FROM Funcionario WHERE funcArea='tecnica'", Funcionario.class);
+		funcioanrios = query.getResultList();
+		return funcioanrios;
+	}
 	
 	public void insertPersFunc(Persona persona, Funcionario funcionario){
 		logger.info("Registrar "+persona.getPersNombre());
