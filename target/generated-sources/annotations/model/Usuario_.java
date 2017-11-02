@@ -13,6 +13,7 @@ public abstract class Usuario_ {
 	public static volatile SingularAttribute<Usuario, String> usuaPass;
 	public static volatile ListAttribute<Usuario, Auditoria> auditorias;
 	public static volatile SingularAttribute<Usuario, Boolean> usuaActivo;
+	public static volatile ListAttribute<Usuario, Interaccion> interacciones;
 	public static volatile SingularAttribute<Usuario, Funcionario> funcionario;
 	public static volatile SingularAttribute<Usuario, String> usuaTipo;
 	public static volatile SingularAttribute<Usuario, Integer> usuaIdUsuario;

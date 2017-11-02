@@ -12,7 +12,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.model.StreamedContent;
+
 import model.Funcionario;
+import reporte.GeneradorDeReporte;
 import service.FuncionarioService;
 
 @ViewScoped
@@ -27,6 +30,8 @@ public class ReportesSistemaMBean implements Serializable{
 	private FuncionarioService funcionarioService;
 	@Inject
 	private FacesContext context;
+	@Inject
+	private GeneradorDeReporte generadorDeReporte;
 	
 	private List<Funcionario> funcionarioTecList;
 	private Date fechaInicio;
@@ -38,7 +43,7 @@ public class ReportesSistemaMBean implements Serializable{
 		listar();
 	}
 	
-	public void generarReporte(){
+	public StreamedContent generarReporte(){
 		if(fechaInicio == null){
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Falta Ingresar Fecha Inicio");
 			context.addMessage(null, m);
@@ -50,9 +55,15 @@ public class ReportesSistemaMBean implements Serializable{
 				if(funcionarioSelect == null){
 					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte sin filtro de Funcionario");
 					context.addMessage(null, m);
-					parametros = new HashMap<String, Object>();
-					parametros.put("fechainicio", fechaInicio);
-					parametros.put("fechafin", fechaFin);
+					try {
+						parametros = new HashMap<String, Object>();
+						parametros.put("FechaInicio", fechaInicio);
+						parametros.put("FechaFin", fechaFin);
+						return generadorDeReporte.generarReporte("/resources/reportes/CambiodePiezasMes.jrxml", parametros);
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println(e.toString());
+					}					
 				} else {
 					parametros = new HashMap<String, Object>();
 					parametros.put("fechainicio", fechaInicio);
@@ -63,6 +74,7 @@ public class ReportesSistemaMBean implements Serializable{
 				}
 			}
 		}
+		return null;
 	}
 	
 	public void listar(){

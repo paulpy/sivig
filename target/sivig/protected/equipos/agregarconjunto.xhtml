@@ -16,6 +16,8 @@
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:outputText for="idNEquipoSerie" value="Serie Equipo: " />
 				<p:inputText id="idNEquipoSerie" value="#{conjuntoMBean.nuevoEquipo.equiSerieEquipo}" required="true" />
+				<h:outputText for="idNEquipoIdentificador" value="Identificador Equipo: " />
+				<p:inputText id="idNEquipoIdentificador" value="#{conjuntoMBean.nuevoEquipo.equiIdenificador}" required="true" />
 				<h:outputText for="mask" value="Fecha Ingreso Equipo: " />
 				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
 					value="#{conjuntoMBean.nuevoEquipo.equiFechaIngreso}" required="true" />

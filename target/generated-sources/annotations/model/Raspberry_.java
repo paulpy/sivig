@@ -14,6 +14,7 @@ public abstract class Raspberry_ {
 	public static volatile SingularAttribute<Raspberry, Date> raspFechaIngreso;
 	public static volatile SingularAttribute<Raspberry, String> raspIp;
 	public static volatile ListAttribute<Raspberry, Equipo> equipos;
+	public static volatile ListAttribute<Raspberry, Interaccion> interacciones;
 	public static volatile SingularAttribute<Raspberry, Boolean> raspActivo;
 	public static volatile SingularAttribute<Raspberry, Integer> raspIdRaspberry;
 	public static volatile SingularAttribute<Raspberry, String> raspEstado;

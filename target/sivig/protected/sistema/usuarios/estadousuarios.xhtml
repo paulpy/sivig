@@ -7,40 +7,43 @@
 	<ui:define name="title">Usuarios</ui:define>
 	<ui:define name="title2">Estados Usuario</ui:define>
 	<ui:define name="body">
-		<h:form id="mainForm">
-			<p:panel id="panelestadosusuarios" header="Estados Usuarios"
-				style="text-align:center; width:80%; min-width:20%">
-				<p:dataTable id="estadosusuariosdatatable" value="#{usuarioController.usuariosList}"
+		<f:metadata>
+			<f:event listener="#{usuarioMBean.listarUsuarios()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:panel id="panelestadosusuarios" header="Estados Usuarios"
+			style="text-align:center; width:80%; min-width:20%">
+			<p:dataTable id="estadosusuariosdatatable"
+				value="#{usuarioMBean.usuarioList}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-				var="item" style="margin-botton: 1%" lazy="true" emptyMessage="No se encontraron Contratos" paginator="true" paginatorAlwaysVisible="true"
-				paginatorPosition="bottom" rows="30">
-					<p:column style="width: 9%; text-align: center"
-						headerText="Nombre Usuario">
-						<h:outputText value="#{item.funcionario.persona.persNombre}" />
-					</p:column>
-					<p:column style="width: 9%; text-align: center"
-						headerText="Usuario">
-						<h:outputText value="#{item.usuaUsuario}" />
-					</p:column>
-					<p:column style="width: 9%; text-align: center"
-						headerText="Tipo Usuario">
-						<h:outputText value="#{item.usuaTipo}" />
-					</p:column>
-					<p:column style="width: 9%; text-align: center"
-						headerText="Estado Usuario">
-						<h:outputText value="#{item.usuaActivo}" />
-					</p:column>
-					<p:column style="width: 7%; text-align: center">
-						<f:facet name="header">
-							<p:button id="nuevousuario" value="Agregar" 
-								outcome="/protected/sistema/usuarios/agregarusuario.xhtml" >
-							</p:button>		 
-						</f:facet>
-						<p:button  title="Editar"  icon="ui-icon-pencil" >
-						</p:button>	
-					</p:column>
-				</p:dataTable>
-			</p:panel>
-		</h:form>
+				var="item" style="margin-botton: 1%" lazy="true"
+				emptyMessage="No se encontraron Contratos" paginator="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				<p:column style="width: 9%; text-align: center"
+					headerText="Nombre Usuario">
+					<h:outputText value="#{item.funcionario.persona.persNombre}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center" headerText="Usuario">
+					<h:outputText value="#{item.usuaUsuario}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Tipo Usuario">
+					<h:outputText value="#{item.usuaTipo}" />
+				</p:column>
+				<p:column style="width: 9%; text-align: center"
+					headerText="Estado Usuario">
+					<h:outputText value="#{usuarioMBean.estadoUsuario(item.usuaActivo)}" style="color:#{usuarioMBean.colorEstadoUsuario(item.usuaActivo)}" />
+				</p:column>
+				<p:column style="width: 7%; text-align: center">
+					<f:facet name="header">
+						<p:button id="nuevousuario" value="Agregar"
+							outcome="/protected/sistema/usuarios/agregarusuario.xhtml">
+						</p:button>
+					</f:facet>
+					<p:button title="Editar" icon="ui-icon-pencil">
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
 	</ui:define>
 </ui:composition>

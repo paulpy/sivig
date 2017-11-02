@@ -24,19 +24,14 @@
 				<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
 					columnClasses="label,value" layout="grid"
 					styleClass="ui-panelgrid-blank">
-
 					<h:outputText value="Activo: " />
-					<h:outputText value="#{equipos.equiActivo}" />
-
+					<h:outputText value="#{viewEquiposRaspMBean.estadoRaspberryView(equipos.equiActivo)}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipoView(equipos.equiActivo)}"/>
 					<h:outputText value="Estado: " />
-					<h:outputText value="#{equipos.equiEstado}" />
-
+					<h:outputText value="#{equipos.equiEstado}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipos(equipos.equiEstado)}"/>
 					<h:outputText value="Fecha Ingreso: " />
 					<h:outputText value="#{equipos.equiFechaIngreso}" />
-
 					<h:outputText value="Raspberry: " />
 					<h:outputText value="#{equipos.raspberry.raspNombre}" />
-
 				</p:panelGrid>
 			</p:panel>
 		</p:dataGrid>

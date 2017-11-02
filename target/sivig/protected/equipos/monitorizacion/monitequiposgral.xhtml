@@ -5,26 +5,41 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title">Monitorizacion</ui:define>
-	<ui:define name="title2">Equipos</ui:define>
+	<ui:define name="title2">Conjunto</ui:define>
 	<ui:define name="body">
-		<p:carousel headerText="Responsive" var="car"
-			itemStyle="text-align:center" responsive="true">
-			<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
-				columnClasses="label,value" layout="grid"
-				styleClass="ui-panelgrid-blank">
-
-				<h:outputText value="Id:" />
-				<h:outputText value="1" />
-
-				<h:outputText value="Year" />
-				<h:outputText value="2017" />
-
-				<h:outputText value="Color:" />
-				<h:outputText value="ROJO" />
-
-				<h:outputText value="Price" />
-				<h:outputText value="MUCHO" />
-			</p:panelGrid>
-		</p:carousel>
+		<p:poll interval="5" listener="#{viewEquiposRaspMBean.estadosEquipos()}"/>
+		<f:metadata>
+			<f:event listener="#{viewEquiposRaspMBean.listEquipos()}"
+				type="preRenderView" />
+		</f:metadata>
+		<p:dataGrid id="gritEquiposMontGral" var="item" value="#{viewEquiposRaspMBean.equipos}"
+			columns="5" layout="grid" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10">
+			<f:facet name="header">
+            Monitoreo Conjuntos
+       	 	</f:facet>
+			<p:panel header="Datos"
+				style="text-align:center">
+				<p:panelGrid id="datosEquipos" columns="2" style="width:100%;margin:10px 0px"
+					columnClasses="label,value" layout="grid" 
+					styleClass="ui-panelgrid-blank">
+					<h:outputText value="Equipo:" />
+		            <h:outputText value="#{item.equiIdenificador}" />
+		            <h:outputText value="Estado:" />
+		            <h:outputText value="#{item.equiEstado}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipos(item.equiEstado)}"/>
+		            <h:outputText value="Raspberry:" />
+		            <h:outputText value="#{item.raspberry.raspNombre}" />
+		            <h:outputText value="Estado:" />
+		            <h:outputText value="#{item.raspberry.raspEstado}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipos(item.raspberry.raspEstado)}"/>
+		            <h:outputText value="Activo:" />
+		            <h:outputText value="#{viewEquiposRaspMBean.estadoRaspberryView(item.raspberry.raspActivo)}" style="color:#{viewEquiposRaspMBean.colorEstadoEquipoView(item.raspberry.raspActivo)}"/>
+		            <p:button styleClass="commandbutton" value="Panel de Control"
+		            	outcome="/protected/equipos/panelcontrolconjunto.xhtml">
+						<f:param name="idEquipoParam" value="#{item.equiIdEquipo}" />
+					</p:button>
+				</p:panelGrid>
+			</p:panel>
+		</p:dataGrid>
 	</ui:define>
 </ui:composition>

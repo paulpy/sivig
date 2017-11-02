@@ -13,12 +13,12 @@
 		</f:metadata>
 		<p:panel id="panellistcontratos" header="Contratos"
 			style="text-align:center; width:80%; min-width:20%">
-			<p:dataTable id="listadocontratos"
+			<p:dataTable styleClass="dataTable" id="listadocontratos"
 				value="#{contratoMBean.contratoList}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 				var="item" style="margin-botton: 1%" lazy="true"
 				emptyMessage="No se encontraron Contratos" paginator="true"
-				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="30">
+				paginatorAlwaysVisible="true" paginatorPosition="bottom" rows="10">
 				<p:column style="width: 9%; text-align: center"
 					headerText="Identificador del Contrato">
 					<h:outputText value="#{item.contIdentificadorContrato}" />
@@ -36,15 +36,15 @@
 				</p:column>
 				<p:column style="width: 9%; text-align: center"
 					headerText="Estado Contrato">
-					<h:outputText value="#{item.contActivo}" />
+					<h:outputText value="#{contratoMBean.estadoContratoView(item.contActivo)}" style="color:#{contratoMBean.colorEstadoContratoView(item.contActivo)}" />
 				</p:column>
 				<p:column style="width: 7%; text-align: center">
 					<f:facet name="header">
-						<p:button id="nuevocontrato" value="Agregar"
+						<p:button styleClass="commandbutton" id="nuevocontrato" value="Agregar"
 							outcome="/protected/empresarial/clientes/agregarcontrato.xhtml">
 						</p:button>
 					</f:facet>
-					<p:button title="Editar" icon="ui-icon-pencil"
+					<p:button styleClass="commandbutton" title="Editar" icon="ui-icon-pencil"
 						outcome="/protected/empresarial/clientes/modcontrato.xhtml">
 						<f:param name="idContratoParam" value="#{item.contIdContrato}" />
 					</p:button>

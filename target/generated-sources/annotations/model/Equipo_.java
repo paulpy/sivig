@@ -18,6 +18,7 @@ public abstract class Equipo_ {
 	public static volatile SingularAttribute<Equipo, Raspberry> raspberry;
 	public static volatile SingularAttribute<Equipo, String> equiEstado;
 	public static volatile SingularAttribute<Equipo, Integer> equiIdEquipo;
+	public static volatile ListAttribute<Equipo, Interaccion> interacciones;
 	public static volatile SingularAttribute<Equipo, Date> equiFechaIngreso;
 	public static volatile SingularAttribute<Equipo, Boolean> equiActivo;
 
