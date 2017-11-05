@@ -22,32 +22,35 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
-public class GeneradorDeReporte implements Serializable{
+public class GeneradorDeReporte implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	Logger log;
-	
+
 	@ManagedProperty(value = "#{conexionConsulta}")
 	private ConexionConsulta conexionConsulta;
 	
-	public StreamedContent generarReporte(String rutareporte,Map<String, Object> parametros){
+	ConexionJasper cjr = new ConexionJasper();
+
+	public StreamedContent generarReporte(String rutareporte, Map<String, Object> parametros) {
 		try {
 			ConexionConsulta conn = new ConexionConsulta();
-			
-			java.io.InputStream reporteTemplate = this.getClass().getResourceAsStream(rutareporte);
+
+			java.io.InputStream reportTemplate = this.getClass().getResourceAsStream(rutareporte);
 			JasperReport jasperReport;
 			JasperPrint jasperPrint;
 			JasperDesign jasperDesign;
-			
-			jasperDesign = JRXmlLoader.load(reporteTemplate);
+
+			jasperDesign = JRXmlLoader.load(reportTemplate);
 			jasperReport = JasperCompileManager.compileReport(jasperDesign);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn.conectionConsultaReporte());
 			byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
+			// ver Primefaces User Guide, sección 3.45 -> FileDownload
 			return new DefaultStreamedContent(new ByteArrayInputStream(pdf), "application/pdf", "reporte.pdf");
 		} catch (JRException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -55,8 +58,8 @@ public class GeneradorDeReporte implements Serializable{
 			e.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			if(ex.toString().startsWith("java.io.FileNotFoundException")){
-				System.out.println("algo mas paso");
+			if (ex.toString().startsWith("java.io.FileNotFoundException")) {
+				ex.toString();
 			}
 		}
 		return null;

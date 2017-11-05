@@ -23,7 +23,10 @@ public class ConexionConsulta implements Serializable{
 		InitialContext initialContext;
 		try {
 			initialContext = new InitialContext();
-			DataSource ds = (DataSource)initialContext.lookup("java:jboss/sibigDS");
+			DataSource ds = (DataSource)initialContext.lookup("java:jboss/datasources/sivigDS");
+			if(ds.getConnection() != null){
+				System.out.println("entra a la bd");
+			}
 			return (ds.getConnection());
 		} catch (NamingException e) {
 			// TODO: handle exception

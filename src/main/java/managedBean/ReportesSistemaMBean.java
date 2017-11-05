@@ -59,7 +59,7 @@ public class ReportesSistemaMBean implements Serializable{
 						parametros = new HashMap<String, Object>();
 						parametros.put("FechaInicio", fechaInicio);
 						parametros.put("FechaFin", fechaFin);
-						return generadorDeReporte.generarReporte("/resources/reportes/CambiodePiezasMes.jrxml", parametros);
+						return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMes.jrxml", parametros);
 					} catch (Exception e) {
 						// TODO: handle exception
 						System.out.println(e.toString());
