@@ -52,25 +52,38 @@ public class ReportesSistemaMBean implements Serializable{
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Falta Ingresar Fecha Fin");
 				context.addMessage(null, m);
 			} else {
-				if(funcionarioSelect == null){
-					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte sin filtro de Funcionario");
+				if((fechaInicio.after(fechaFin))||(fechaFin.before(fechaInicio))){
+					System.out.println("Las fechas no estan en el orden Correcto");
+					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Atencion","Las fechas no estan en el orden Correcto");
 					context.addMessage(null, m);
-					try {
-						parametros = new HashMap<String, Object>();
-						parametros.put("FechaInicio", fechaInicio);
-						parametros.put("FechaFin", fechaFin);
-						return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMes.jrxml", parametros);
-					} catch (Exception e) {
-						// TODO: handle exception
-						System.out.println(e.toString());
-					}					
 				} else {
-					parametros = new HashMap<String, Object>();
-					parametros.put("fechainicio", fechaInicio);
-					parametros.put("fechafin", fechaFin);
-					parametros.put("idfuncionario", funcionarioSelect.getFuncIdFuncionario());
-					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte ");
-					context.addMessage(null, m);
+					if(funcionarioSelect == null){
+						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte sin filtro de Funcionario");
+						context.addMessage(null, m);
+						try {
+							parametros = new HashMap<String, Object>();
+							parametros.put("FechaInicio", fechaInicio);
+							parametros.put("FechaFin", fechaFin);
+							return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMes.jrxml", parametros);
+						} catch (Exception e) {
+							// TODO: handle exception
+							System.out.println(e.toString());
+						}
+					} else {
+						try {
+							parametros = new HashMap<String, Object>();
+							parametros.put("FechaInicio", fechaInicio);
+							parametros.put("FechaFin", fechaFin);
+							parametros.put("fechafin", fechaFin);
+							parametros.put("idpersona", funcionarioSelect.getPersona().getPersIdPersona());
+							return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMesFunc.jrxml", parametros);
+						} catch (Exception e) {
+							// TODO: handle exception
+							System.out.println(e.toString());
+						}
+						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte ");
+						context.addMessage(null, m);
+					}
 				}
 			}
 		}
