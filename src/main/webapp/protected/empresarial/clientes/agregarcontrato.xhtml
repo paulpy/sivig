@@ -44,7 +44,7 @@
 				<p:inputSwitch id="idNContEstado" value="#{contratoMBean.nuevoContrato.contActivo}" required="true"/>
 			</h:panelGrid>
 			<p:commandButton value="Agregar Contrato" title="Agregar Contrato"
-				action="#{contratoMBean.guardarContrato()}" update="growl" />
+				action="#{contratoMBean.guardarContrato(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/empresarial/clientes/estadocontratos.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

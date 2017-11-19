@@ -15,7 +15,7 @@
 			<p:inputText id="idNAccion" value="#{accionMBean.nuevaAccion.acciAccion}"
 				required="true" />
 			<p:commandButton value="Agregar Accion" title="Agregar Accion"
-				action="#{accionMBean.guardarAccion()}" update="growl" />
+				action="#{accionMBean.guardarAccion(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/sistema/datosgenericos/listadoacciones.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

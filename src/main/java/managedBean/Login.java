@@ -14,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import clases.AuditoriaClass;
 import model.Usuario;
 import service.UsuarioService;
 
@@ -29,6 +30,9 @@ public class Login implements Serializable {
 
 	@Inject
 	private UsuarioService usuarioService;
+	
+	@Inject
+	private AuditoriaClass auditoriaClass;
 
 	public Login() {
 	}
@@ -81,6 +85,7 @@ public class Login implements Serializable {
 							externalContext.redirect(originalURL);
 							FacesContext.getCurrentInstance().addMessage(null,
 									new FacesMessage("Acceso Concedido", userName));
+							auditoriaClass.agregarAuditoria("Ingreso al Sistema", "Usuario", userName);
 						} catch (ServletException e) {
 							e.printStackTrace();
 							FacesContext.getCurrentInstance().addMessage("", new FacesMessage(
@@ -98,6 +103,7 @@ public class Login implements Serializable {
 	}
 
 	public String logout() {
+		auditoriaClass.agregarAuditoria("Salida del Sistema", "Usuarios", userName);
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/index.xhtml?faces-redirect=true";
 	}

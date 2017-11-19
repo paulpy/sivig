@@ -19,7 +19,7 @@ public class AuditoriaService {
 	private Event<Auditoria> auditoriaEventSrc;
 	
 	public void registrarAuditoria(Auditoria auditoria) throws Exception {
-		logger.info("Registrando" + auditoria.getAudiDetalleAccion());
+		logger.info("Registrando " + auditoria.getAudiDetalleAccion());
 		em.persist(auditoria);
 		auditoriaEventSrc.fire(auditoria);
 	}

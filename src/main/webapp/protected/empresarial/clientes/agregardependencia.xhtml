@@ -62,7 +62,7 @@
 				<p:inputText id="idNDepeNroEdi" value="#{dependenciaMBean.nuevaDireccion.direNro}" required="true"/>
 			</h:panelGrid>
 			<p:commandButton value="Agregar Entidad" title="Agregar Entidad"
-				update="growl" action="#{dependenciaMBean.guardarDependencia()}" />
+				update="growl" action="#{dependenciaMBean.guardarDependencia(request.getUserPrincipal().getName())}" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/empresarial/clientes/estadodependencias.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

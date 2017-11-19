@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Calle;
 import model.Ciudad;
 import model.Dependencia;
@@ -44,6 +45,9 @@ public class DependenciaMBean implements Serializable{
 	private CiudadService ciudadService;
 	@Inject
 	private DireccionService direccionService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
+	
 	@RequestParam
 	private String idDependencia;
 	
@@ -71,18 +75,20 @@ public class DependenciaMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarDependencia(){
+	public void guardarDependencia(String usuariodata){
 		try {
 			if (idDependencia != null) {
 				dependenciaService.actualizarDependencia(nuevaDependencia, nuevaDireccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando", "Dependencia", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/clientes/estadodependencias.xhtml");
 			} else {
 				dependenciaService.insertarDependencia(nuevaDependencia, nuevaDireccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Accion", "Accion", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

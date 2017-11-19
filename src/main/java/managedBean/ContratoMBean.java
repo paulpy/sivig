@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Contrato;
 import model.Entidad;
 import model.Funcionario;
@@ -36,6 +37,8 @@ public class ContratoMBean implements Serializable {
 	private FuncionarioService funcionarioService;
 	@Inject
 	private EntidadService entidadService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idContratoParam;
 
@@ -60,18 +63,20 @@ public class ContratoMBean implements Serializable {
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 
-	public void guardarContrato() {
+	public void guardarContrato(String usuariodata) {
 		try {
 			if (idContratoParam != null) {
 				contratoService.actualizarContrato(nuevoContrato);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Contratos", "Contrato", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/clientes/estadocontratos.xhtml");
 			} else {
 				contratoService.registrarContrato(nuevoContrato);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado", "Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Contratos", "Contrato", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {
@@ -86,6 +91,7 @@ public class ContratoMBean implements Serializable {
 
 	public void limpiar() {
 		nuevoContrato = new Contrato();
+		auditoriaClass = new AuditoriaClass();
 	}
 
 	public void listarContratos() {

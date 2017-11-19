@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Accion;
 import service.AccionService;
 
@@ -28,6 +29,8 @@ public class AccionMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private AccionService accionService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idAccion;
 	private ExternalContext externalContext;
@@ -44,7 +47,7 @@ public class AccionMBean implements Serializable{
 			}
 		}
 	}
-	public void guardarAccion(){
+	public void guardarAccion(String usuariodata){
 		try {
 			if(idAccion != null){
 				accionService.actualizaAccion(nuevaAccion);
@@ -52,9 +55,11 @@ public class AccionMBean implements Serializable{
 						"Confirmacion de Actualizacion");
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadoacciones.xhtml");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando", "Accion", usuariodata);
 			} else {
 				accionService.registrarAccion(nuevaAccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
+				auditoriaClass.agregarAuditoria("Agregando Accion", "Accion", usuariodata);
 				context.addMessage(null, m);
 				inicializar();
 			}
