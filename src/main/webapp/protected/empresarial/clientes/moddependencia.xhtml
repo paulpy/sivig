@@ -65,7 +65,7 @@
 				<p:inputText value="#{dependenciaMBean.nuevaDireccion.direNro}" />
 			</h:panelGrid>
 			<p:commandButton value="Modificar Entidad" title="Modificar Entidad"
-				update="growl" action="#{dependenciaMBean.guardarDependencia()}" />
+				update="growl" action="#{dependenciaMBean.guardarDependencia(request.getUserPrincipal().getName())}" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/empresarial/clientes/estadodependencias.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

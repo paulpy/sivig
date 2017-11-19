@@ -54,7 +54,7 @@
 					required="true" />
 				<p:commandButton value="Agregar Funcionario"
 					title="Agregar Funcionario"
-					action="#{funcionarioMBean.guardarFuncionario()}" update="growl" />
+					action="#{funcionarioMBean.guardarFuncionario(request.getUserPrincipal().getName())}" update="growl" />
 				<p:button value="Volver" id="botonVolver"
 					outcome="/protected/empresarial/funcionarios/estadofuncionario.xhtml"
 					icon="ui-icon-arrowreturnthick-1-w" />

@@ -21,7 +21,7 @@
 				<p:inputSwitch id="idNEntidadEstado" required="true" value="#{entidadMbean.nuevaEntidad.entiEstado}" />
 			</h:panelGrid>
 			<p:commandButton value="Agregar Entidad" title="Agregar Entidad"
-				action="#{entidadMbean.guardarEntidad()}" update="growl" />
+				action="#{entidadMbean.guardarEntidad(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/empresarial/clientes/estadoentidad.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

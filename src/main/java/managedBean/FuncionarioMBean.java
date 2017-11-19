@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Funcionario;
 import model.Persona;
 import service.FuncionarioService;
@@ -33,6 +34,8 @@ public class FuncionarioMBean implements Serializable{
 	private PersonaService personaService;
 	@Inject
 	private FuncionarioService funcionarioService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	
 	@RequestParam
 	private String idFuncionarioParam;
@@ -57,18 +60,20 @@ public class FuncionarioMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarFuncionario(){
+	public void guardarFuncionario(String usuariodata){
 		try {
 			if(idFuncionarioParam != null){
 				funcionarioService.actualizarPersFunc(nuevoFuncPersona, nuevoFuncionario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Funcionario", "Funcionario", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/funcionarios/estadofuncionario.xhtml");
 			} else {
 				funcionarioService.insertPersFunc(nuevoFuncPersona, nuevoFuncionario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Funcionario", "Funcionario", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

@@ -70,13 +70,13 @@ public class ContratoMBean implements Serializable {
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Actualizando Contratos", "Contrato", usuariodata);
+				auditoriaClass.agregarAuditoria("Actualizando Contrato", "Contrato", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/clientes/estadocontratos.xhtml");
 			} else {
 				contratoService.registrarContrato(nuevoContrato);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado", "Confirmacion de Registro");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Agregando Contratos", "Contrato", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregando Contrato", "Contrato", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

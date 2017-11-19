@@ -82,13 +82,13 @@ public class DependenciaMBean implements Serializable{
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Actualizando", "Dependencia", usuariodata);
+				auditoriaClass.agregarAuditoria("Actualizando Dependencia", "Dependencia", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/clientes/estadodependencias.xhtml");
 			} else {
 				dependenciaService.insertarDependencia(nuevaDependencia, nuevaDireccion);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Agregando Accion", "Accion", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregando Dependencia", "Dependencia", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

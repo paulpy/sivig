@@ -56,7 +56,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Modificar Funcionario"
 				title="Modificar Funcionario"
-				action="#{funcionarioMBean.guardarFuncionario()}" update="true" />
+				action="#{funcionarioMBean.guardarFuncionario(request.getUserPrincipal().getName())}" update="true" />
 		</p:panel>
 	</ui:define>
 </ui:composition>

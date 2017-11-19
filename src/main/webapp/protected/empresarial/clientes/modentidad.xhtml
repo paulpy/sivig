@@ -23,7 +23,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Modificar Entidad"
 				title="Modificar Estado Entidad"
-				action="#{entidadMbean.guardarEntidad()}" update="growl" />
+				action="#{entidadMbean.guardarEntidad(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/empresarial/clientes/estadoentidad.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />
