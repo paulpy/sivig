@@ -28,7 +28,7 @@
 					required="true" />
 			</h:panelGrid>
 			<p:commandButton value="Agregar Raspberry" title="Agregar Raspberry"
-				actionListener="#{raspberryMBean.guardarRaspberry()}" update="growl" />
+				actionListener="#{raspberryMBean.guardarRaspberry(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/equipos/datos/estadoraspberrys.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

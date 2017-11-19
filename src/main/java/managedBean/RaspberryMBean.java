@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Raspberry;
 import service.RaspberryService;
 
@@ -28,6 +29,8 @@ public class RaspberryMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private RaspberryService raspberryService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idRaspberryParam;
 	
@@ -48,18 +51,20 @@ public class RaspberryMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarRaspberry(){
+	public void guardarRaspberry(String usuariodata){
 		try {
 			if(idRaspberryParam != null){
 				raspberryService.actualizarRaspberry(nuevoRaspberry);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Raspberry", "Raspberry", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/equipos/datos/estadoraspberrys.xhtml");
 			} else {
 				raspberryService.registrarRaspberry(nuevoRaspberry);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Raspberry", "Raspberry", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

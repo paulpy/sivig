@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Equipo;
 
 import model.Raspberry;
@@ -34,6 +35,8 @@ public class EquipoMBean implements Serializable{
 	private EquipoService equipoService;
 	@Inject
 	private RaspberryService raspberryService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idEquipoParam;
 	
@@ -56,18 +59,20 @@ public class EquipoMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarEquipo(){
+	public void guardarEquipo(String usuariodata){
 		try {
 			if(idEquipoParam != null){
 				equipoService.updateEquipo(nuevoEquipo);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Equipo", "Equipo", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/equipos/datos/estadoequipos.xhtml");
 			} else {
 				equipoService.registrarEquipo(nuevoEquipo);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Equipo", "Equipo", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

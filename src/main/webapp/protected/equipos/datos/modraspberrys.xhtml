@@ -32,7 +32,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Modificar Raspberry"
 				title="Modificar Raspberry"
-				actionListener="#{raspberryMBean.guardarRaspberry()}" update="growl" />
+				actionListener="#{raspberryMBean.guardarRaspberry(request.getUserPrincipal().getName())}" update="growl" />
 		</p:panel>
 	</ui:define>
 </ui:composition>

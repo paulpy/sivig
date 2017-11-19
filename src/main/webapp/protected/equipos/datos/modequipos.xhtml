@@ -34,7 +34,7 @@
 				</p:selectOneMenu>
 			</h:panelGrid>
 			<p:commandButton value="Modificar Equipo" title="Modificar Equipo"
-				action="#{equipoMBean.guardarEquipo()}" update="growl" />
+				action="#{equipoMBean.guardarEquipo(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/equipos/datos/estadoequipos.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />
