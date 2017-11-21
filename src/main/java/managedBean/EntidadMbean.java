@@ -60,13 +60,13 @@ public class EntidadMbean implements Serializable{
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Actualizando Entidad", "Entidad", usuariodata);auditoriaClass.agregarAuditoria("Actualizando", "Accion", usuariodata);
+				auditoriaClass.agregarAuditoria("Actualizando Entidad "+nuevaEntidad.getEntiEntidad(), "Entidad", usuariodata);auditoriaClass.agregarAuditoria("Actualizando", "Accion", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/clientes/estadoentidad.xhtml");
 			} else {
 				entidadService.registrarEntidad(nuevaEntidad);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado", "Confirmacion de Registro");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Agregando Entidad", "Entidad", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregando Entidad "+nuevaEntidad.getEntiEntidad(), "Entidad", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

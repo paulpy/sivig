@@ -66,13 +66,13 @@ public class EquipoMBean implements Serializable{
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Actualizando Equipo", "Equipo", usuariodata);
+				auditoriaClass.agregarAuditoria("Actualizando Equipo "+nuevoEquipo.getEquiIdenificador(), "Equipo", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/equipos/datos/estadoequipos.xhtml");
 			} else {
 				equipoService.registrarEquipo(nuevoEquipo);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Agregando Equipo", "Equipo", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregando Equipo "+nuevoEquipo.getEquiIdenificador(), "Equipo", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {

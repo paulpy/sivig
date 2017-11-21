@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import clases.AuditoriaClass;
 import model.Equipo;
 import model.Raspberry;
 import service.RaspberryService;
@@ -28,17 +29,21 @@ public class ConjuntoMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private RaspberryService raspberryService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	
 	public void inicializar(){
 		nuevoRaspberry = new Raspberry();
 		nuevoEquipo = new Equipo();
 	}
 	
-	public void registrarConjunto() throws ExecutionException {
+	public void registrarConjunto(String usuariodata) throws ExecutionException {
 		try {
 			if(raspberryService.insertConjunto(nuevoEquipo, nuevoRaspberry)){
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregado Conjunto "+nuevoEquipo.getEquiIdenificador(), "Equipo", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregado Conjunto "+nuevoRaspberry.getRaspNombre(), "Raspberry", usuariodata);
 				inicializar();
 			} else {
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Fallo el Registro");

@@ -102,8 +102,8 @@ public class Login implements Serializable {
 		context.addMessage(null, new FacesMessage("Ingreso Exitoso", userName));
 	}
 
-	public String logout() {
-		auditoriaClass.agregarAuditoria("Salida del Sistema", "Usuarios", userName);
+	public String logout(String userName) {
+		auditoriaClass.agregarAuditoria("Salida del Sistema", "Usuario", userName);
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/index.xhtml?faces-redirect=true";
 	}

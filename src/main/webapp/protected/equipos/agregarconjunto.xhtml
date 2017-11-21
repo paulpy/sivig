@@ -34,7 +34,7 @@
 				<p:inputSwitch id="idNequipoRaspActivo" value="#{conjuntoMBean.nuevoRaspberry.raspActivo}" required="true" />
 			</h:panelGrid>
 			<p:commandButton value="Agregar Conjunto" title="Agregar Raspberry"
-				action="#{conjuntoMBean.registrarConjunto()}"
+				action="#{conjuntoMBean.registrarConjunto(request.getUserPrincipal().getName())}"
 				update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/main.xhtml"

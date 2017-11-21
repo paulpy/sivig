@@ -67,13 +67,13 @@ public class FuncionarioMBean implements Serializable{
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Actualizando Funcionario", "Funcionario", usuariodata);
+				auditoriaClass.agregarAuditoria("Actualizando Funcionario "+nuevoFuncionario.getPersona().getPersIdPersona(), "Funcionario", usuariodata);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/empresarial/funcionarios/estadofuncionario.xhtml");
 			} else {
 				funcionarioService.insertPersFunc(nuevoFuncPersona, nuevoFuncionario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
-				auditoriaClass.agregarAuditoria("Agregando Funcionario", "Funcionario", usuariodata);
+				auditoriaClass.agregarAuditoria("Agregando Funcionario "+nuevoFuncionario.getPersona().getPersIdPersona(), "Funcionario", usuariodata);
 				limpiar();
 			}
 		} catch (Exception e) {
