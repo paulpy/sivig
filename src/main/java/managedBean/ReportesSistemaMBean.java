@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import org.primefaces.model.StreamedContent;
 
+import clases.AuditoriaClass;
 import model.Funcionario;
 import reporte.GeneradorDeReporte;
 import service.FuncionarioService;
@@ -32,6 +33,8 @@ public class ReportesSistemaMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private GeneradorDeReporte generadorDeReporte;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	
 	private List<Funcionario> funcionarioTecList;
 	private Date fechaInicio;
@@ -43,7 +46,7 @@ public class ReportesSistemaMBean implements Serializable{
 		listar();
 	}
 	
-	public StreamedContent generarReporte(){
+	public StreamedContent generarReporte(String usuario){
 		if(fechaInicio == null){
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Falta Ingresar Fecha Inicio");
 			context.addMessage(null, m);
@@ -84,6 +87,7 @@ public class ReportesSistemaMBean implements Serializable{
 						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte ");
 						context.addMessage(null, m);
 					}
+					auditoriaClass.agregarAuditoria("Generando Reporte ", "vistareporte", usuario);
 				}
 			}
 		}
