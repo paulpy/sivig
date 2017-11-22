@@ -15,7 +15,7 @@
 			<p:inputText id="idNCalle" value="#{calleMBean.nuevaCalle.callCalle}"
 				required="true" />
 			<p:commandButton value="Agregar Calle" title="Agregar Calle"
-				action="#{calleMBean.guardarCalle()}" update="growl" />
+				action="#{calleMBean.guardarCalle(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/sistema/datosgenericos/listadocalle.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

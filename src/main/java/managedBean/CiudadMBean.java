@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Ciudad;
 import service.CiudadService;
 
@@ -28,6 +29,8 @@ public class CiudadMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private CiudadService ciudadService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idCiudad;
 	
@@ -49,17 +52,19 @@ public class CiudadMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarCiudad(){
+	public void guardarCiudad(String usuario){
 		try {
 			if(idCiudad != null){
 				ciudadService.actualizarCiudad(nuevaCiudad);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizacion de Ciudad "+nuevaCiudad.getCiudCiudad(), "Ciudad", usuario);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadociudad.xhtml");
 			} else {
 				ciudadService.registrarCiudad(nuevaCiudad);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
+				auditoriaClass.agregarAuditoria("Actualizacion de Ciudad "+nuevaCiudad.getCiudCiudad(), "Ciudad", usuario);
 				context.addMessage(null, m);
 				limpiar();
 			}

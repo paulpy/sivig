@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.CausaCambioEstado;
 import service.CambioEstadoService;
 
@@ -28,6 +29,8 @@ public class CausaCambioMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private CambioEstadoService cambioEstadoService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idCausaCambio;
 	
@@ -49,18 +52,20 @@ public class CausaCambioMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarCambioEstado(){
+	public void guardarCambioEstado(String usuario){
 		try {
 			if(idCausaCambio != null){
 				cambioEstadoService.actualizarCambioEstado(nuevaCambioEstado);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Causa Cambio "+nuevaCambioEstado.getCcesCausaEstado(), "causascambioestado", usuario);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadocausaestado.xhtml");
 			} else {
 				cambioEstadoService.registrarCambioEstado(nuevaCambioEstado);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Causa Cambio "+nuevaCambioEstado.getCcesCausaEstado(), "causascambioestado", usuario);
 				limpiar();
 			}
 		} catch (Exception e) {

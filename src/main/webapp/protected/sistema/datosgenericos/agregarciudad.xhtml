@@ -15,7 +15,7 @@
 			<p:inputText id="idNCiudad"
 				value="#{ciudadMBean.nuevaCiudad.ciudCiudad}" required="true" />
 			<p:commandButton value="Agregar Ciudad" title="Agregar Ciudad"
-				action="#{ciudadMBean.guardarCiudad()}" update="growl" />
+				action="#{ciudadMBean.guardarCiudad(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/sistema/datosgenericos/listadociudad.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

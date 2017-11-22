@@ -75,7 +75,7 @@
 				</h:panelGrid>
 			</p:panel>
 			<p:commandButton value="Agregar Usuario" title="Agregar Usuario"
-				actionListener="#{usuarioController.registrarUsuario()}"
+				actionListener="#{usuarioController.registrarUsuario(request.getUserPrincipal().getName())}"
 				update="growl" />
 		</p:panel>
 	</ui:define>

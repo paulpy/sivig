@@ -18,7 +18,7 @@
 				required="true" />
 			<p:commandButton value="Agregar Cambio Estado"
 				title="Agregar Cambio Estado"
-				actionListener="#{causaCambioMBean.guardarCambioEstado()}"
+				actionListener="#{causaCambioMBean.guardarCambioEstado(request.getUserPrincipal().getName())}"
 				update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/sistema/datosgenericos/listadocausaestado.xhtml"

@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Calle;
 import service.CalleService;
 
@@ -28,6 +29,8 @@ public class CalleMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private CalleService calleService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idCalle;
 	
@@ -49,18 +52,20 @@ public class CalleMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarCalle(){
+	public void guardarCalle(String usuario){
 		try {
 			if(idCalle != null){
 				calleService.actualizarCalle(nuevaCalle);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando Calle "+nuevaCalle.getCallCalle(), "calle", usuario);
 				inicializar();
 			} else {
 				calleService.registrarCalle(nuevaCalle);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando Calle "+nuevaCalle.getCallCalle(), "calle", usuario);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/agregarcalle.xhtml");
 			}
 		} catch (Exception e) {

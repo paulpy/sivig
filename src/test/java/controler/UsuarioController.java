@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import clases.AuditoriaClass;
 import model.Funcionario;
 import model.Persona;
 import model.Usuario;
@@ -25,6 +26,8 @@ public class UsuarioController {
 	private PersonaService personaService;
 	@Inject
 	private UsuarioService usuarioService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@Produces
 	@Named
 	private Usuario nuevoUsuario;
@@ -48,14 +51,16 @@ public class UsuarioController {
 		nuevoUsuaPersona = new Persona();
 		usuariosList = usuarioService.listUsuario();
 	}
-	public void registrarUsuario() throws Exception {
+	public void registrarUsuario(String usuario) throws Exception {
 		try {
 			if(personaService.inserPersFuncUsua(nuevoUsuaPersona, nuevoUsuaFuncionario, nuevoUsuario)){
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizando usuario "+nuevoUsuario.getUsuaUsuario(), "usuario", usuario);
 			} else {
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Registro no guardado");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregando usuario "+nuevoUsuario.getUsuaUsuario(), "usuario", usuario);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

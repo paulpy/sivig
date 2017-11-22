@@ -17,7 +17,7 @@
 				value="#{estadoEquipoMBean.nuevoEstadoEquipo.eseqEstadoEquipo}"
 				required="true" />
 			<p:commandButton value="Agregar Estado" title="Agregar Estado"
-				actionListener="#{estadoEquipoMBean.guardarEstadoEquipo()}"
+				actionListener="#{estadoEquipoMBean.guardarEstadoEquipo(request.getUserPrincipal().getName())}"
 				update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/sistema/datosgenericos/listadoestadoequipo.xhtml"

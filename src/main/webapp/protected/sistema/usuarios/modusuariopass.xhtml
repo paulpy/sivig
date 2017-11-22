@@ -53,7 +53,7 @@
 						</p:panel>
 					</h:panelGrid>
 					<p:commandButton value="Agregar Usuario" title="Agregar Usuario" 
-					actionListener="#{usuarioController.registrarUsuario()}" 
+					actionListener="#{usuarioController.registrarUsuario(request.getUserPrincipal().getName())}" 
 					update="message"/>
 			</p:panel>
 		</h:form>

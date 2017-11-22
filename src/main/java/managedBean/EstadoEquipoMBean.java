@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.EstadoEquipo;
 import service.EstadoEquipoService;
 
@@ -28,6 +29,9 @@ public class EstadoEquipoMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private EstadoEquipoService estadoEquipoService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
+	
 	@RequestParam
 	private String idEstadoEquipo;
 	
@@ -49,18 +53,20 @@ public class EstadoEquipoMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarEstadoEquipo(){
+	public void guardarEstadoEquipo(String usuario){
 		try {
 			if(idEstadoEquipo != null){
 				estadoEquipoService.actualizarEstadoEquipo(nuevoEstadoEquipo);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Actualizacion de estado "+nuevoEstadoEquipo.getEseqEstadoEquipo(), "estadosequipo", usuario);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/sistema/datosgenericos/listadoestadoequipo.xhtml");
 			} else {
 				estadoEquipoService.registrarEstadoEquipo(nuevoEstadoEquipo);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
+				auditoriaClass.agregarAuditoria("Agregado estado "+nuevoEstadoEquipo.getEseqEstadoEquipo(), "estadosequipo", usuario);
 				limpiar();
 			}
 		} catch (Exception e) {
