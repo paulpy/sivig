@@ -47,7 +47,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Guardar Mantenimiento" update="growl"
 				title="Guardar Mantenimineto"
-				action="#{mantenimientoMBean.registrarMantenimiento()}" />
+				action="#{mantenimientoMBean.registrarMantenimiento(request.getUserPrincipal().getName())}" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/main.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Dependencia;
 import model.Equipo;
 import model.Funcionario;
@@ -40,6 +41,8 @@ public class InstalacionMBean implements Serializable{
 	private FuncionarioService funcionarioService;
 	@Inject
 	private DependenciaService dependenciaService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idInstalacionParam;
 
@@ -53,9 +56,10 @@ public class InstalacionMBean implements Serializable{
 		listarEFD();
 	}
 	
-	public void registrarInstalacion()throws Exception{
+	public void registrarInstalacion(String usuario)throws Exception{
 		try{
 			instalacionService.registrarInstalacion(nuevaInstalacion);
+			auditoriaClass.agregarAuditoria("Agregado Instalacion "+nuevaInstalacion.getDependencia().getDepeNombreDependencia()+"-"+nuevaInstalacion.getEquipo().getEquiIdenificador(), "Instalacion", usuario);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 			context.addMessage(null, m);
 			limpiar();

@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Pieza;
 import service.PiezaService;
 
@@ -28,6 +29,8 @@ public class PiezasMBean implements Serializable{
 	private FacesContext context;
 	@Inject
 	private PiezaService piezaService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idPiezaParam;
 	
@@ -49,16 +52,18 @@ public class PiezasMBean implements Serializable{
 		externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	}
 	
-	public void guardarPieza(){
+	public void guardarPieza(String usuario){
 		try {
 			if(idPiezaParam != null){
 				piezaService.actualizarPieza(nuevaPieza);
+				auditoriaClass.agregarAuditoria("Actualizando Pieza "+nuevaPieza.getPiezPieza(), "Pieza", usuario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado",
 						"Confirmacion de Actualizacion");
 				context.addMessage(null, m);
 				externalContext.redirect(externalContext.getRequestContextPath() + "/protected/procesostecnicos/listapiezas.xhtml");
 			} else {
 				piezaService.registrarPieza(nuevaPieza);
+				auditoriaClass.agregarAuditoria("Agregando Pieza "+nuevaPieza.getPiezPieza(), "Pieza", usuario);
 				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 				context.addMessage(null, m);
 				limpiar();

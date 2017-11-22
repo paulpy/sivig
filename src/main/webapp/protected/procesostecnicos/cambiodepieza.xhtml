@@ -44,7 +44,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Guardar Cambio de Pieza"
 				title="Guardar Cambio"
-				actionListener="#{cambioPiezaMBean.registrarCambioPieza()}"
+				actionListener="#{cambioPiezaMBean.registrarCambioPieza(request.getUserPrincipal().getName())}"
 				update="growl" />
 		</p:panel>
 	</ui:define>

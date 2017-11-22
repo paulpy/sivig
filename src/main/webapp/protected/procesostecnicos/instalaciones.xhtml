@@ -46,7 +46,7 @@
 			</h:panelGrid>
 			<p:commandButton value="Guardar Instalacion" update="growl"
 				title="Guardar Instalacion"
-				action="#{instalacionMBean.registrarInstalacion()}" />
+				action="#{instalacionMBean.registrarInstalacion(request.getUserPrincipal().getName())}" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/procesostecnicos/listainstalaciones.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

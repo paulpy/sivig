@@ -23,7 +23,7 @@
 					value="#{piezasMBean.nuevaPieza.piezDetalle}" required="true" />
 			</h:panelGrid>
 			<p:commandButton value="Agregar Piezas" title="Agregar Pieza"
-				actionListener="#{piezasMBean.guardarPieza()}" update="growl" />
+				actionListener="#{piezasMBean.guardarPieza(request.getUserPrincipal().getName())}" update="growl" />
 			<p:button value="Volver" id="botonVolver"
 				outcome="/protected/procesostecnicos/listapiezas.xhtml"
 				icon="ui-icon-arrowreturnthick-1-w" />

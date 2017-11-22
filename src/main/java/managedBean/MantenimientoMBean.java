@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.jboss.solder.servlet.http.RequestParam;
 
+import clases.AuditoriaClass;
 import model.Contrato;
 import model.Dependencia;
 import model.Funcionario;
@@ -39,6 +40,8 @@ public class MantenimientoMBean implements Serializable{
 	private FuncionarioService funcionarioService;
 	@Inject
 	private ContratoService contratoService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	@RequestParam
 	private String idMantenimientoParam;
 
@@ -51,9 +54,10 @@ public class MantenimientoMBean implements Serializable{
 		listarDFC();
 	}
 	
-	public void registrarMantenimiento() throws Exception {
+	public void registrarMantenimiento(String usuario) throws Exception {
 		try {
 			mantenimientoService.registrarMantenimiento(nuevoMantenimiento);
+			auditoriaClass.agregarAuditoria("Agregado Mantenimiento "+nuevoMantenimiento.getDependencia().getDepeNombreDependencia()+"-"+nuevoMantenimiento.getContrato().getContIdentificadorContrato(), "Mantenimiento", usuario);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 			context.addMessage(null, m);
 			limpiar();

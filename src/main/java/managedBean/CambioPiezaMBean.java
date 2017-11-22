@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import clases.AuditoriaClass;
 import model.CambioPieza;
 import model.Equipo;
 import model.Funcionario;
@@ -37,6 +38,8 @@ public class CambioPiezaMBean implements Serializable{
 	private EquipoService equipoService;
 	@Inject
 	private PiezaService piezaService;
+	@Inject
+	private AuditoriaClass auditoriaClass;
 	
 	private List<Funcionario> funcionarioList;
 	private List<Equipo> equipoList;
@@ -47,9 +50,10 @@ public class CambioPiezaMBean implements Serializable{
 		listar();
 	}
 	
-	public void registrarCambioPieza() throws Exception{
+	public void registrarCambioPieza(String usuariodata) throws Exception{
 		try {
 			cambioPiezaService.registrarCambioPieza(nuevoCambioPieza);
+			auditoriaClass.agregarAuditoria("Agregado Cambio de pieza "+nuevoCambioPieza.getEquipo()+"-"+nuevoCambioPieza.getPieza().getPiezPieza(), "cambiodepiezas", usuariodata);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
 			context.addMessage(null, m);
 			limpiar();
