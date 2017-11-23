@@ -8,33 +8,27 @@
 	<ui:define name="title2">Reporte de Clientes</ui:define>
 	<ui:define name="body">
 		<f:metadata>
-			<f:event listener="#{reportesSistemaMBean.inicializar()}"
-				type="preRenderView" />
+			<f:event listener="#{reportesSistemaMBean.inicializar()}" type="preRenderView" />
 		</f:metadata>
 		<div>
 			<p:panel id="reportecambiodepiezas"
 				header="Reportes de Cambio de Piezas" style="margin-bottom:20px">
 				<h:panelGrid columns="8" cellpadding="10">
 					<p:outputLabel for="fechainicio" value="Fecha Inicio:" />
-					<p:calendar id="fechainicio" pattern="dd-MM-yyyy"
-						value="#{reportesSistemaMBean.fechaInicio}" />
+					<p:calendar id="fechainicio" pattern="dd-MM-yyyy" value="#{reportesSistemaMBean.fechaInicio}"/>
 					<p:outputLabel for="fechafin" value="Fecha Fin:" />
-					<p:calendar id="fechafin" pattern="dd-MM-yyyy"
-						value="#{reportesSistemaMBean.fechaFin}" />
+					<p:calendar id="fechafin" pattern="dd-MM-yyyy" value="#{reportesSistemaMBean.fechaFin}"/>
 					<p:outputLabel for="listfuncionario" value="Funcionario:" />
 					<p:selectOneMenu id="listfuncionario" style="width:125px"
-						value="#{reportesSistemaMBean.funcionarioSelect}"
-						converter="#{funcionarioConverter}">
+						value="#{reportesSistemaMBean.funcionarioSelect}" converter="#{funcionarioConverter}">
 						<f:selectItem itemLabel="Select One" itemValue="" />
 						<f:selectItems value="#{reportesSistemaMBean.funcionarioTecList}"
-							var="item" itemValue="#{item}"
-							itemLabel="#{item.persona.persNombre}" />
+							var="item" itemValue="#{item}" itemLabel="#{item.persona.persNombre}"/>
 					</p:selectOneMenu>
 					<p:commandButton value="Generar Reporte" title="Generar Reporte"
-						action="#{reportesSistemaMBean.generarReporte()}" update="growl"
-						ajax="false">
-						<p:fileDownload
-							value="#{reportesSistemaMBean.generarReporte(request.getUserPrincipal().getName())}"></p:fileDownload>
+						action="#{reportesSistemaMBean.generarReporte()}"
+						update="growl" ajax="false">
+						<p:fileDownload value="#{reportesSistemaMBean.generarReporte(request.getUserPrincipal().getName())}"></p:fileDownload>	
 					</p:commandButton>
 					<p:button value="Volver" id="botonVolver"
 						outcome="/protected/equipos/datos/estadoequipos.xhtml"
