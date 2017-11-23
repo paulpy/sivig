@@ -15,12 +15,15 @@
 	</style>
 	<parameter name="FechaInicio" class="java.sql.Date">
 		<parameterDescription><![CDATA[FechaInicio]]></parameterDescription>
+		<defaultValueExpression><![CDATA[TODAY( )]]></defaultValueExpression>
 	</parameter>
 	<parameter name="FechaFin" class="java.sql.Date">
 		<parameterDescription><![CDATA[FechaFinReporte]]></parameterDescription>
+		<defaultValueExpression><![CDATA[TODAY( )]]></defaultValueExpression>
 	</parameter>
 	<parameter name="idpersona" class="java.lang.Integer">
 		<parameterDescription><![CDATA[idpersona]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT capi_fecha_cambio, capi_observacion, equi_identificador, pers_nombre, pers_apellido, piez_pieza
@@ -51,29 +54,33 @@
 	<field name="piez_pieza" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="piez_pieza"/>
 	</field>
+	<variable name="Mes" class="java.sql.Date">
+		<variableExpression><![CDATA[MONTH(TODAY())]]></variableExpression>
+		<initialValueExpression><![CDATA[MONTH(TODAY())]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="132" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" forecolor="#0066CC" backcolor="#0066CC" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<reportElement style="Title" x="9" y="6" width="370" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
 					<textElement>
 						<font size="40" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Piezas Cambiadas]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="10" y="62" width="120" height="29" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
+					<reportElement style="SubTitle" x="10" y="62" width="120" height="29" forecolor="#FFFFFF" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Fecha Inicio:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="244" y="60" width="95" height="29" uuid="3fb356b1-fcff-4f7f-9423-85bdce123113"/>
+					<reportElement style="SubTitle" x="244" y="60" width="95" height="29" forecolor="#FFFFFF" uuid="3fb356b1-fcff-4f7f-9423-85bdce123113"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
@@ -95,7 +102,7 @@
 				</textField>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#0066CC" backcolor="#0066CC" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
 					<textElement textAlignment="Right">
@@ -139,7 +146,7 @@
 				<text><![CDATA[Identificador]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="298" y="-123" width="92" height="18" forecolor="#FFFFFF" uuid="00736862-9e6f-499f-90e4-3b8f3ff76a8f">
+				<reportElement style="Column header" x="306" y="-119" width="92" height="18" forecolor="#FFFFFF" uuid="00736862-9e6f-499f-90e4-3b8f3ff76a8f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df64d2bf-8c96-4c8e-9a79-c9caabd51315"/>
 				</reportElement>
 				<textElement>
@@ -148,7 +155,7 @@
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="369" y="-123" width="92" height="18" forecolor="#FFFFFF" uuid="7c5d94a8-f075-44ee-9f6c-af00421524cf">
+				<reportElement style="Column header" x="387" y="-119" width="92" height="18" forecolor="#FFFFFF" uuid="7c5d94a8-f075-44ee-9f6c-af00421524cf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bfb8d9d4-7ad6-47a4-a2ba-7ab838070fd6"/>
 				</reportElement>
 				<textElement>
@@ -199,7 +206,7 @@
 					<textFieldExpression><![CDATA[$F{equi_identificador}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="298" y="-130" width="92" height="18" forecolor="#FFFFFF" uuid="0f33429c-8d6b-465e-b3fb-0014434fe026">
+					<reportElement style="Detail" positionType="Float" x="306" y="-126" width="92" height="18" forecolor="#FFFFFF" uuid="0f33429c-8d6b-465e-b3fb-0014434fe026">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df64d2bf-8c96-4c8e-9a79-c9caabd51315"/>
 					</reportElement>
 					<textElement>
@@ -208,7 +215,7 @@
 					<textFieldExpression><![CDATA[$F{pers_nombre}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="369" y="-130" width="92" height="18" forecolor="#FFFFFF" uuid="690d943d-8773-4d18-b6c3-7b9b2b518e69">
+					<reportElement style="Detail" positionType="Float" x="387" y="-126" width="92" height="18" forecolor="#FFFFFF" uuid="690d943d-8773-4d18-b6c3-7b9b2b518e69">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bfb8d9d4-7ad6-47a4-a2ba-7ab838070fd6"/>
 					</reportElement>
 					<textElement>
@@ -241,7 +248,7 @@
 	<pageFooter>
 		<band height="25" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#0066CC" backcolor="#0066CC" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
 				<textField evaluationTime="Report">
 					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
 					<textElement verticalAlignment="Middle">
