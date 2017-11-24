@@ -5,15 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title">Sistema</ui:define>
-	<ui:define name="title2">Reporte de Cambios de Piezas</ui:define>
+	<ui:define name="title2">Reporte de Piezas</ui:define>
 	<ui:define name="body">
 		<f:metadata>
 			<f:event listener="#{reportesSistemaMBean.inicializar()}" 
 				type="preRenderView" />
 		</f:metadata>
 		<div>
-			<p:panel id="reportecambiodepiezas"
-				header="Reportes de Cambio de Piezas" style="margin-bottom:20px">
+			<p:panel id="reportedepiezas"
+				header="Reportes de Piezas" style="margin-bottom:20px">
 				<h:panelGrid columns="8" cellpadding="10">
 					<p:outputLabel for="fechainicio" value="Fecha Inicio:" />
 					<p:calendar id="fechainicio" pattern="dd-MM-yyyy"
@@ -21,15 +21,6 @@
 					<p:outputLabel for="fechafin" value="Fecha Fin:" />
 					<p:calendar id="fechafin" pattern="dd-MM-yyyy"
 						value="#{reportesSistemaMBean.fechaFin}" />
-					<p:outputLabel for="listfuncionario" value="Funcionario:" />
-					<p:selectOneMenu id="listfuncionario" style="width:125px"
-						value="#{reportesSistemaMBean.funcionarioSelect}"
-						converter="#{funcionarioConverter}">
-						<f:selectItem itemLabel="Seleccionar" itemValue="" />
-						<f:selectItems value="#{reportesSistemaMBean.funcionarioTecList}"
-							var="item" itemValue="#{item}"
-							itemLabel="#{item.persona.persNombre}" />
-					</p:selectOneMenu>
 					<p:commandButton value="Generar Reporte" title="Generar Reporte"
 						update="growl" ajax="false">
 						<p:fileDownload
@@ -39,10 +30,6 @@
 						outcome="/protected/equipos/datos/estadoequipos.xhtml"
 						icon="ui-icon-arrowreturnthick-1-w" />
 				</h:panelGrid>
-			</p:panel>
-		</div>
-		<div>
-			<p:panel id="reportecambiodepiezasgrilla">
 			</p:panel>
 		</div>
 	</ui:define>

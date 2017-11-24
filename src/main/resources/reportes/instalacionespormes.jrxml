@@ -13,12 +13,8 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="fechainicio" class="java.sql.Date">
-		<defaultValueExpression><![CDATA[TODAY( )]]></defaultValueExpression>
-	</parameter>
-	<parameter name="fechafin" class="java.sql.Date">
-		<defaultValueExpression><![CDATA[TODAY( )]]></defaultValueExpression>
-	</parameter>
+	<parameter name="fechainicio" class="java.sql.Date"/>
+	<parameter name="fechafin" class="java.sql.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT inst_fecha_instalacion, inst_observacion,depe_nombre_dependencia, equi_identificador,pers_nombre,pers_apellido,enti_entidad
   FROM instalaciones, dependencias, equipos,funcionarios,personas,entidades
