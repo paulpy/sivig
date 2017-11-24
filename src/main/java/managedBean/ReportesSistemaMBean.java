@@ -15,13 +15,15 @@ import javax.inject.Inject;
 import org.primefaces.model.StreamedContent;
 
 import clases.AuditoriaClass;
+import model.Entidad;
 import model.Funcionario;
 import reporte.GeneradorDeReporte;
+import service.EntidadService;
 import service.FuncionarioService;
 
 @ViewScoped
 @ManagedBean
-public class ReportesSistemaMBean implements Serializable{
+public class ReportesSistemaMBean implements Serializable {
 
 	/**
 	 * 
@@ -30,38 +32,103 @@ public class ReportesSistemaMBean implements Serializable{
 	@Inject
 	private FuncionarioService funcionarioService;
 	@Inject
+	private EntidadService entidadService;
+	@Inject
 	private FacesContext context;
 	@Inject
 	private GeneradorDeReporte generadorDeReporte;
 	@Inject
 	private AuditoriaClass auditoriaClass;
-	
+
+	private List<Entidad> entidadList;
 	private List<Funcionario> funcionarioTecList;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private Funcionario funcionarioSelect;
 	private Map<String, Object> parametros;
-	
-	public void inicializar(){
-		listar();
+	private String tipoReporte;
+	private String urlreporte;
+
+	public void inicializar() {
+		String contexto = FacesContext.getCurrentInstance().getExternalContext().getRequest().toString().substring(63,
+				67);
+		tipoReporte = contexto;
+		if (tipoReporte.equals("ripm")) {
+			entidadList = entidadService.listEntidad();
+			urlreporte = "/reportes/instalacionpormesporentidad.jrxml";
+			System.out.println("entro al entidad");
+		} else {
+			if (tipoReporte.equals("rcdp")) {
+				funcionarioTecList = funcionarioService.listFuncionarioTec();
+				urlreporte = "/reportes/CambiodePiezasMes.jrxml";
+				System.out.println("entro al cambio de pieza");
+			}
+		}
 	}
-	
-	public StreamedContent generarReporte(String usuario){
-		if(fechaInicio == null){
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Falta Ingresar Fecha Inicio");
+
+	public StreamedContent generarReporteAll(String usuario) {
+		if (fechaInicio == null) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Falta Ingresar Fecha Inicio");
 			context.addMessage(null, m);
 		} else {
-			if(fechaFin == null){
-				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Falta Ingresar Fecha Fin");
+			if (fechaFin == null) {
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Falta Ingresar Fecha Fin");
 				context.addMessage(null, m);
 			} else {
-				if((fechaInicio.after(fechaFin))||(fechaFin.before(fechaInicio))){
+				if ((fechaInicio.after(fechaFin)) || (fechaFin.before(fechaInicio))) {
 					System.out.println("Las fechas no estan en el orden Correcto");
-					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Atencion","Las fechas no estan en el orden Correcto");
+					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atencion",
+							"Las fechas no estan en el orden Correcto");
 					context.addMessage(null, m);
 				} else {
-					if(funcionarioSelect == null){
-						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte sin filtro de Funcionario");
+					parametros = new HashMap<String, Object>();
+					parametros.put("fechainicio", fechaInicio);
+					parametros.put("fechafin", fechaFin);
+					if (tipoReporte.equals("rcdp")) {
+						if (funcionarioSelect == null) {
+							FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
+									"Se generara el Reporte sin filtro de Funcionario");
+							context.addMessage(null, m);
+						} else {
+							parametros.put("id", funcionarioSelect.getPersona().getPersIdPersona());
+							FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
+									"Se generara el Reporte ");
+							context.addMessage(null, m);
+						}
+						auditoriaClass.agregarAuditoria("Generando Reporte ", "vistareporte", usuario);
+						System.out.println("entro al rcpd " + urlreporte);
+					}
+					try {
+						return generadorDeReporte.generarReporte(urlreporte,
+								parametros);
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println(e.toString());
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	public StreamedContent generarReporte(String usuario) {
+		if (fechaInicio == null) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Falta Ingresar Fecha Inicio");
+			context.addMessage(null, m);
+		} else {
+			if (fechaFin == null) {
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Falta Ingresar Fecha Fin");
+				context.addMessage(null, m);
+			} else {
+				if ((fechaInicio.after(fechaFin)) || (fechaFin.before(fechaInicio))) {
+					System.out.println("Las fechas no estan en el orden Correcto");
+					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atencion",
+							"Las fechas no estan en el orden Correcto");
+					context.addMessage(null, m);
+				} else {
+					if (funcionarioSelect == null) {
+						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
+								"Se generara el Reporte sin filtro de Funcionario");
 						context.addMessage(null, m);
 						try {
 							parametros = new HashMap<String, Object>();
@@ -79,12 +146,14 @@ public class ReportesSistemaMBean implements Serializable{
 							parametros.put("FechaFin", fechaFin);
 							parametros.put("fechafin", fechaFin);
 							parametros.put("idpersona", funcionarioSelect.getPersona().getPersIdPersona());
-							return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMesFunc.jrxml", parametros);
+							return generadorDeReporte.generarReporte("/reportes/CambiodePiezasMesFunc.jrxml",
+									parametros);
 						} catch (Exception e) {
 							// TODO: handle exception
 							System.out.println(e.toString());
 						}
-						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Atencion","Se generara el Reporte ");
+						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
+								"Se generara el Reporte ");
 						context.addMessage(null, m);
 					}
 					auditoriaClass.agregarAuditoria("Generando Reporte ", "vistareporte", usuario);
@@ -93,8 +162,8 @@ public class ReportesSistemaMBean implements Serializable{
 		}
 		return null;
 	}
-	
-	public void listar(){
+
+	public void listar() {
 		funcionarioTecList = funcionarioService.listFuncionarioTec();
 	}
 
@@ -129,7 +198,21 @@ public class ReportesSistemaMBean implements Serializable{
 	public void setFuncionarioSelect(Funcionario funcionarioSelect) {
 		this.funcionarioSelect = funcionarioSelect;
 	}
-	
-	
+
+	public String getTipoReporte() {
+		return tipoReporte;
+	}
+
+	public void setTipoReporte(String tipoReporte) {
+		this.tipoReporte = tipoReporte;
+	}
+
+	public List<Entidad> getEntidadList() {
+		return entidadList;
+	}
+
+	public void setEntidadList(List<Entidad> entidadList) {
+		this.entidadList = entidadList;
+	}
 
 }

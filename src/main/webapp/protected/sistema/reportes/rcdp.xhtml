@@ -8,7 +8,7 @@
 	<ui:define name="title2">Reporte de Clientes</ui:define>
 	<ui:define name="body">
 		<f:metadata>
-			<f:event listener="#{reportesSistemaMBean.inicializar()}"
+			<f:event listener="#{reportesSistemaMBean.inicializar()}" 
 				type="preRenderView" />
 		</f:metadata>
 		<div>
@@ -31,10 +31,9 @@
 							itemLabel="#{item.persona.persNombre}" />
 					</p:selectOneMenu>
 					<p:commandButton value="Generar Reporte" title="Generar Reporte"
-						action="#{reportesSistemaMBean.generarReporte()}" update="growl"
-						ajax="false">
+						update="growl" ajax="false">
 						<p:fileDownload
-							value="#{reportesSistemaMBean.generarReporte(request.getUserPrincipal().getName())}"></p:fileDownload>
+							value="#{reportesSistemaMBean.generarReporteAll(request.getUserPrincipal().getName())}"></p:fileDownload>
 					</p:commandButton>
 					<p:button value="Volver" id="botonVolver"
 						outcome="/protected/equipos/datos/estadoequipos.xhtml"

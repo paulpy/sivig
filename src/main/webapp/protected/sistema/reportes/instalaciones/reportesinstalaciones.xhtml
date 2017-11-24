@@ -28,7 +28,7 @@
 					<p:commandButton value="Generar Reporte" title="Generar Reporte"
 						action="#{reportesSistemaMBean.generarReporte()}"
 						update="growl" ajax="false">
-						<p:fileDownload value="#{reportesSistemaMBean.generarReporte(request.getUserPrincipal().getName())}"></p:fileDownload>	
+						<p:fileDownload value="#{reportesSistemaMBean.generarReporteAll(request.getUserPrincipal().getName())}"></p:fileDownload>	
 					</p:commandButton>
 					<p:button value="Volver" id="botonVolver"
 						outcome="/protected/equipos/datos/estadoequipos.xhtml"
