@@ -55,12 +55,10 @@ public class ReportesSistemaMBean implements Serializable {
 		tipoReporte = contexto;
 		if (tipoReporte.equals("ripm")) {
 			entidadList = entidadService.listEntidad();
-			urlreporte = "/reportes/instalacionpormesporentidad.jrxml";
 			System.out.println("entro al entidad");
 		} else {
 			if (tipoReporte.equals("rcdp")) {
 				funcionarioTecList = funcionarioService.listFuncionarioTec();
-				urlreporte = "/reportes/CambiodePiezasMes.jrxml";
 				System.out.println("entro al cambio de pieza");
 			}
 		}
@@ -89,13 +87,15 @@ public class ReportesSistemaMBean implements Serializable {
 							FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
 									"Se generara el Reporte sin filtro de Funcionario");
 							context.addMessage(null, m);
+							urlreporte = "/reportes/cambiodepiezasmes.jrxml";
 						} else {
 							parametros.put("id", funcionarioSelect.getPersona().getPersIdPersona());
 							FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
-									"Se generara el Reporte ");
+									"Se generara el Reporte con Funcionario");
 							context.addMessage(null, m);
+							urlreporte = "/reportes/cambiodepiezasmesfunc.jrxml";
 						}
-						auditoriaClass.agregarAuditoria("Generando Reporte ", "vistareporte", usuario);
+						auditoriaClass.agregarAuditoria("Generando Reporte Cambio de Pieza", "vistareporte", usuario);
 						System.out.println("entro al rcpd " + urlreporte);
 					}
 					try {
