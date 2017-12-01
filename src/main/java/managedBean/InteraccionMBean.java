@@ -120,6 +120,7 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setRaspberry(nuevoEquipo.getRaspberry());
 		nuevaInteraccion.setUsuario(usuarioService.getUsuario(usuariodata));
 		nuevaInteraccion.setInteFechaHoraSolicitud(timestamp);
+		nuevaInteraccion.setInteComando(timestamp.toString());
 		nuevaInteraccion.setAccion(accionService.getAccion(4));
 		nuevaInteraccion.setInteActivo(true);
 		nuevaInteraccion.setInteCodigo(40);
