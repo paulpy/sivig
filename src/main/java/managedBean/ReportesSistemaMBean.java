@@ -78,6 +78,10 @@ public class ReportesSistemaMBean implements Serializable {
 			entidadList = entidadService.listEntidad();
 			System.out.println("entro a manteminietos");
 		}
+		if (tipoReporte.equals("/gen")) {
+			entidadList = entidadService.listEntidad();
+			System.out.println("entro a auditoria");
+		}
 	}
 
 	public StreamedContent generarReporteAll(String usuario) {
@@ -111,6 +115,13 @@ public class ReportesSistemaMBean implements Serializable {
 						context.addMessage(null, m);
 						urlreporte = "/reportes/todaslaspiezas.jrxml";
 						auditoriaClass.agregarAuditoria("Generando Reporte de Contratos", "vistareporte", usuario);
+					}
+					if (tipoReporte.equals("/gen")) {
+						FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atencion",
+								"Se generara el Reporte de Auditoria");
+						context.addMessage(null, m);
+						urlreporte = "/reportes/auditoriafechas.jrxml";
+						auditoriaClass.agregarAuditoria("Generando Reporte de Auditoria", "Auditoria", usuario);
 					}
 					if (tipoReporte.equals("rcdp")) {
 						if (funcionarioSelect == null) {

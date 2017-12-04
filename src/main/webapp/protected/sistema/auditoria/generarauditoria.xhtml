@@ -7,24 +7,30 @@
 	<ui:define name="title">Auditoria</ui:define>
 	<ui:define name="title2">Aditoria Equipos</ui:define>
 	<ui:define name="body">
-		<h:form id="mainForm">
-			<p:panelGrid columns="2" style="width:100%;margin:10px 0px"
-				columnClasses="label,value" layout="grid"
-				styleClass="ui-panelgrid-blank">
-				<p:outputLabel for="tabla" value="Tabla: " />
-		        <p:selectOneMenu id="tabla" value="#{selectOneMenuView.console}" style="width:125px">
-		            <f:selectItem itemLabel="Ninguno" itemValue="null" />
-		        </p:selectOneMenu>
-	  				<p:outputLabel for="fechainicio" value="Fecha Inicio Rango: " />
-	     				<p:calendar id="fechainicio" effect="fold" />
-	     				<p:outputLabel for="fechafinal" value="Fecha Final Rango:" />
-	     				<p:calendar id="fechafinal" effect="fold" />
-	     				<p:outputLabel for="funcionario" value="Funcionario: " />
-		        <p:selectOneMenu id="funcionario"  style="width:125px">
-		            <f:selectItem itemLabel="Funcionario" itemValue="funcionario" />
-		        </p:selectOneMenu>
-		        <p:commandButton value="Submit" icon="ui-icon-check" />
-			</p:panelGrid>
-		</h:form>
+		<f:metadata>
+			<f:event listener="#{reportesSistemaMBean.inicializar()}"
+				type="preRenderView" />
+		</f:metadata>
+		<div>
+			<p:panel id="reporteauditoria" header="Reportes de Auditoria"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="8" cellpadding="10">
+					<p:outputLabel for="fechainicio" value="Fecha Inicio:" />
+					<p:calendar id="fechainicio" pattern="dd-MM-yyyy"
+						value="#{reportesSistemaMBean.fechaInicio}" />
+					<p:outputLabel for="fechafin" value="Fecha Fin:" />
+					<p:calendar id="fechafin" pattern="dd-MM-yyyy"
+						value="#{reportesSistemaMBean.fechaFin}" />
+					<p:commandButton value="Generar Reporte" title="Generar Reporte"
+						update="growl" ajax="false">
+						<p:fileDownload
+							value="#{reportesSistemaMBean.generarReporteAll(request.getUserPrincipal().getName())}"></p:fileDownload>
+					</p:commandButton>
+					<p:button value="Volver" id="botonVolver"
+						outcome="/protected/equipos/datos/estadoequipos.xhtml"
+						icon="ui-icon-arrowreturnthick-1-w" />
+				</h:panelGrid>
+			</p:panel>
+		</div>
 	</ui:define>
 </ui:composition>
