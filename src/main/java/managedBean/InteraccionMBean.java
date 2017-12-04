@@ -394,7 +394,6 @@ public class InteraccionMBean implements Serializable{
 				}
 			}
 		}
-		
 		return colorAsignado;
 	}
 	
