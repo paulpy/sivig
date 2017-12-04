@@ -53,4 +53,19 @@ public class EquipoService {
 		equipo = query.setParameter("equiIdentificador", identificadorEquipo).getSingleResult();
 		return equipo;
 	}
+	
+	public Boolean getExisteEquipo(String identificadorEquipo){
+		Equipo equipo = null;
+		Boolean existe = false;
+		TypedQuery<Equipo> query = em.createQuery("FROM Equipo AS e WHERE e.equiIdentificador = :equiIdentificador", Equipo.class);
+		try {
+			equipo = query.setParameter("equiIdentificador", identificadorEquipo).getSingleResult();
+			existe = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.toString();
+			existe = false;
+		}
+		return existe;
+	}
 }

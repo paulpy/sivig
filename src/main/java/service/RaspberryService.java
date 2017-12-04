@@ -66,6 +66,21 @@ public class RaspberryService {
 		return raspberry;
 	}
 	
+	public Boolean getExisteRasp(String identificadorRaspberry){
+		Raspberry raspberry = null;
+		Boolean existe = false;
+		TypedQuery<Raspberry> query = em.createQuery("FROM Raspberry AS r WHERE r.raspNombre = :raspNombre", Raspberry.class);
+		try {
+			raspberry = query.setParameter("raspNombre", identificadorRaspberry).getSingleResult();
+			existe = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.toString();
+			existe = false;
+		}
+		return existe;
+	}
+	
 	public Raspberry getRaspberryJson(JSONArray datosConjunto){
 		Raspberry raspRecu = null;
 		JSONObject elementoJsonDatos = new JSONObject();
