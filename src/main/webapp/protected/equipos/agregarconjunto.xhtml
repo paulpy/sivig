@@ -15,30 +15,40 @@
 			style="margin-bottom:20px">
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:outputText for="idNEquipoSerie" value="Serie Equipo: " />
-				<p:inputText id="idNEquipoSerie" value="#{conjuntoMBean.nuevoEquipo.equiSerieEquipo}" required="true" />
-				<h:outputText for="idNEquipoIdentificador" value="Identificador Equipo: " />
-				<p:inputText id="idNEquipoIdentificador" value="#{conjuntoMBean.nuevoEquipo.equiIdenificador}" required="true" />
+				<p:inputText id="idNEquipoSerie"
+					value="#{conjuntoMBean.nuevoEquipo.equiSerieEquipo}"
+					required="true" />
+				<h:outputText for="idNEquipoIdentificador"
+					value="Identificador Equipo: " />
+				<p:inputText id="idNEquipoIdentificador"
+					value="#{conjuntoMBean.nuevoEquipo.equiIdenificador}"
+					required="true" />
 				<h:outputText for="mask" value="Fecha Ingreso Equipo: " />
 				<p:calendar id="mask" pattern="dd-MM-yyyy" mask="true"
-					value="#{conjuntoMBean.nuevoEquipo.equiFechaIngreso}" required="true" />
+					value="#{conjuntoMBean.nuevoEquipo.equiFechaIngreso}"
+					required="true" />
 				<h:outputText for="idNEquipoActivo" value="Equipo Activo: " />
-				<p:inputSwitch id="idNEquipoActivo" value="#{conjuntoMBean.nuevoEquipo.equiActivo}" required="true" />
+				<p:inputSwitch id="idNEquipoActivo"
+					value="#{conjuntoMBean.nuevoEquipo.equiActivo}" required="true" />
 				<h:outputText for="mask2" value="Fecha Ingreso Raspberry: " />
 				<p:calendar id="mask2" pattern="dd-MM-yyyy" mask="true"
-					value="#{conjuntoMBean.nuevoRaspberry.raspFechaIngreso}" />
+					value="#{conjuntoMBean.nuevoRaspberry.raspFechaIngreso}"
+					required="true" />
 				<h:outputText for="idNEquipoRasp" value="Nombre Raspberry: " />
-				<p:inputText if="idNEquipoRasp" value="#{conjuntoMBean.nuevoRaspberry.raspNombre}" required="true" />
+				<p:inputText if="idNEquipoRasp"
+					value="#{conjuntoMBean.nuevoRaspberry.raspNombre}" required="true" />
 				<h:outputText for="idNEquipoRIP" value="Raspbery IP: " />
-				<p:inputText id="idNEquipoRIP" value="#{conjuntoMBean.nuevoRaspberry.raspIp}" required="true" />
+				<p:inputText id="idNEquipoRIP"
+					value="#{conjuntoMBean.nuevoRaspberry.raspIp}" required="true" />
 				<h:outputText for="idNequipoRaspActivo" value="Raspberry Activo: " />
-				<p:inputSwitch id="idNequipoRaspActivo" value="#{conjuntoMBean.nuevoRaspberry.raspActivo}" required="true" />
+				<p:inputSwitch id="idNequipoRaspActivo"
+					value="#{conjuntoMBean.nuevoRaspberry.raspActivo}" required="true" />
 			</h:panelGrid>
 			<p:commandButton value="Agregar Conjunto" title="Agregar Raspberry"
 				action="#{conjuntoMBean.registrarConjunto(request.getUserPrincipal().getName())}"
 				update="growl" />
 			<p:button value="Volver" id="botonVolver"
-				outcome="/protected/main.xhtml"
-				icon="ui-icon-arrowreturnthick-1-w" />
+				outcome="/protected/main.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
 		</p:panel>
 	</ui:define>
 </ui:composition>
