@@ -1,6 +1,7 @@
 package managedBean;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,8 @@ import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
 
 import model.Equipo;
+import model.HistoricoEquipoEstado;
+import model.HistoricoRaspberryEstado;
 import model.Raspberry;
 import service.EquipoService;
 import service.HistoricoEquipoEstadoService;
@@ -50,22 +53,31 @@ public class ViewEquiposRaspMBean implements Serializable{
 		equipos = equipoService.listEquipoActivos();
 		if(equipos.size() > 0){
 			for(Equipo equipo : equipos){
-				List<String> listadoEstadoHE = historicoEquipoEstadoService.listHistoricoEquipoCambioEstado(equipo.getEquiIdEquipo());
-				if(listadoEstadoHE.size() == 0){
+				HistoricoEquipoEstado ultimoEstadoEquipo = historicoEquipoEstadoService.ultimoEstadoEquipo(equipo.getEquiIdEquipo());
+				HistoricoRaspberryEstado ultumoEstadoRasp = historicoRaspberryEstadoService.ultimoEstadorasp(equipo.getRaspberry().getRaspIdRaspberry());
+				if (ultimoEstadoEquipo==null) {
 					System.out.println("Es un estado null");
 				} else {
-					String estadoEquipo = listadoEstadoHE.get(0).toString();
-					equipo.setEquiEstado(estadoEquipo);
+					equipo.setEquiEstado(ultimoEstadoEquipo.getEstadosEquipo().getEseqEstadoEquipo());
 					equipoService.updateEquipo(equipo);
 				}
-				List<String> listadoEstadoHR = historicoRaspberryEstadoService.listHistoricoRaspCambioEstado(equipo.getRaspberry().getRaspIdRaspberry());
-				if(listadoEstadoHR.size() == 0){
+				if (ultumoEstadoRasp==null){
 					System.out.println("Es un estado null");
 				} else {
-					String estadoRaspberry = listadoEstadoHR.get(0).toString();
-					Raspberry raspactual = equipo.getRaspberry();
-					raspactual.setRaspEstado(estadoRaspberry);
-					raspberryService.actualizarRaspberry(raspactual);
+					Timestamp tiempoactual = new Timestamp(System.currentTimeMillis());
+					Timestamp tiempoanterior = ultimoEstadoEquipo.getEqesMomentoEstado();
+					int diff =(int) ((tiempoactual.getTime() - tiempoanterior.getTime())/1000);
+					if (diff >= 10) {
+						Raspberry raspactual = equipo.getRaspberry();
+						raspactual.setRaspEstado("Desconectado");
+						raspberryService.actualizarRaspberry(raspactual);
+						equipo.setEquiEstado("Desconectado");
+						equipoService.updateEquipo(equipo);
+					} else {
+						Raspberry raspactual = equipo.getRaspberry();
+						raspactual.setRaspEstado(ultumoEstadoRasp.getEstadosEquipo().getEseqEstadoEquipo());
+						raspberryService.actualizarRaspberry(raspactual);
+					}
 				}
 			}
 			RequestContext.getCurrentInstance().update("mainForm:gritEquiposMontGral");

@@ -104,4 +104,19 @@ public class HistoricoRaspberryEstadoService {
 		return listarHistoricoR;
 	}
 	
+	public HistoricoRaspberryEstado ultimoEstadorasp(Integer idrasp){
+		HistoricoRaspberryEstado ultimoEstado = null;
+		TypedQuery<HistoricoRaspberryEstado> query = em.createQuery("FROM HistoricoRaspberryEstado AS hre WHERE hre.raspberry.raspIdRaspberry = :raspberry ORDER BY hre.raesMomentoCambio ASC", HistoricoRaspberryEstado.class);
+		List<HistoricoRaspberryEstado> listRaspEstados = query.setParameter("raspberry", idrasp).getResultList();
+		try {
+			for(HistoricoRaspberryEstado historicoRE : listRaspEstados){
+				ultimoEstado = historicoRE;
+			}
+			System.out.println(ultimoEstado);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+		return ultimoEstado;
+	}
 }

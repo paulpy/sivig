@@ -113,4 +113,20 @@ public class HistoricoEquipoEstadoService {
 		listarHistEquipo = query.setParameter("equipo", idequipo).getResultList();
 		return listarHistEquipo;
 	}
+	
+	public HistoricoEquipoEstado ultimoEstadoEquipo(Integer idequipo){
+		HistoricoEquipoEstado ultimoEstado = null;
+		TypedQuery<HistoricoEquipoEstado> query = em.createQuery("FROM HistoricoEquipoEstado AS hee WHERE hee.equipo.equiIdEquipo = :equipo ORDER BY hee.eqesMomentoEstado ASC", HistoricoEquipoEstado.class);
+		List<HistoricoEquipoEstado> listEquiEstado = query.setParameter("equipo", idequipo).getResultList();
+		try {
+			for(HistoricoEquipoEstado historicoEE : listEquiEstado){
+				ultimoEstado = historicoEE;
+			}
+			System.out.println(ultimoEstado);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+		return ultimoEstado;
+	}
 }
