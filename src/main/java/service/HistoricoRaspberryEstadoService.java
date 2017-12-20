@@ -112,7 +112,7 @@ public class HistoricoRaspberryEstadoService {
 			for(HistoricoRaspberryEstado historicoRE : listRaspEstados){
 				ultimoEstado = historicoRE;
 			}
-			System.out.println(ultimoEstado);
+			System.out.println(ultimoEstado.getEstadosEquipo().getEseqEstadoEquipo());
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.toString());

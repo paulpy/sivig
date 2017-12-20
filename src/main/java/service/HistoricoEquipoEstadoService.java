@@ -122,7 +122,7 @@ public class HistoricoEquipoEstadoService {
 			for(HistoricoEquipoEstado historicoEE : listEquiEstado){
 				ultimoEstado = historicoEE;
 			}
-			System.out.println(ultimoEstado);
+			System.out.println(ultimoEstado.getEstadosEquipo().getEseqEstadoEquipo());
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.toString());

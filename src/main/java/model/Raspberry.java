@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 import java.util.Date;
@@ -37,6 +39,9 @@ public class Raspberry implements Serializable {
 	
 	@Column(name="rasp_estado")
 	private String raspEstado;
+	
+	@Column(name="rasp_ultima_comunicacion")
+	private Timestamp raspUltimaComunicacion;
 
 	//bi-directional many-to-one association to Equipo
 	@OneToMany(mappedBy="raspberry")
@@ -99,6 +104,14 @@ public class Raspberry implements Serializable {
 
 	public void setRaspEstado(String raspEstado) {
 		this.raspEstado = raspEstado;
+	}
+
+	public Timestamp getRaspUltimaComunicacion() {
+		return raspUltimaComunicacion;
+	}
+
+	public void setRaspUltimaComunicacion(Timestamp raspUltimaComunicacion) {
+		this.raspUltimaComunicacion = raspUltimaComunicacion;
 	}
 
 	public List<Equipo> getEquipos() {

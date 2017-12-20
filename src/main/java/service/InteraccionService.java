@@ -26,6 +26,8 @@ public class InteraccionService {
 	private EntityManager em;
 	@Inject
 	private Event<Interaccion> interaccionEventSrc;
+	@Inject
+	private RaspberryService raspberryService;
 	public void registrarInteraccion(Interaccion interaccion) throws Exception{
 		logger.info("Registrado "+interaccion.getAccion().getAcciAccion());
 		em.persist(interaccion);
@@ -80,6 +82,9 @@ public class InteraccionService {
 				interaccion.setInteActivo(false);
 				actualizarInteraccion(interaccion);
 			}
+			Timestamp tiempoactual = new Timestamp(System.currentTimeMillis());
+			rasp.setRaspUltimaComunicacion(tiempoactual);
+			raspberryService.actualizarRaspberry(rasp);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.toString());

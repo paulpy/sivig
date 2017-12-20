@@ -54,20 +54,25 @@ public class ViewEquiposRaspMBean implements Serializable{
 		if(equipos.size() > 0){
 			for(Equipo equipo : equipos){
 				HistoricoEquipoEstado ultimoEstadoEquipo = historicoEquipoEstadoService.ultimoEstadoEquipo(equipo.getEquiIdEquipo());
-				HistoricoRaspberryEstado ultumoEstadoRasp = historicoRaspberryEstadoService.ultimoEstadorasp(equipo.getRaspberry().getRaspIdRaspberry());
+				HistoricoRaspberryEstado ultimoEstadoRasp = historicoRaspberryEstadoService.ultimoEstadorasp(equipo.getRaspberry().getRaspIdRaspberry());
 				if (ultimoEstadoEquipo==null) {
 					System.out.println("Es un estado null");
 				} else {
 					equipo.setEquiEstado(ultimoEstadoEquipo.getEstadosEquipo().getEseqEstadoEquipo());
 					equipoService.updateEquipo(equipo);
 				}
-				if (ultumoEstadoRasp==null){
+				if (ultimoEstadoRasp==null){
 					System.out.println("Es un estado null");
 				} else {
 					Timestamp tiempoactual = new Timestamp(System.currentTimeMillis());
-					Timestamp tiempoanterior = ultimoEstadoEquipo.getEqesMomentoEstado();
+					System.out.println(tiempoactual);
+					Timestamp tiempoanterior = ultimoEstadoRasp.getRaspberry().getRaspUltimaComunicacion();
+					System.out.println(tiempoanterior);
 					int diff =(int) ((tiempoactual.getTime() - tiempoanterior.getTime())/1000);
-					if (diff >= 10) {
+					System.out.println(tiempoactual.getTime());
+					System.out.println(tiempoanterior.getTime());
+					System.out.println(diff);
+					if (diff >= 100) {
 						Raspberry raspactual = equipo.getRaspberry();
 						raspactual.setRaspEstado("Desconectado");
 						raspberryService.actualizarRaspberry(raspactual);
@@ -75,7 +80,7 @@ public class ViewEquiposRaspMBean implements Serializable{
 						equipoService.updateEquipo(equipo);
 					} else {
 						Raspberry raspactual = equipo.getRaspberry();
-						raspactual.setRaspEstado(ultumoEstadoRasp.getEstadosEquipo().getEseqEstadoEquipo());
+						raspactual.setRaspEstado(ultimoEstadoRasp.getEstadosEquipo().getEseqEstadoEquipo());
 						raspberryService.actualizarRaspberry(raspactual);
 					}
 				}
