@@ -65,13 +65,8 @@ public class ViewEquiposRaspMBean implements Serializable{
 					System.out.println("Es un estado null");
 				} else {
 					Timestamp tiempoactual = new Timestamp(System.currentTimeMillis());
-					System.out.println(tiempoactual);
 					Timestamp tiempoanterior = ultimoEstadoRasp.getRaspberry().getRaspUltimaComunicacion();
-					System.out.println(tiempoanterior);
 					int diff =(int) ((tiempoactual.getTime() - tiempoanterior.getTime())/1000);
-					System.out.println(tiempoactual.getTime());
-					System.out.println(tiempoanterior.getTime());
-					System.out.println(diff);
 					if (diff >= 100) {
 						Raspberry raspactual = equipo.getRaspberry();
 						raspactual.setRaspEstado("Desconectado");

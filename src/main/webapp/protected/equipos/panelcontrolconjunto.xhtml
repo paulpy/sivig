@@ -7,7 +7,7 @@
 	<ui:define name="title">Equipos</ui:define>
 	<ui:define name="title2">Panel de Control</ui:define>
 	<ui:define name="body">
-		<p:poll interval="5" listener="#{interaccionMBean.verificarEquipo()}" />
+		<p:poll interval="30" listener="#{interaccionMBean.verificarEquipo()}" update="growl"/>
 		<f:metadata>
 			<f:viewParam name="idEquipoParam"
 				value="#{interaccionMBean.idEquipoParam}" />
@@ -22,46 +22,46 @@
 						value="#{interaccionMBean.nuevoEquipo.equiIdenificador}" />
 					<h:outputLabel value="			|			" />
 					<h:outputLabel value="Estado: " />
-					<h:outputLabel value="#{interaccionMBean.nuevoEquipo.equiEstado}"
+					<h:outputLabel id="estadoequipooutput" value="#{interaccionMBean.nuevoEquipo.equiEstado}"
 						style="color:#{interaccionMBean.colorEstadoEquipos(interaccionMBean.nuevoEquipo.equiEstado)}" />
 				</p:panel>
 				<p:panel id="prasp" header="Acciones Raspberry">
 					<h:panelGrid columns="3" cellpadding="10">
 						<p:commandButton value="Reiniciar"
-							action="#{interaccionMBean.reiniciarR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.reiniciarR(request.getUserPrincipal().getName())}" update="growl"/>
 						<p:commandButton value="Apagar"
-							action="#{interaccionMBean.apagarR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.apagarR(request.getUserPrincipal().getName())}" update="growl"/>
 						<p:commandButton value="Sincronizar Horario"
-							action="#{interaccionMBean.sincHoraR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.sincHoraR(request.getUserPrincipal().getName())}" update="growl"/>
 						<p:commandButton value="Sincronizar Estados"
-							action="#{interaccionMBean.sincEstadosR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.sincEstadosR(request.getUserPrincipal().getName())}" update="growl"/>
 						<p:commandButton value="Sincronizar Acciones"
-							action="#{interaccionMBean.sincAccionesR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.sincAccionesR(request.getUserPrincipal().getName())}" update="growl"/>
 						<p:commandButton value="Sincronizar Causas"
-							action="#{interaccionMBean.sincCausasR(request.getUserPrincipal().getName())}" />
+							action="#{interaccionMBean.sincCausasR(request.getUserPrincipal().getName())}" update="growl"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:panelGrid>
 			<p:panel id="pequi" header="Acciones Equipo">
 				<h:panelGrid columns="3" cellpadding="10">
 					<p:commandButton value="Reiniciar"
-						action="#{interaccionMBean.reinicioE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.reinicioE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Inicio"
-						action="#{interaccionMBean.encendidoE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.encendidoE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Apagar"
-						action="#{interaccionMBean.apagadoE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.apagadoE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Sincronizar Horario"
-						action="#{interaccionMBean.sincHoraE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.sincHoraE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Crear Backup"
-						action="#{interaccionMBean.crearBackupE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.crearBackupE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Inicio Sistema"
-						action="#{interaccionMBean.inicioSE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.inicioSE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Reinicio Sistema"
-						action="#{interaccionMBean.reinicioSE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.reinicioSE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton value="Bajada de Sistema"
-						action="#{interaccionMBean.paradaSE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.paradaSE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:commandButton for="comandoaenviar" value="Enviar Comando"
-						action="#{interaccionMBean.enviarComandoE(request.getUserPrincipal().getName())}" />
+						action="#{interaccionMBean.enviarComandoE(request.getUserPrincipal().getName())}" update="growl"/>
 					<p:inputText id="comandoaenviar"
 						value="#{interaccionMBean.nuevaInteraccion.inteComando}" />
 				</h:panelGrid>

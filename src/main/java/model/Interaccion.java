@@ -34,6 +34,9 @@ public class Interaccion implements Serializable {
 
 	@Column(name="inte_fecha_hora_solicitud")
 	private Timestamp inteFechaHoraSolicitud;
+	
+	@Column(name="inte_resultado")
+	private String inteResultado;
 
 	//bi-directional many-to-one association to Accion
 	@ManyToOne
@@ -136,6 +139,14 @@ public class Interaccion implements Serializable {
 
 	public void setInteCodigo(Integer inteCodigo) {
 		this.inteCodigo = inteCodigo;
+	}
+
+	public String getInteResultado() {
+		return inteResultado;
+	}
+
+	public void setInteResultado(String inteResultado) {
+		this.inteResultado = inteResultado;
 	}
 
 	@Override

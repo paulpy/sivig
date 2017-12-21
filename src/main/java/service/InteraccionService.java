@@ -100,6 +100,7 @@ public class InteraccionService {
 			elementoJsonInter =datosAActualizar.getJSONObject(i);
 			interaccion = getInteraccion(elementoJsonInter.getInt("id"));
 			interaccion.setInteFechaHoraRealizado(Timestamp.valueOf(elementoJsonInter.getString("realizado")));
+			interaccion.setInteResultado(elementoJsonInter.getString("resultado"));
 			try {
 				actualizarInteraccion(interaccion);
 			} catch (Exception e) {
@@ -108,5 +109,20 @@ public class InteraccionService {
 			}
 		}
 		return false;
+	}
+	
+	public Interaccion ultimaInteraccion(Integer idEquipo){
+		Interaccion ultimaInteraccionRealizada = null;
+		TypedQuery<Interaccion> query = em.createQuery("FROM Interaccion AS int WHERE int.equipo.equiIdEquipo = :equipo ORDER BY int.inteIdInteraccion ASC", Interaccion.class);
+		List<Interaccion> listaInteraccion = query.setParameter("equipo", idEquipo).getResultList();
+		try {
+			for(Interaccion interaccionRecu : listaInteraccion){
+				ultimaInteraccionRealizada =  interaccionRecu;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+		return ultimaInteraccionRealizada;
 	}
 }

@@ -36,6 +36,8 @@ public class InteraccionMBean implements Serializable{
 	private Interaccion nuevaInteraccion;
 	private Equipo nuevoEquipo;
 	private Accion accionRealizada;
+	private Interaccion ultimaInteraccion;
+	Integer ultimoId=0;
 	
 	@Inject
 	private FacesContext context;
@@ -85,8 +87,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(10);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Apagar"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,8 +107,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(20);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Reiniciar"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,8 +128,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(40);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Sincronizacion de Hora"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,8 +148,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(50);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Sincronizar Estados"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,8 +168,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(70);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Sincronizar Acciones"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,8 +188,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(80);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Sincronizar Causas"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,8 +208,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(11);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Apagar Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -226,8 +228,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(31);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Encender Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -246,8 +248,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(21);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Registrado","Confirmacion de Registro");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Reinicio Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -267,8 +269,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(41);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Sincronizar Hora Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -287,8 +289,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(61);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Crear Backup Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -307,8 +309,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(91);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Iniciar Servicio Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -327,8 +329,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(101);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Reiniciar Servicio Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -347,8 +349,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(111);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Parar Servicio Equipo"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -367,8 +369,8 @@ public class InteraccionMBean implements Serializable{
 		nuevaInteraccion.setInteCodigo(121);
 		try {
 			interaccionService.registrarInteraccion(nuevaInteraccion);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO," Registrado "," Confirmacion de Registro ");
-			context.addMessage(null, m);
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Guardado", "Interaccion Enviar Comando"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -380,6 +382,25 @@ public class InteraccionMBean implements Serializable{
 		listarHistoricos(nuevoEquipo);
 		RequestContext.getCurrentInstance().update("mainForm:historicoEquiposTabla");
 		RequestContext.getCurrentInstance().update("mainForm:historicoRaspberryTabla");
+		RequestContext.getCurrentInstance().update("mainForm:estadoequipooutput");
+		RequestContext.getCurrentInstance().update("mainForm:interaccionestabla");
+		ultimaInteraccion = interaccionService.ultimaInteraccion(nuevoEquipo.getEquiIdEquipo());
+		String mensaje = null;
+		System.out.println(ultimaInteraccion.getInteIdInteraccion());
+		System.out.println(ultimoId);
+		if (ultimoId.equals(ultimaInteraccion.getInteIdInteraccion())) {
+			System.out.println("Interaccion ya leida");
+		} else{
+			System.out.println(ultimaInteraccion.getInteResultado());
+			if(ultimaInteraccion.getInteResultado().equals("0")){
+				mensaje = "Completado";
+			} else {
+				mensaje = "Interaccion no Completada";
+			}
+			context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Resultado de la Ultima Interaccion", mensaje));
+		}
+		ultimoId=ultimaInteraccion.getInteIdInteraccion();
 	}
 	
 	public String colorEstadoEquipos(String estado){
